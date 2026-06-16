@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AEM Insider — Adobe Experience Manager for Practitioners</title>
+  <meta name="description" content="AEM tutorials, architecture insights, and real-world tips from an Adobe Certified AEM Master with 13+ years of experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="logo.png" />
+</head>
+<body>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="logo.svg" alt="AEM Insider" style="height:36px;width:36px;border-radius:8px;" />AEM Insider</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="https://aeminsider.substack.com" target="_blank" class="nav-cta">Subscribe</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">For AEM Practitioners</div>
+      <h1>The insider guide to<br><span class="accent">Adobe Experience Manager</span><span class="cursor"></span></h1>
+      <p class="hero-sub">Real-world architecture patterns, hard-won lessons, and no-fluff insights from 13+ years building on AEM. Written for developers, architects, and digital teams who live inside AEM every day.</p>
+      <div class="hero-actions">
+        <a href="https://aeminsider.substack.com" target="_blank" class="btn-primary">Read the newsletter →</a>
+        <a href="https://youtube.com/@aeminsider" target="_blank" class="btn-secondary">▶ Watch on YouTube</a>
+      </div>
+      <div class="hero-tags">
+        <span class="tag">OSGi</span>
+        <span class="tag">Sling</span>
+        <span class="tag">HTL</span>
+        <span class="tag">AEMaaCS</span>
+        <span class="tag">Dispatcher</span>
+        <span class="tag">Content Fragments</span>
+        <span class="tag">Edge Delivery</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="section-inner">
+      <div class="reveal"><div class="section-label">What you get</div>
+      <h2 class="section-title">Built for people who actually build on AEM</h2>
+      <p class="section-desc">No marketing spin. No beginner hand-holding you already outgrew. Just the knowledge you wish someone had shared sooner.</p></div>
+      <div class="features-grid stagger reveal">
+        <div class="feature-card">
+          <div class="feature-icon">📐</div>
+          <h3>Architecture deep dives</h3>
+          <p>Component design, content modeling, multi-site setups — the decisions that matter at enterprise scale.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>AEMaaCS & Edge Delivery</h3>
+          <p>Staying ahead of the AEM Cloud roadmap so you can advise your clients and teams with confidence.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <h3>Debugging & troubleshooting</h3>
+          <p>The gotchas, the quirks, and the fixes. The stuff that isn't in the docs but costs teams weeks.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Real-world patterns</h3>
+          <p>Patterns pulled from real implementations — not toy examples, but production-grade approaches.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="section-inner">
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <div class="section-label">Behind AEM Insider</div>
+          <h2 class="section-title">13 years inside the platform</h2>
+          <div class="about-badge">🏆 Adobe Certified AEM Master</div>
+          <p>I've been the developer teams call when AEM gets hard. When the component won't render, the replication queue is stuck, or the migration scope balloons before a Monday deadline.</p>
+          <p>AEM has almost no good public content for practitioners — the official docs get you started, and after that you're mostly on your own. AEM Insider is me changing that.</p>
+          <a href="about.html" class="btn-secondary" style="margin-top:1.5rem;display:inline-flex;">Read my story →</a>
+        </div>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-number">13<span>+</span></div><div class="stat-label">Years on AEM</div></div>
+          <div class="stat"><div class="stat-number">AEM<span>☁</span></div><div class="stat-label">Cloud Specialist</div></div>
+          <div class="stat"><div class="stat-number">5<span>x</span></div><div class="stat-label">AEM versions shipped</div></div>
+          <div class="stat"><div class="stat-number">0</div><div class="stat-label">Fluff in the content</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--navy-mid);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="section-inner">
+      <div class="section-label">Latest posts</div>
+      <h2 class="section-title">From the blog</h2>
+      <p class="section-desc">Deep dives, quick tips, and honest takes on AEM.</p>
+      <div class="posts-grid stagger reveal">
+        <div class="post-card">
+          <div class="post-meta">INTRODUCTION · Jun 2026</div>
+          <h3>I've spent 13 years inside Adobe Experience Manager. Here's why I'm finally talking about it publicly.</h3>
+          <p>The real reason AEM practitioners have nowhere to go for good content — and why I'm changing that.</p>
+          <a href="https://aeminsider.substack.com" target="_blank" class="post-link">Read on Substack →</a>
+        </div>
+        <div class="post-card" style="opacity:0.5;">
+          <div class="post-meta">COMING SOON</div>
+          <h3>What is Adobe Experience Manager, really? The practitioner's answer.</h3>
+          <p>Not the marketing pitch. A straight answer to what AEM is, how it works, and when it makes sense.</p>
+          <span class="post-link" style="color:var(--muted);cursor:default;">Coming next week</span>
+        </div>
+        <div class="post-card" style="opacity:0.5;">
+          <div class="post-meta">COMING SOON</div>
+          <h3>AEM component architecture: the patterns that hold up at scale</h3>
+          <p>The component design decisions that seem fine early and hurt you later — and what to do instead.</p>
+          <span class="post-link" style="color:var(--muted);cursor:default;">Coming soon</span>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;">
+        <a href="blog.html" class="btn-secondary">View all posts →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="resources">
+    <div class="section-inner">
+      <div class="section-label">Resources</div>
+      <h2 class="section-title">Tools for AEM teams</h2>
+      <p class="section-desc">Checklists, reference guides, and curated links that make AEM work easier.</p>
+      <div class="resources-grid stagger reveal">
+        <div class="resource-card"><div class="resource-type">Checklist</div><h3>AEM project kickoff checklist</h3><p>The questions to answer before a single line of code is written.</p></div>
+        <div class="resource-card"><div class="resource-type">Reference</div><h3>OSGi configuration cheat sheet</h3><p>Common OSGi configs and what they actually do in plain language.</p></div>
+        <div class="resource-card"><div class="resource-type">Guide</div><h3>AEMaaCS migration readiness guide</h3><p>What you need to tackle before moving to AEM as a Cloud Service.</p></div>
+        <div class="resource-card"><div class="resource-type">Video</div><h3>What is AEM? Complete overview 2026</h3><p>The full picture — from architecture to authoring — for every level.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;">
+        <a href="resources.html" class="btn-secondary">Browse all resources →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="newsletter-box reveal">
+      <h2>Stay inside the platform</h2>
+      <p>Join AEM practitioners getting the newsletter every week. No spam, no filler — just AEM.</p>
+      <div class="newsletter-input-row">
+        <input type="email" placeholder="your@email.com" aria-label="Email address" />
+        <a href="https://aeminsider.substack.com" target="_blank" class="btn-primary">Subscribe →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo"><img src="logo.svg" alt="AEM Insider" style="height:28px;width:28px;border-radius:6px;" />AEM Insider</div>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="https://aeminsider.substack.com" target="_blank">Substack</a></li>
+        <li><a href="https://youtube.com/@aeminsider" target="_blank">YouTube</a></li>
+      </ul>
+      <div class="footer-copy">© 2026 AEM Insider</div>
+    </div>
+  </footer>
+
+  <script src="animations.js"></script>
+  <script src="particles.js"></script>
+</body>
+</html>

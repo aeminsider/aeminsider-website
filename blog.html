@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — AEM Insider</title>
+  <meta name="description" content="AEM tutorials, architecture guides, and practitioner insights. Written by an Adobe Certified AEM Master." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="logo.png" />
+  <style>
+    .page-hero { padding: 9rem 2rem 3rem; }
+    .page-hero-inner { max-width: 1000px; margin: 0 auto; }
+    .blog-layout { max-width: 1000px; margin: 0 auto; padding: 0 2rem 5rem; display: grid; grid-template-columns: 1fr 280px; gap: 3rem; align-items: start; }
+    .post-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .post-item { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; transition: border-color 0.2s, transform 0.2s; display: block; }
+    .post-item:hover { border-color: rgba(33,150,243,0.3); transform: translateY(-2px); }
+    .post-item .post-meta { font-size: 12px; color: var(--blue-glow); font-family: var(--font-display); font-weight: 600; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
+    .post-item h2 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.6rem; color: var(--white); }
+    .post-item p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .post-item .post-link { font-size: 13px; font-family: var(--font-display); font-weight: 600; color: var(--blue-glow); }
+    .coming-soon { opacity: 0.45; pointer-events: none; }
+    .sidebar-box { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .sidebar-box h3 { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; }
+    .sidebar-box p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .topic-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    @media (max-width: 768px) { .blog-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="logo.svg" alt="AEM Insider" style="height:36px;width:36px;border-radius:8px;" />AEM Insider</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="https://aeminsider.substack.com" target="_blank" class="nav-cta">Subscribe</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-inner reveal">
+      <div class="section-label">Blog</div>
+      <h1 class="section-title">Everything I know about AEM</h1>
+      <p class="section-desc">Deep dives, architecture patterns, troubleshooting guides, and honest takes. All free.</p>
+    </div>
+  </div>
+
+  <div class="blog-layout">
+    <div class="post-list stagger">
+      <!-- Published -->
+      <a href="https://aeminsider.substack.com" target="_blank" class="post-item">
+        <div class="post-meta">INTRODUCTION · Jun 14, 2026</div>
+        <h2>I've spent 13 years inside Adobe Experience Manager. Here's why I'm finally talking about it publicly.</h2>
+        <p>The real reason AEM practitioners have nowhere to go for good content — and what AEM Insider is going to do about that.</p>
+        <span class="post-link">Read on Substack →</span>
+      </a>
+
+      <!-- Coming soon -->
+      <div class="post-item coming-soon">
+        <div class="post-meta">OVERVIEW · Coming soon</div>
+        <h2>What is Adobe Experience Manager, really? The practitioner's answer.</h2>
+        <p>Not the marketing pitch. A ground-up explanation of what AEM is, how it's structured, and when it actually makes sense to use it.</p>
+        <span class="post-link">Coming next week</span>
+      </div>
+
+      <div class="post-item coming-soon">
+        <div class="post-meta">ARCHITECTURE · Coming soon</div>
+        <h2>AEM component design: the patterns that hold up at scale</h2>
+        <p>The decisions that seem fine in early sprints and quietly kill teams at scale — and what to design instead.</p>
+        <span class="post-link">Coming soon</span>
+      </div>
+
+      <div class="post-item coming-soon">
+        <div class="post-meta">AEMAACS · Coming soon</div>
+        <h2>Moving to AEM as a Cloud Service: what nobody tells you</h2>
+        <p>The migration realities that aren't in the Adobe docs, from someone who's done it on production systems.</p>
+        <span class="post-link">Coming soon</span>
+      </div>
+
+      <div class="post-item coming-soon">
+        <div class="post-meta">DEBUGGING · Coming soon</div>
+        <h2>Replication queue nightmares: diagnosis and fixes</h2>
+        <p>A field guide to the replication issues that wake you up at 2am and how to permanently resolve them.</p>
+        <span class="post-link">Coming soon</span>
+      </div>
+    </div>
+
+    <aside>
+      <div class="sidebar-box">
+        <h3>Get the newsletter</h3>
+        <p>New posts land in your inbox every week. Free, always.</p>
+        <a href="https://aeminsider.substack.com" target="_blank" class="btn-primary" style="width: 100%; justify-content: center;">Subscribe on Substack →</a>
+      </div>
+      <div class="sidebar-box">
+        <h3>Topics</h3>
+        <div class="topic-tags">
+          <span class="tag">OSGi</span>
+          <span class="tag">Sling</span>
+          <span class="tag">HTL</span>
+          <span class="tag">AEMaaCS</span>
+          <span class="tag">Dispatcher</span>
+          <span class="tag">Architecture</span>
+          <span class="tag">Migration</span>
+          <span class="tag">Workflows</span>
+          <span class="tag">MSM</span>
+          <span class="tag">Edge Delivery</span>
+        </div>
+      </div>
+      <div class="sidebar-box">
+        <h3>Watch on YouTube</h3>
+        <p>Prefer video? The same content, shown and explained.</p>
+        <a href="https://youtube.com/@aeminsider" target="_blank" class="btn-secondary" style="width: 100%; justify-content: center;">▶ @aeminsider</a>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo"><img src="logo.svg" alt="AEM Insider" style="height:28px;width:28px;border-radius:6px;" />AEM Insider</div>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="https://aeminsider.substack.com" target="_blank">Substack</a></li>
+        <li><a href="https://youtube.com/@aeminsider" target="_blank">YouTube</a></li>
+      </ul>
+      <div class="footer-copy">© 2026 AEM Insider</div>
+    </div>
+  </footer>
+
+  <script src="animations.js"></script>
+  <script src="particles.js"></script>
+</body>
+</html>
