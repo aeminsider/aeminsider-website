@@ -1,104 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — AEM Insider</title>
-  <meta name="description" content="13+ years building on Adobe Experience Manager. Adobe Certified AEM Master. This is why I started AEM Insider." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="logo.png?v=2" />
-  <style>
-    .about-hero { padding: 9rem 2rem 4rem; max-width: 720px; margin: 0 auto; }
-    .about-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1.5rem; }
-    .about-body { max-width: 680px; margin: 0 auto; padding: 0 2rem 5rem; }
-    .about-body p { color: var(--muted); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1.4rem; }
-    .about-body p strong { color: var(--white); font-weight: 500; }
-    .about-body h2 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--white); margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
-    .cert-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(21,101,192,0.12); border: 1px solid rgba(21,101,192,0.3); border-radius: 8px; padding: 10px 16px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--blue-glow); margin: 1rem 0 2rem; }
-    .skills-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 1rem 0 2rem; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — AEM Insider</title>
+<meta name="description" content="13 years inside Adobe Experience Manager, taught anonymously. Why AEM Insider is faceless, and who it's for." />
+<link rel="icon" href="assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
 </head>
 <body>
-  <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-  <nav>
-    <a href="index.html" class="nav-logo"><img src="logo.svg?v=2" alt="AEM Insider" style="height:36px;width:36px;border-radius:8px;" />AEM Insider</a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="https://aeminsider.substack.com" target="_blank" class="nav-cta">Subscribe</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="about-hero reveal">
-    <div class="section-label">About</div>
-    <h1>13 years inside AEM.<br>Here's what I learned.</h1>
-  </div>
-
-  <div class="about-body">
-    <div class="cert-badge">🏆 Adobe Certified AEM Master</div>
-
-    <p>I'm the person companies call when AEM gets hard. When a replication queue is stuck at midnight before a go-live. When a component architecture that made sense in the discovery phase falls apart at scale. When the migration estimate triples and the client needs a clear path forward by Monday morning.</p>
-
-    <p>I've been building on Adobe Experience Manager for over <strong>13 years</strong> — from AEM 5.x through to AEM as a Cloud Service. I've worked on large enterprise implementations across industries: financial services, retail, media, healthcare. The kind of deployments where getting it wrong isn't just a bug ticket, it's a headline.</p>
-
-    <h2>Why AEM Insider exists</h2>
-
-    <p>Here's the problem: there is almost no good public content for AEM practitioners. The Adobe documentation covers the basics. After that, you're left with sparse forums, outdated blog posts, and hard lessons learned at your client's expense.</p>
-
-    <p>For years I kept everything I learned to myself — or shared it in Slack DMs with other AEM folks I trusted. <strong>AEM Insider is me finally changing that.</strong></p>
-
-    <p>Every piece of content here — every newsletter issue, every YouTube video, every resource — is the thing I wish had existed when I was figuring this out. Real-world patterns, honest takes, and the details that actually matter at enterprise scale.</p>
-
-    <h2>What I cover</h2>
-    <div class="skills-list">
-      <span class="tag">OSGi & Sling</span>
-      <span class="tag">HTL / Sightly</span>
-      <span class="tag">AEM as a Cloud Service</span>
-      <span class="tag">Edge Delivery Services</span>
-      <span class="tag">Dispatcher config</span>
-      <span class="tag">Content Fragments</span>
-      <span class="tag">Experience Fragments</span>
-      <span class="tag">Multi-site Manager</span>
-      <span class="tag">AEM Workflows</span>
-      <span class="tag">Replication</span>
-      <span class="tag">Component architecture</span>
-      <span class="tag">AEM migrations</span>
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="AEM Insider" />
+        <span class="wm"><b>AEM Insider</b><span>aeminsider.com</span></span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="About.html" class="active">About</a>
+        <a href="Blog.html">Blog</a>
+        <a href="Resources.html">Resources</a>
+        <a class="nav-cta-m" href="https://aeminsider.substack.com" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+      <div class="spacer"></div>
+      <a class="btn btn--red" href="https://aeminsider.substack.com" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Subscribe
+      </a>
+      <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
+  </header>
 
-    <h2>Follow along</h2>
-    <p>The best way to follow AEM Insider is through the <strong>newsletter on Substack</strong> — free, weekly, straight to your inbox. I also publish video content on <strong>YouTube at @aeminsider</strong> for topics that are better shown than written.</p>
-
-    <p>Have a topic you want me to cover? Hit reply on any newsletter issue or find me on LinkedIn. I read everything.</p>
-
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
-      <a href="https://aeminsider.substack.com" target="_blank" class="btn-primary">Subscribe to the newsletter →</a>
-      <a href="https://youtube.com/@aeminsider" target="_blank" class="btn-secondary">▶ YouTube</a>
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">// About AEM Insider</div>
+      <h1 style="margin-top:16px;">13 years inside AEM.<br />Now on your screen.</h1>
+      <p class="lede">I've been the developer teams call when AEM gets hard — when the component won't render, the replication queue is stuck, or a migration balloons before a Monday deadline. AEM Insider is me handing that experience to you, one build at a time.</p>
     </div>
-  </div>
+  </section>
+
+  <section style="padding-top:40px;">
+    <div class="wrap">
+      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stat"><div class="num"><span data-count="13">13</span><span>+</span></div><div class="lbl">Years on AEM</div></div>
+        <div class="stat"><div class="num">AEM<span>☁</span></div><div class="lbl">Certified Master</div></div>
+        <div class="stat"><div class="num"><span data-count="5">5</span><span>×</span></div><div class="lbl">AEM versions shipped</div></div>
+        <div class="stat"><div class="num">0</div><div class="lbl">Fluff in the content</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faceless">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">// Why anonymous</div>
+        <h2>No face. No name. On purpose.</h2>
+        <p>This channel is faceless by design — and it makes the content better, not worse.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="n">01</div>
+          <h3>The work speaks, not the person</h3>
+          <p>You're here to learn AEM, not to follow a personality. Every minute is spent on the screen and the code — there's nothing else to sell you.</p>
+        </div>
+        <div class="feat">
+          <div class="n">02</div>
+          <h3>Credibility from craft</h3>
+          <p>13 years and an Adobe Certified AEM Master credential do the vouching. You can judge the teaching by the builds, episode after episode.</p>
+        </div>
+        <div class="feat">
+          <div class="n">03</div>
+          <h3>Built to last</h3>
+          <p>No vlog, no burnout, no algorithm chasing. Just a steady, searchable library of AEM knowledge that holds up over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cred">
+        <div>
+          <div class="eyebrow">// The mission</div>
+          <h2 style="margin-top:12px;font-size:clamp(24px,2.6vw,32px);">AEM has almost no good public content for people learning it.</h2>
+          <p>The official docs get you started, and after that you're mostly on your own — piecing together Stack Overflow answers, half-finished blog posts, and tribal knowledge. AEM Insider exists to fix that: a clear, ordered path from "what even is AEM" to shipping production code, taught the way I wish someone had taught me.</p>
+        </div>
+        <div>
+          <div class="eyebrow">// Who it's for</div>
+          <ul style="list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:14px;">
+            <li style="display:flex;gap:11px;font-size:16px;color:var(--ink-2);"><span style="color:var(--accent);font-weight:700;">→</span> Developers brand new to AEM who want a real starting point</li>
+            <li style="display:flex;gap:11px;font-size:16px;color:var(--ink-2);"><span style="color:var(--accent);font-weight:700;">→</span> Content authors &amp; marketers who use AEM every day</li>
+            <li style="display:flex;gap:11px;font-size:16px;color:var(--ink-2);"><span style="color:var(--accent);font-weight:700;">→</span> Teams onboarding new hires onto an AEM project</li>
+            <li style="display:flex;gap:11px;font-size:16px;color:var(--ink-2);"><span style="color:var(--accent);font-weight:700;">→</span> Anyone studying for AEM certification</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="newsletter">
+    <div class="wrap">
+      <div class="news">
+        <div class="eyebrow" style="color:#ff9b94;">// Stay inside the platform</div>
+        <h2 style="margin-top:14px;">Get every AEM build in your inbox</h2>
+        <p class="sub">One email a week — the new tutorial, the written walkthrough, and the source. Free.</p>
+        <form class="nl-form" id="nl-form" novalidate>
+          <input type="email" id="nl-email" placeholder="you@company.com" aria-label="Email address" />
+          <button class="btn btn--red" type="submit">Subscribe free</button>
+        </form>
+        <div class="nl-note" id="nl-note">No spam. Powered by Substack · aeminsider.substack.com</div>
+        <div class="nl-ok" id="nl-ok">✓ You're on the list. Check your inbox to confirm — the next build lands Tuesday.</div>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <div class="footer-inner">
-      <div class="footer-logo"><img src="logo.svg?v=2" alt="AEM Insider" style="height:28px;width:28px;border-radius:6px;" />AEM Insider</div>
-      <ul class="footer-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="https://aeminsider.substack.com" target="_blank">Substack</a></li>
-        <li><a href="https://youtube.com/@aeminsider" target="_blank">YouTube</a></li>
-      </ul>
-      <div class="footer-copy">© 2026 AEM Insider</div>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <img src="assets/logo.svg" alt="AEM Insider" />
+          <p>No-fluff Adobe Experience Manager tutorials — from first setup to production, taught by an Adobe Certified AEM Master with 13+ years on the platform.</p>
+        </div>
+        <div class="foot-col">
+          <h5>Watch</h5>
+          <a href="https://youtube.com/@aeminsider" target="_blank" rel="noopener">YouTube channel</a>
+          <a href="Blog.html">All episodes</a>
+        </div>
+        <div class="foot-col">
+          <h5>Read</h5>
+          <a href="https://aeminsider.substack.com" target="_blank" rel="noopener">Substack</a>
+          <a href="Resources.html">Resources</a>
+        </div>
+        <div class="foot-col">
+          <h5>Site</h5>
+          <a href="index.html">Home</a>
+          <a href="About.html">About</a>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <span>© 2026 AEM Insider · aeminsider.com</span>
+        <span>Not affiliated with Adobe Inc.</span>
+      </div>
     </div>
   </footer>
 
-  <script src="animations.js"></script>
-  <script src="particles.js"></script>
+  <script src="assets/anim.js"></script>
+  <script>
+    const nav=document.getElementById('nav');
+    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+    const burger=document.getElementById('burger');
+    if(burger){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+      document.querySelectorAll('.nav nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}));}
+    const form=document.getElementById('nl-form'),email=document.getElementById('nl-email'),
+          ok=document.getElementById('nl-ok'),note=document.getElementById('nl-note');
+    if(form){form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const v=(email.value||'').trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){email.classList.add('err');email.focus();return;}
+      email.classList.remove('err');
+      try{const k='aeminsider_subs',list=JSON.parse(localStorage.getItem(k)||'[]');
+        if(!list.some(s=>s.email===v)){list.push({email:v,ts:Date.now()});localStorage.setItem(k,JSON.stringify(list));}}catch(_){}
+      form.style.display='none';note.style.display='none';ok.classList.add('show');
+    });
+    email.addEventListener('input',()=>email.classList.remove('err'));}
+  </script>
 </body>
 </html>

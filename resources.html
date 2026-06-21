@@ -1,182 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resources — AEM Insider</title>
-  <meta name="description" content="Free AEM resources: checklists, reference guides, cheat sheets, and curated links for Adobe Experience Manager practitioners." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="logo.png?v=2" />
-  <style>
-    .page-hero { padding: 9rem 2rem 3rem; }
-    .page-hero-inner { max-width: 1000px; margin: 0 auto; }
-    .resources-page { max-width: 1000px; margin: 0 auto; padding: 0 2rem 5rem; }
-    .resource-section { margin-bottom: 3.5rem; }
-    .resource-section-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
-    .resource-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-    .resource-item { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; transition: border-color 0.2s; }
-    .resource-item:hover { border-color: rgba(33,150,243,0.3); }
-    .resource-item .resource-type { font-size: 11px; font-family: var(--font-display); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-    .resource-item h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--white); line-height: 1.4; }
-    .resource-item p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 0.75rem; }
-    .resource-status { font-size: 12px; font-family: var(--font-display); font-weight: 600; }
-    .status-live { color: var(--blue-glow); }
-    .status-soon { color: var(--muted); }
-    .coming-soon-item { opacity: 0.5; }
-    .external-links { display: flex; flex-direction: column; gap: 0.75rem; }
-    .ext-link { display: flex; align-items: center; justify-content: space-between; background: var(--navy-mid); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; transition: border-color 0.2s; }
-    .ext-link:hover { border-color: rgba(33,150,243,0.3); }
-    .ext-link-name { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--white); }
-    .ext-link-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
-    .ext-link-arrow { color: var(--blue-glow); font-size: 18px; flex-shrink: 0; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resources — AEM Insider</title>
+<meta name="description" content="Checklists, reference guides, and curated tools that make AEM work easier." />
+<link rel="icon" href="assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
 </head>
 <body>
-  <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-  <nav>
-    <a href="index.html" class="nav-logo"><img src="logo.svg?v=2" alt="AEM Insider" style="height:36px;width:36px;border-radius:8px;" />AEM Insider</a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="resources.html" class="active">Resources</a></li>
-      <li><a href="https://aeminsider.substack.com" target="_blank" class="nav-cta">Subscribe</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="page-hero">
-    <div class="page-hero-inner reveal">
-      <div class="section-label">Resources</div>
-      <h1 class="section-title">Tools to make AEM easier</h1>
-      <p class="section-desc">Checklists, reference guides, cheat sheets, and curated links. All free, built from real project experience.</p>
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="AEM Insider" />
+        <span class="wm"><b>AEM Insider</b><span>aeminsider.com</span></span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="About.html">About</a>
+        <a href="Blog.html">Blog</a>
+        <a href="Resources.html" class="active">Resources</a>
+        <a class="nav-cta-m" href="https://aeminsider.substack.com" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+      <div class="spacer"></div>
+      <a class="btn btn--red" href="https://aeminsider.substack.com" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Subscribe
+      </a>
+      <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
-  </div>
+  </header>
 
-  <div class="resources-page">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">// Resources</div>
+      <h1 style="margin-top:16px;">Tools for AEM teams.</h1>
+      <p class="lede">Checklists, reference guides, and cheat sheets that make AEM work easier. Free resources drop alongside the tutorials — subscribers get them first.</p>
+    </div>
+  </section>
 
-    <div class="resource-section">
-      <div class="resource-section-title">📋 Checklists & Guides</div>
-      <div class="resource-items">
-        <div class="resource-item coming-soon-item">
-          <div class="resource-type">Checklist</div>
+  <section style="padding-top:36px;">
+    <div class="wrap">
+      <div class="res-grid">
+        <div class="res-card">
+          <div class="rtype">Video · Free</div>
+          <h3>What is AEM? Complete Overview 2026</h3>
+          <p>The full picture — from architecture to authoring — for every level. Start here if you're new.</p>
+          <div class="rfoot"><a href="https://www.youtube.com/watch?v=uhxeVCX93jU" target="_blank" rel="noopener">▶ Watch on YouTube →</a></div>
+        </div>
+        <div class="res-card">
+          <div class="rtype">Checklist</div>
           <h3>AEM project kickoff checklist</h3>
-          <p>The questions to answer before a single line of code is written — content model, authoring requirements, replication topology, and more.</p>
-          <span class="resource-status status-soon">Coming soon</span>
+          <p>The questions to answer before a single line of code is written on a new AEM build.</p>
+          <div class="rfoot"><span class="rsoon">Coming soon · subscribers first</span></div>
         </div>
-        <div class="resource-item coming-soon-item">
-          <div class="resource-type">Guide</div>
-          <h3>AEMaaCS migration readiness guide</h3>
-          <p>A practical assessment of what you need to tackle before moving to AEM as a Cloud Service.</p>
-          <span class="resource-status status-soon">Coming soon</span>
-        </div>
-        <div class="resource-item coming-soon-item">
-          <div class="resource-type">Checklist</div>
-          <h3>Go-live checklist for AEM projects</h3>
-          <p>What to verify before you flip the switch — Dispatcher rules, replication agents, SSL, caching, and performance.</p>
-          <span class="resource-status status-soon">Coming soon</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="resource-section">
-      <div class="resource-section-title">📄 Reference Sheets</div>
-      <div class="resource-items">
-        <div class="resource-item coming-soon-item">
-          <div class="resource-type">Reference</div>
+        <div class="res-card">
+          <div class="rtype">Reference</div>
           <h3>OSGi configuration cheat sheet</h3>
-          <p>Common OSGi configs, what they control, and the safe defaults — in plain language.</p>
-          <span class="resource-status status-soon">Coming soon</span>
+          <p>Common OSGi configs and what they actually do, in plain language.</p>
+          <div class="rfoot"><span class="rsoon">Coming soon · subscribers first</span></div>
         </div>
-        <div class="resource-item coming-soon-item">
-          <div class="resource-type">Reference</div>
-          <h3>Sling URL resolution cheat sheet</h3>
-          <p>How Sling resolves URLs, selectors, suffixes, and extensions — the mental model that makes everything click.</p>
-          <span class="resource-status status-soon">Coming soon</span>
+        <div class="res-card">
+          <div class="rtype">Guide</div>
+          <h3>AEMaaCS migration readiness guide</h3>
+          <p>What you need to tackle before moving to AEM as a Cloud Service.</p>
+          <div class="rfoot"><span class="rsoon">Coming soon · subscribers first</span></div>
         </div>
-        <div class="resource-item coming-soon-item">
-          <div class="resource-type">Reference</div>
+        <div class="res-card">
+          <div class="rtype">Cheat sheet</div>
+          <h3>Local AEM setup commands</h3>
+          <p>Every command to get an AEM SDK instance, WKND, and your project running locally.</p>
+          <div class="rfoot"><span class="rsoon">Coming soon · subscribers first</span></div>
+        </div>
+        <div class="res-card">
+          <div class="rtype">Reference</div>
           <h3>HTL quick reference</h3>
-          <p>All the HTL expressions and blocks in one place, with real usage examples.</p>
-          <span class="resource-status status-soon">Coming soon</span>
+          <p>The HTL syntax you'll actually use — data-sly blocks, expressions, and context.</p>
+          <div class="rfoot"><span class="rsoon">Coming soon · subscribers first</span></div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="resource-section">
-      <div class="resource-section-title">▶ Video</div>
-      <div class="resource-items">
-        <div class="resource-item">
-          <div class="resource-type">YouTube</div>
-          <h3>What is Adobe Experience Manager? Complete overview 2026</h3>
-          <p>The full picture — from architecture to authoring — for developers, architects, and anyone evaluating AEM.</p>
-          <a href="https://www.youtube.com/watch?v=uhxeVCX93jU" target="_blank" class="resource-status status-live">Watch on YouTube →</a>
-        </div>
-        <div class="resource-item">
-          <div class="resource-type">YouTube</div>
-          <h3>How Are AEM Pages Built? Components, Templates & Local Setup (2026)</h3>
-          <p>A full hands-on setup — Cloud SDK, Sites and Assets, WKND, building a page, and going live.</p>
-          <a href="https://www.youtube.com/watch?v=7a3dwv0oQNg" target="_blank" class="resource-status status-live">Watch on YouTube →</a>
-        </div>
+  <section id="newsletter">
+    <div class="wrap">
+      <div class="news">
+        <div class="eyebrow" style="color:#ff9b94;">// Get them first</div>
+        <h2 style="margin-top:14px;">Subscribers get every resource first</h2>
+        <p class="sub">Join the newsletter and the checklists, cheat sheets, and guides land in your inbox as they're released. Free.</p>
+        <form class="nl-form" id="nl-form" novalidate>
+          <input type="email" id="nl-email" placeholder="you@company.com" aria-label="Email address" />
+          <button class="btn btn--red" type="submit">Subscribe free</button>
+        </form>
+        <div class="nl-note" id="nl-note">No spam. Powered by Substack · aeminsider.substack.com</div>
+        <div class="nl-ok" id="nl-ok">✓ You're on the list. Check your inbox to confirm — the next drop lands Tuesday.</div>
       </div>
     </div>
-
-    <div class="resource-section">
-      <div class="resource-section-title">🔗 Essential AEM links</div>
-      <div class="external-links">
-        <a href="https://experienceleague.adobe.com/docs/experience-manager-cloud-service/content/home.html" target="_blank" class="ext-link">
-          <div>
-            <div class="ext-link-name">Adobe Experience League — AEM docs</div>
-            <div class="ext-link-desc">The official AEM as a Cloud Service documentation</div>
-          </div>
-          <span class="ext-link-arrow">→</span>
-        </a>
-        <a href="https://developer.adobe.com/experience-manager/" target="_blank" class="ext-link">
-          <div>
-            <div class="ext-link-name">AEM Developer portal</div>
-            <div class="ext-link-desc">APIs, SDKs, and developer tooling from Adobe</div>
-          </div>
-          <span class="ext-link-arrow">→</span>
-        </a>
-        <a href="https://sling.apache.org/documentation.html" target="_blank" class="ext-link">
-          <div>
-            <div class="ext-link-name">Apache Sling documentation</div>
-            <div class="ext-link-desc">The foundational framework beneath AEM</div>
-          </div>
-          <span class="ext-link-arrow">→</span>
-        </a>
-        <a href="https://felix.apache.org/documentation.html" target="_blank" class="ext-link">
-          <div>
-            <div class="ext-link-name">Apache Felix (OSGi) documentation</div>
-            <div class="ext-link-desc">OSGi container reference — essential for AEM developers</div>
-          </div>
-          <span class="ext-link-arrow">→</span>
-        </a>
-      </div>
-    </div>
-
-  </div>
+  </section>
 
   <footer>
-    <div class="footer-inner">
-      <div class="footer-logo"><img src="logo.svg?v=2" alt="AEM Insider" style="height:28px;width:28px;border-radius:6px;" />AEM Insider</div>
-      <ul class="footer-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="https://aeminsider.substack.com" target="_blank">Substack</a></li>
-        <li><a href="https://youtube.com/@aeminsider" target="_blank">YouTube</a></li>
-      </ul>
-      <div class="footer-copy">© 2026 AEM Insider</div>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <img src="assets/logo.svg" alt="AEM Insider" />
+          <p>No-fluff Adobe Experience Manager tutorials — from first setup to production, taught by an Adobe Certified AEM Master with 13+ years on the platform.</p>
+        </div>
+        <div class="foot-col">
+          <h5>Watch</h5>
+          <a href="https://youtube.com/@aeminsider" target="_blank" rel="noopener">YouTube channel</a>
+          <a href="Blog.html">All episodes</a>
+        </div>
+        <div class="foot-col">
+          <h5>Read</h5>
+          <a href="https://aeminsider.substack.com" target="_blank" rel="noopener">Substack</a>
+          <a href="Resources.html">Resources</a>
+        </div>
+        <div class="foot-col">
+          <h5>Site</h5>
+          <a href="index.html">Home</a>
+          <a href="About.html">About</a>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <span>© 2026 AEM Insider · aeminsider.com</span>
+        <span>Not affiliated with Adobe Inc.</span>
+      </div>
     </div>
   </footer>
 
-  <script src="animations.js"></script>
-  <script src="particles.js"></script>
+  <script src="assets/anim.js"></script>
+  <script>
+    const nav=document.getElementById('nav');
+    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+    const burger=document.getElementById('burger');
+    if(burger){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+      document.querySelectorAll('.nav nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}));}
+    const form=document.getElementById('nl-form'),email=document.getElementById('nl-email'),
+          ok=document.getElementById('nl-ok'),note=document.getElementById('nl-note');
+    if(form){form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const v=(email.value||'').trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){email.classList.add('err');email.focus();return;}
+      email.classList.remove('err');
+      try{const k='aeminsider_subs',list=JSON.parse(localStorage.getItem(k)||'[]');
+        if(!list.some(s=>s.email===v)){list.push({email:v,ts:Date.now()});localStorage.setItem(k,JSON.stringify(list));}}catch(_){}
+      form.style.display='none';note.style.display='none';ok.classList.add('show');
+    });
+    email.addEventListener('input',()=>email.classList.remove('err'));}
+  </script>
 </body>
 </html>
