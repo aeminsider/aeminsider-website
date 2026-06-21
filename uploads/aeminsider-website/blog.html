@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog &amp; Episodes — AEM Insider</title>
+<meta name="description" content="Every AEM Insider tutorial and post in one place — watch on YouTube or read on Substack." />
+<link rel="icon" href="assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="AEM Insider" />
+        <span class="wm"><b>AEM Insider</b><span>aeminsider.com</span></span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="About.html">About</a>
+        <a href="Blog.html" class="active">Blog</a>
+        <a href="Resources.html">Resources</a>
+        <a class="nav-cta-m" href="https://aeminsider.substack.com" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+      <div class="spacer"></div>
+      <a class="btn btn--red" href="https://aeminsider.substack.com" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Subscribe
+      </a>
+      <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">// Blog &amp; episodes</div>
+      <h1 style="margin-top:16px;">Every AEM build, in one place.</h1>
+      <p class="lede">New tutorial every Tuesday. Watch the video on YouTube, or read the written walkthrough on Substack — whichever way you learn best.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:36px;">
+    <div class="wrap">
+      <div class="tabs-row" role="tablist" aria-label="Filter episodes by track">
+        <button class="ptab active" data-filter="all"><span class="pic"></span>All episodes</button>
+        <button class="ptab" data-filter="dev"><span class="pic"></span>For Developers</button>
+        <button class="ptab" data-filter="author"><span class="pic"></span>For Content Authors</button>
+      </div>
+      <div class="mono" id="blog-count" style="font-size:12.5px;color:var(--ink-3);margin-bottom:22px;"></div>
+
+      <div class="post-list" id="post-list">
+
+        <div class="post-row is-soon" data-track="dev">
+          <div><div class="pkind">EP03 · Coming</div><div class="pdate">Next Tuesday</div></div>
+          <div>
+            <h3>Building a Maven Multimodule AEM Project, From Scratch</h3>
+            <p>The folder structure, the pom.xml, and the commands to build it and deploy to your local instance.</p>
+          </div>
+          <div class="plinks"><span class="rsoon mono" style="color:var(--ink-3);font-size:13px;">Coming soon</span></div>
+        </div>
+
+        <div class="post-row" data-track="dev">
+          <div><div class="pkind">EP02 · Video</div><div class="pdate">Jun 2026</div></div>
+          <div>
+            <h3>How Are AEM Pages Built? Components, Templates &amp; Local Setup Explained (2026)</h3>
+            <p>Setting up AEM locally from scratch, installing WKND, building a real page with components, and going live.</p>
+          </div>
+          <div class="plinks">
+            <a href="https://www.youtube.com/watch?v=7a3dwv0oQNg" target="_blank" rel="noopener">▶ YouTube →</a>
+            <a href="https://aeminsider.substack.com/p/how-aem-pages-are-built-components" target="_blank" rel="noopener">✎ Substack →</a>
+          </div>
+        </div>
+
+        <div class="post-row" data-track="dev author">
+          <div><div class="pkind">EP01 · Video</div><div class="pdate">Jun 2026</div></div>
+          <div>
+            <h3>What is Adobe Experience Manager (AEM)? Complete Overview 2026</h3>
+            <p>Where AEM fits in Adobe Experience Cloud, the Sling / JCR / OSGi engine underneath, and the hotel analogy that makes it click.</p>
+          </div>
+          <div class="plinks">
+            <a href="https://www.youtube.com/watch?v=uhxeVCX93jU" target="_blank" rel="noopener">▶ YouTube →</a>
+            <a href="https://aeminsider.substack.com/p/what-is-adobe-experience-manager" target="_blank" rel="noopener">✎ Substack →</a>
+          </div>
+        </div>
+
+        <div class="post-row" data-track="dev author">
+          <div><div class="pkind">Intro · Post</div><div class="pdate">Jun 2026</div></div>
+          <div>
+            <h3>I've spent 13 years inside Adobe Experience Manager. Here's why I'm finally talking about it publicly.</h3>
+            <p>The real reason AEM practitioners have nowhere to go for good content — and why I'm changing that.</p>
+          </div>
+          <div class="plinks">
+            <a href="https://aeminsider.substack.com" target="_blank" rel="noopener">✎ Read on Substack →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="blog-empty" style="display:none;border:1px dashed var(--line);border-radius:var(--radius);padding:34px;text-align:center;color:var(--ink-2);">
+        <p style="font-size:16px;">More tutorials for this track are on the way.</p>
+        <p class="mono" style="font-size:13px;color:var(--ink-3);margin-top:8px;">See what's planned on the <a href="index.html#paths" style="color:var(--accent);font-weight:600;">roadmap →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="newsletter">
+    <div class="wrap">
+      <div class="news">
+        <div class="eyebrow" style="color:#ff9b94;">// Never miss an episode</div>
+        <h2 style="margin-top:14px;">Get every AEM build in your inbox</h2>
+        <p class="sub">One email a week — the new tutorial, the written walkthrough, and the source. Free.</p>
+        <form class="nl-form" id="nl-form" novalidate>
+          <input type="email" id="nl-email" placeholder="you@company.com" aria-label="Email address" />
+          <button class="btn btn--red" type="submit">Subscribe free</button>
+        </form>
+        <div class="nl-note" id="nl-note">No spam. Powered by Substack · aeminsider.substack.com</div>
+        <div class="nl-ok" id="nl-ok">✓ You're on the list. Check your inbox to confirm — the next build lands Tuesday.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <img src="assets/logo.svg" alt="AEM Insider" />
+          <p>No-fluff Adobe Experience Manager tutorials — from first setup to production, taught by an Adobe Certified AEM Master with 13+ years on the platform.</p>
+        </div>
+        <div class="foot-col">
+          <h5>Watch</h5>
+          <a href="https://youtube.com/@aeminsider" target="_blank" rel="noopener">YouTube channel</a>
+          <a href="Blog.html">All episodes</a>
+        </div>
+        <div class="foot-col">
+          <h5>Read</h5>
+          <a href="https://aeminsider.substack.com" target="_blank" rel="noopener">Substack</a>
+          <a href="Resources.html">Resources</a>
+        </div>
+        <div class="foot-col">
+          <h5>Site</h5>
+          <a href="index.html">Home</a>
+          <a href="About.html">About</a>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <span>© 2026 AEM Insider · aeminsider.com</span>
+        <span>Not affiliated with Adobe Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/anim.js"></script>
+  <script>
+    const nav=document.getElementById('nav');
+    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+    const burger=document.getElementById('burger');
+    if(burger){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+      document.querySelectorAll('.nav nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}));}
+
+    // episode track filter
+    const fTabs=document.querySelectorAll('.ptab[data-filter]');
+    const rows=document.querySelectorAll('#post-list .post-row');
+    const countEl=document.getElementById('blog-count');
+    const emptyEl=document.getElementById('blog-empty');
+    const labels={all:'episodes',dev:'developer episodes',author:'content-author episodes'};
+    function applyFilter(f){
+      let n=0;
+      rows.forEach(r=>{
+        const tracks=(r.dataset.track||'').split(' ');
+        const show = f==='all' || tracks.includes(f);
+        r.style.display = show ? '' : 'none';
+        if(show) n++;
+      });
+      countEl.textContent = 'Showing '+n+' '+labels[f];
+      emptyEl.style.display = n===0 ? 'block' : 'none';
+    }
+    fTabs.forEach(t=>t.addEventListener('click',()=>{
+      fTabs.forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      applyFilter(t.dataset.filter);
+    }));
+    applyFilter('all');
+
+    const form=document.getElementById('nl-form'),email=document.getElementById('nl-email'),
+          ok=document.getElementById('nl-ok'),note=document.getElementById('nl-note');
+    if(form){form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const v=(email.value||'').trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){email.classList.add('err');email.focus();return;}
+      email.classList.remove('err');
+      try{const k='aeminsider_subs',list=JSON.parse(localStorage.getItem(k)||'[]');
+        if(!list.some(s=>s.email===v)){list.push({email:v,ts:Date.now()});localStorage.setItem(k,JSON.stringify(list));}}catch(_){}
+      form.style.display='none';note.style.display='none';ok.classList.add('show');
+    });
+    email.addEventListener('input',()=>email.classList.remove('err'));}
+  </script>
+</body>
+</html>
