@@ -314,7 +314,7 @@
     <div class="wrap">
       <div class="foot-top">
         <div class="foot-brand">
-          <img src="assets/logo.svg" alt="AEM Insider" />
+          <a class="fb-lockup" href="index.html"><img src="assets/logo.svg" alt="AEM Insider" /><span>AEM Insider</span></a>
           <p>No-fluff Adobe Experience Manager tutorials — from first setup to production, taught by an Adobe Certified AEM Master with 13+ years on the platform.</p>
         </div>
         <div class="foot-col">
@@ -377,6 +377,9 @@
         const k='aeminsider_subs',list=JSON.parse(localStorage.getItem(k)||'[]');
         if(!list.some(s=>s.email===v)){list.push({email:v,ts:Date.now()});localStorage.setItem(k,JSON.stringify(list));}
       }catch(_){}
+      var u='https://aeminsider.substack.com/subscribe?email='+encodeURIComponent(v);
+      var w=window.open(u,'_blank','noopener'); if(!w){location.href=u;}
+      ok.textContent='✓ Opening Substack to finish your subscription — complete it there, then confirm via the email Substack sends you.';
       form.style.display='none';note.style.display='none';ok.classList.add('show');
     });
     email.addEventListener('input',()=>email.classList.remove('err'));

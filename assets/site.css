@@ -50,6 +50,10 @@ p{margin:0;}
 .ticker .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;box-shadow:0 0 0 4px rgba(211,47,47,0.18);}
 .ticker b{color:#fff;font-weight:500;}
 .ticker .sep{opacity:0.35;}
+@media(max-width:720px){
+  .ticker .wrap{height:auto;padding:9px 0;font-size:11.5px;}
+  .ticker .sep,.ticker .wrap > span:last-child{display:none;}
+}
 
 /* ---------- nav ---------- */
 header.nav{position:sticky;top:0;z-index:50;background:rgba(244,244,241,0.82);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s ease, background .2s ease;}
@@ -135,6 +139,8 @@ section{padding:84px 0;}
 .stat .num span{color:var(--accent);}
 .stat .lbl{font-size:14px;color:var(--ink-3);margin-top:10px;font-family:"IBM Plex Mono",monospace;}
 @media(max-width:760px){.cred{grid-template-columns:1fr;gap:34px;}}
+.stats-grid--4{grid-template-columns:repeat(4,1fr);}
+@media(max-width:860px){.stats-grid--4{grid-template-columns:repeat(2,1fr);}}
 
 /* ---------- tutorials ---------- */
 .vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
@@ -251,8 +257,10 @@ section{padding:84px 0;}
 /* ---------- footer ---------- */
 footer{background:var(--dark);color:rgba(255,255,255,0.62);padding:62px 0 38px;}
 .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;}
-.foot-brand img{width:46px;height:46px;border-radius:11px;}
-.foot-brand p{margin-top:16px;font-size:14.5px;max-width:24em;color:rgba(255,255,255,0.5);}
+.foot-brand .fb-lockup{display:inline-flex;align-items:center;gap:12px;}
+.foot-brand img{width:44px;height:44px;border-radius:10px;}
+.foot-brand .fb-lockup span{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.01em;}
+.foot-brand p{margin-top:18px;font-size:14.5px;max-width:30em;color:rgba(255,255,255,0.5);line-height:1.65;}
 .foot-col h5{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 14px;font-weight:500;}
 .foot-col a{display:block;font-size:14.5px;padding:5px 0;color:rgba(255,255,255,0.68);transition:color .12s ease;}
 .foot-col a:hover{color:#fff;}

@@ -7,13 +7,17 @@
     var t = scope.querySelector('[data-count]');
     if (!t || t._done) return;
     t._done = 1;
-    var end = +t.dataset.count, dur = 900, start = performance.now();
-    (function frame(now) {
-      var p = Math.min((now - start) / dur, 1);
-      var e = 1 - Math.pow(1 - p, 3);
-      t.textContent = Math.round(end * e);
-      if (p < 1) requestAnimationFrame(frame); else t.textContent = end;
-    })(performance.now());
+    var end = +t.dataset.count, dur = 900;
+    t.textContent = end;            // real value first — safe for print / capture / frozen clock
+    if (rm) return;                 // reduced motion: show the number, skip the tween
+    var t0 = performance.now();
+    requestAnimationFrame(function step(now) {
+      if (now <= t0) return;        // clock isn't advancing (frozen) — keep the real value
+      var p = Math.min((now - t0) / dur, 1);
+      t.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+      else t.textContent = end;
+    });
   }
 
   var sel = '.sec-head, .feat, .vid, .stat, .step, .tier, .post-row, .res-card, .cred > div, .news';
