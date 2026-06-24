@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AEM Insider — Video 2: How AEM Pages Are Built</title>
+<link rel="icon" href="../assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="deck.css" />
+<style>
+  .ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px;}
+  .ticks li{font-size:28px;line-height:1.35;color:var(--ink-2);font-family:var(--sans);display:flex;gap:16px;align-items:flex-start;}
+  .dark .ticks li{color:rgba(255,255,255,0.78);}
+  .ticks li .n{font-family:var(--mono);font-size:24px;color:var(--accent);font-weight:600;flex:none;padding-top:2px;min-width:34px;}
+  .card ul.ticks{gap:11px;}
+  .card ul.ticks li{font-size:24px;line-height:1.3;}
+  .card ul.ticks li::before{content:"›";color:var(--accent);font-family:var(--mono);}
+  .card ul.ticks li .n{display:none;}
+  .code-tag{color:var(--c-tag);} .code-attr{color:var(--c-attr);}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · TITLE -->
+  <section class="slide dark grid-bg center" data-label="Title">
+    <div class="col gap-l">
+      <img class="shield anim" src="../assets/logo.svg" alt="AEM Insider" />
+      <div class="col gap-m">
+        <div class="eyebrow anim">// AEM Insider · Video 2</div>
+        <h1 class="title t-xl anim2">How AEM Pages<br /><span class="red">Are Built</span></h1>
+      </div>
+      <div class="col gap-s anim3" style="margin-top:8px;">
+        <div class="sub">Components &amp; Templates Explained</div>
+        <div class="credline"><span class="dot"></span> Hands-On Demo · Local Author &amp; Publish</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · PART 01 · ON-PREM VS CLOUD -->
+  <section class="slide dark grid-bg" data-label="On-Premise vs Cloud">
+    <div class="head anim">
+      <div class="kicker">// Part 01</div>
+      <h2 class="title t-lg">On-Premise vs Cloud</h2>
+      <p class="lede" style="max-width:40em;">AEM comes in two types — on-premise (AEM 6.5) and cloud (AEM Cloud SDK).</p>
+    </div>
+    <div class="vs-wrap anim2" style="margin-top:50px;">
+      <div class="card">
+        <div class="clabel">AEM 6.5</div>
+        <div class="ctitle">On-Premise</div>
+        <ul class="ticks"><li>Customer-licensed</li><li>Needs a license.properties file</li><li>Java 8, 11, or 17 (by version / SP)</li><li>Tied to your org's AEM contract</li></ul>
+      </div>
+      <div class="vs-badge">VS</div>
+      <div class="card accent">
+        <div class="clabel">AEM Cloud SDK</div>
+        <div class="ctitle">Cloud</div>
+        <ul class="ticks"><li>Local dev for AEM as a Cloud Service</li><li>No license file needed</li><li>Java 21 (11 dropped Feb 2026)</li><li>Download requires org-level access</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · PART 02 · SETUP -->
+  <section class="slide paper" data-label="Setting Up Locally">
+    <div class="head anim">
+      <div class="kicker">// Part 02</div>
+      <h2 class="title t-md">Setting Up AEM Locally</h2>
+      <p class="note" style="margin-top:14px;">Software, folders, and your first two servers.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:44px;align-items:flex-start;">
+      <ul class="ticks" style="flex:1;">
+        <li><span class="n">01</span><span>Check <b>java -version</b> — you need Java 21.</span></li>
+        <li><span class="n">02</span><span>Get the SDK zip from Adobe's portal, then unzip it.</span></li>
+        <li><span class="n">03</span><span>Copy &amp; rename: <b>aem-author-p4502.jar</b> / <b>aem-publish-p4503.jar</b>.</span></li>
+        <li><span class="n">04</span><span>Start one by double-click, the other by command.</span></li>
+      </ul>
+      <div class="win" style="flex:1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">terminal</span></div>
+        <pre><span class="muted" style="color:#6b7280;"># start the author instance</span>
+<span class="cmd">$</span> java -jar aem-author-p4502.jar</pre>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:40px;">No port in the name? AEM defaults to <span class="red">4502, 8080, 8081, 8082, 8083, 8084, 8085, 8888, 9362</span>, or random.</p>
+  </section>
+
+  <!-- 4 · PART 03 · CONSOLE TOUR -->
+  <section class="slide paper" data-label="Console Tour">
+    <div class="head anim">
+      <div class="kicker">// Part 03</div>
+      <h2 class="title t-md">Console Tour</h2>
+      <p class="note" style="margin-top:14px;">Sites and Assets — where pages and media live.</p>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:48px;">
+      <div class="card"><div class="clabel">Sites</div><div class="ctitle">Every page lives here</div><p>Browse, create, and organize the pages of your site.</p></div>
+      <div class="card"><div class="clabel">Assets</div><div class="ctitle">Your media library</div><p>Upload and manage images, video, and documents.</p></div>
+      <div class="card"><div class="clabel">OSGi</div><div class="ctitle">Developer settings</div><p>Configuration for the platform — a future video.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:46px;">Plus <span class="red">CRX DE</span>, the <span class="red">Page Editor</span> &amp; <span class="red">Package Manager</span> — more on these later.</p>
+  </section>
+
+  <!-- 5 · PART 04 · WKND -->
+  <section class="slide paper" data-label="Installing WKND">
+    <div class="head anim">
+      <div class="kicker">// Part 04</div>
+      <h2 class="title t-md">Installing WKND &amp; Creating a Page</h2>
+      <p class="note" style="margin-top:14px;">Install a ready-made site, then create your own page.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:40px;align-items:flex-start;">
+      <ul class="ticks" style="flex:1;">
+        <li><span class="n">01</span><span>Get it from <b>github.com/adobe/aem-guides-wknd</b>.</span></li>
+        <li><span class="n">02</span><span>Grab <b>aem-guides-wknd.all-x.x.x.zip</b> (not "-classic").</span></li>
+        <li><span class="n">03</span><span>Install via Package Manager — AEM's content app store.</span></li>
+        <li><span class="n">04</span><span>Install it on both Author &amp; Publish.</span></li>
+        <li><span class="n">05</span><span>Pick a template and create your page.</span></li>
+      </ul>
+      <div class="win" style="flex:1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">publish login (if prompted)</span></div>
+        <pre><span class="cmd">$</span> localhost:4503/libs/granite/
+   core/content/login.html</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · PART 05 · AUTHORING -->
+  <section class="slide paper" data-label="Authoring the Page">
+    <div class="head anim">
+      <div class="kicker">// Part 05</div>
+      <h2 class="title t-md">Authoring the Page</h2>
+      <p class="note" style="margin-top:14px;">Dragging components in and adding real content.</p>
+    </div>
+    <div class="chips anim2" style="margin-top:46px;">
+      <span class="chip">Title</span><span class="chip">Image</span><span class="chip">Text</span><span class="chip">Button</span>
+    </div>
+    <ul class="ticks anim3" style="margin-top:44px;max-width:40em;">
+      <li><span class="n">01</span><span>Drag in the Title, Image, Text &amp; Button components.</span></li>
+      <li><span class="n">02</span><span>Fill in each one through its dialog.</span></li>
+      <li><span class="n">03</span><span>No code, no developer needed.</span></li>
+    </ul>
+  </section>
+
+  <!-- 7 · PART 06 · GOING LIVE -->
+  <section class="slide paper" data-label="Going Live">
+    <div class="head anim">
+      <div class="kicker">// Part 06</div>
+      <h2 class="title t-md">Going Live</h2>
+      <p class="note" style="margin-top:14px;">Connecting Author to Publish, and hitting publish.</p>
+    </div>
+    <div class="flow anim2" style="margin-top:46px;">
+      <div class="node">Author<small>where you built it</small></div>
+      <div class="arrow">→</div>
+      <div class="node accent">Replication<small>the bridge</small></div>
+      <div class="arrow">→</div>
+      <div class="node">Publish<small>live for visitors</small></div>
+    </div>
+    <ul class="ticks anim3" style="margin-top:48px;max-width:40em;">
+      <li><span class="n">01</span><span>Set up the replication agent.</span></li>
+      <li><span class="n">02</span><span>Test the Author → Publish connection.</span></li>
+      <li><span class="n">03</span><span>Hit Publish and see it go live.</span></li>
+    </ul>
+  </section>
+
+  <!-- 8 · OUTRO -->
+  <section class="slide dark grid-bg center" data-label="Outro">
+    <div class="col gap-l">
+      <div class="eyebrow anim">// That's Video 2</div>
+      <h2 class="title t-lg anim" style="max-width:16em;">Next up:<br />a real project.</h2>
+      <div class="next-pill anim2"><b>Video 3 →</b> Building a Multimodule Project · folders, pom.xml &amp; deploying to your local servers</div>
+      <div class="outro-links anim3" style="margin-top:8px;">
+        <a href="https://youtube.com/@aeminsider"><span class="ic">▶</span> youtube.com/@aeminsider</a>
+        <a href="https://aeminsider.com"><span class="ic">◆</span> aeminsider.com</a>
+        <a href="https://aeminsider.substack.com"><span class="ic">✎</span> aeminsider.substack.com</a>
+      </div>
+      <p class="note anim3">Subscribe so you don't miss it. Drop a comment — what should I cover next?</p>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>

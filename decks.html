@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Decks — AEM Insider (private)</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+  .deck-list{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+  .deck-row{display:grid;grid-template-columns:118px 1fr auto;gap:24px;align-items:center;
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;
+    text-decoration:none;color:inherit;transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;}
+  .deck-row:hover{border-color:rgba(22,23,26,0.28);transform:translateY(-2px);box-shadow:0 10px 30px rgba(22,23,26,0.07);}
+  .deck-row.is-soon{background:transparent;border-style:dashed;cursor:default;}
+  .deck-row.is-soon:hover{transform:none;box-shadow:none;border-color:var(--line);}
+  .deck-ep{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--accent);font-weight:500;letter-spacing:0.02em;}
+  .deck-meta{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);margin-top:6px;}
+  .deck-row h3{font-size:19px;line-height:1.25;margin:0;}
+  .deck-row p{font-size:14.5px;color:var(--ink-2);margin:7px 0 0;max-width:54ch;}
+  .deck-open{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;}
+  .deck-soon{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-3);white-space:nowrap;}
+  /* code-window thumbnail */
+  .deck-thumb{height:74px;border-radius:9px;background:var(--dark);border:1px solid rgba(255,255,255,0.08);
+    display:flex;flex-direction:column;overflow:hidden;}
+  .deck-thumb .bar{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .deck-thumb .bar i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.22);}
+  .deck-thumb .bar i:first-child{background:var(--accent);}
+  .deck-thumb .body{flex:1;display:flex;align-items:center;justify-content:center;
+    font-family:"IBM Plex Mono",monospace;font-size:13px;color:rgba(255,255,255,0.5);}
+  .priv{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:12px;
+    color:var(--ink-3);border:1px solid var(--line);border-radius:999px;padding:6px 12px;}
+  .priv b{color:var(--accent);font-weight:500;}
+  @media(max-width:720px){
+    .deck-row{grid-template-columns:1fr;gap:14px;padding:18px;}
+    .deck-thumb{height:64px;}
+    .deck-open,.deck-soon{justify-self:start;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="AEM Insider" />
+        <span class="wm"><b>AEM Insider</b><span>aeminsider.com</span></span>
+      </a>
+      <div class="spacer"></div>
+      <span class="priv"><b>● Private</b> · not linked publicly</span>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">// Decks · internal</div>
+      <h1 style="margin-top:16px;">Episode decks</h1>
+      <p class="lede">The 1920×1080 slide decks behind each episode. Click one to open it — use ← / → to move through slides, and print / export to PowerPoint from there.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:30px;">
+    <div class="wrap">
+      <div class="deck-list">
+
+        <a class="deck-row" href="decks/Video%201%20-%20What%20is%20AEM.html">
+          <div class="deck-thumb"><div class="bar"><i></i><i></i><i></i></div><div class="body">&lt;/&gt; EP01</div></div>
+          <div>
+            <div class="deck-ep">EP01 · Deck</div>
+            <h3>What is Adobe Experience Manager? Complete Overview 2026</h3>
+            <p>Where AEM fits in Adobe Experience Cloud, the Sling / JCR / OSGi engine underneath, and the hotel analogy.</p>
+            <div class="deck-meta">decks/Video 1 - What is AEM.html</div>
+          </div>
+          <div class="deck-open">Open deck →</div>
+        </a>
+
+        <a class="deck-row" href="decks/Video%202%20-%20How%20AEM%20Pages%20Are%20Built.html">
+          <div class="deck-thumb"><div class="bar"><i></i><i></i><i></i></div><div class="body">&lt;/&gt; EP02</div></div>
+          <div>
+            <div class="deck-ep">EP02 · Deck</div>
+            <h3>How Are AEM Pages Built? Components, Templates &amp; Local Setup</h3>
+            <p>Setting up AEM locally, installing WKND, building a real page with components, and going live.</p>
+            <div class="deck-meta">decks/Video 2 - How AEM Pages Are Built.html</div>
+          </div>
+          <div class="deck-open">Open deck →</div>
+        </a>
+
+        <div class="deck-row is-soon">
+          <div class="deck-thumb"><div class="bar"><i></i><i></i><i></i></div><div class="body">&lt;/&gt; EP03</div></div>
+          <div>
+            <div class="deck-ep">EP03 · Coming</div>
+            <h3>Building a Maven Multimodule AEM Project, From Scratch</h3>
+            <p>The folder structure, the pom.xml, and the commands to build it and deploy to your local instance.</p>
+            <div class="deck-meta">Not built yet</div>
+          </div>
+          <div class="deck-soon">Coming soon</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-bot" style="border-top:0;">
+        <span>© 2026 AEM Insider · internal decks index</span>
+        <span>Not affiliated with Adobe Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('nav');
+    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+  </script>
+</body>
+</html>

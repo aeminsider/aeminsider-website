@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AEM Insider — Video 1: What is Adobe Experience Manager?</title>
+<link rel="icon" href="../assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="deck.css" />
+<style>
+  .card ul.ticks{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  .card ul.ticks li{font-size:24px;line-height:1.3;color:var(--ink-2);font-family:var(--sans);display:flex;gap:11px;}
+  .dark .card ul.ticks li{color:rgba(255,255,255,0.74);}
+  .card ul.ticks li::before{content:"›";color:var(--accent);font-family:var(--mono);}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · TITLE -->
+  <section class="slide dark grid-bg center" data-label="Title">
+    <div class="col gap-l">
+      <img class="shield anim" src="../assets/logo.svg" alt="AEM Insider" />
+      <div class="col gap-m">
+        <div class="eyebrow anim">// AEM Insider · Video 1</div>
+        <h1 class="title t-xl anim2">What is Adobe<br /><span class="red">Experience Manager?</span></h1>
+      </div>
+      <div class="col gap-s anim3" style="margin-top:8px;">
+        <div class="sub">Complete Overview · 2026</div>
+        <div class="credline"><span class="dot"></span> Adobe Certified AEM Master · 13+ years experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · CHAPTER 01 -->
+  <section class="slide dark grid-bg" data-label="Chapter 01">
+    <div class="head anim">
+      <div class="kicker">// Chapter 01</div>
+      <h2 class="title t-lg">What is Adobe Experience Manager?</h2>
+      <p class="lede" style="max-width:34em;">A platform that helps large companies create, manage, and deliver digital content across websites and channels.</p>
+    </div>
+    <div class="vs-wrap anim2" style="margin-top:60px;">
+      <div class="card">
+        <div class="clabel">WordPress</div>
+        <div class="ctitle">The bicycle.</div>
+        <p>Easy to get on. Great for most things.</p>
+      </div>
+      <div class="vs-badge">VS</div>
+      <div class="card accent">
+        <div class="clabel">AEM</div>
+        <div class="ctitle">The commercial aircraft.</div>
+        <p>Complex to operate, but built for enterprise scale.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · ENTERPRISE PROBLEM -->
+  <section class="slide paper" data-label="The problem AEM solves">
+    <div class="head anim">
+      <div class="kicker">// Chapter 01 · Continued</div>
+      <h2 class="title t-md">The enterprise problem AEM solves</h2>
+    </div>
+    <div class="cards g4 anim2" style="margin-top:48px;">
+      <div class="card"><div class="big-num">20+</div><div class="clabel">Languages</div><p>Website content in many different languages.</p></div>
+      <div class="card"><div class="big-num">1000s</div><div class="clabel">Pages</div><p>Thousands of pages to manage and update.</p></div>
+      <div class="card"><div class="big-num">Global</div><div class="clabel">Teams</div><p>Teams in different countries working at once.</p></div>
+      <div class="card"><div class="big-num">Millions</div><div class="clabel">Visitors</div><p>Traffic at a scale that demands reliability.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:46px;">How do you manage all of that without complete chaos? <span class="red">→ That's exactly what AEM is built for.</span></p>
+  </section>
+
+  <!-- 4 · EXPERIENCE CLOUD -->
+  <section class="slide paper" data-label="Adobe Experience Cloud">
+    <div class="head anim">
+      <div class="kicker">// Chapter 01 · Continued</div>
+      <h2 class="title t-md">AEM is part of Adobe Experience Cloud</h2>
+    </div>
+    <div class="body-grow">
+      <div class="flow anim2">
+        <div class="node accent">AEM<small>the content engine</small></div>
+        <div class="arrow">→</div>
+        <div class="node">Adobe Analytics<small>measure</small></div>
+        <div class="node">Adobe Target<small>personalize</small></div>
+        <div class="node">Adobe Campaign<small>message</small></div>
+        <div class="node">Adobe Commerce<small>sell</small></div>
+      </div>
+    </div>
+    <p class="note anim3">Native integration — all tools share data out of the box.</p>
+  </section>
+
+  <!-- 5 · ANALYTICS & TARGET -->
+  <section class="slide paper" data-label="Analytics & Target">
+    <div class="head anim">
+      <div class="kicker">// Chapter 01 · Adobe Ecosystem</div>
+      <h2 class="title t-md">Analytics &amp; Target</h2>
+    </div>
+    <div class="cards g2 anim2" style="margin-top:48px;">
+      <div class="card">
+        <div class="clabel">Adobe Analytics</div>
+        <div class="ctitle">Your website's report card.</div>
+        <p>Tracks who visited, which pages they read, where they clicked, and where they left — so your content team makes smarter publishing decisions.</p>
+      </div>
+      <div class="card">
+        <div class="clabel">Adobe Target</div>
+        <div class="ctitle">Your personalization engine.</div>
+        <p>Two people on the same site can see different things. Target uses what Analytics knows to show each person relevant content — no extra pages needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · CAMPAIGN & COMMERCE -->
+  <section class="slide paper" data-label="Campaign & Commerce">
+    <div class="head anim">
+      <div class="kicker">// Chapter 01 · Adobe Ecosystem</div>
+      <h2 class="title t-md">Campaign &amp; Commerce</h2>
+    </div>
+    <div class="cards g2 anim2" style="margin-top:48px;">
+      <div class="card">
+        <div class="clabel">Adobe Campaign</div>
+        <div class="ctitle">Your marketing comms platform.</div>
+        <p>Decides who to contact, what to say, and when — automatically. Connected to AEM, those emails look exactly like your website.</p>
+      </div>
+      <div class="card">
+        <div class="clabel">Adobe Commerce</div>
+        <div class="ctitle">The engine behind "Add to Cart."</div>
+        <p>Handles product listings, carts, checkout, payments, and orders. Connected to AEM, product pages feel like a seamless part of your brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CHAPTER 02 -->
+  <section class="slide dark grid-bg" data-label="Chapter 02">
+    <div class="head anim">
+      <div class="kicker">// Chapter 02</div>
+      <h2 class="title t-lg">What is AEM made of?</h2>
+      <p class="lede" style="max-width:36em;">Three core technologies — here's what each one does, in plain English.</p>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:54px;">
+      <div class="card"><div class="clabel">Apache Sling</div><div class="ctitle">The Receptionist</div><p>Routes web requests to the right content.</p></div>
+      <div class="card"><div class="clabel">JCR</div><div class="ctitle">The Database</div><p>Stores all content in one place.</p></div>
+      <div class="card"><div class="clabel">OSGi</div><div class="ctitle">The Power Grid</div><p>Keeps AEM modular and always running.</p></div>
+    </div>
+  </section>
+
+  <!-- 8 · SLING -->
+  <section class="slide paper" data-label="Apache Sling">
+    <div class="head anim">
+      <div class="kicker">// Chapter 02 · Building Block 1</div>
+      <h2 class="title t-md">Apache Sling — The Receptionist</h2>
+    </div>
+    <div class="flow anim2" style="margin-top:46px;">
+      <div class="node">Web Request<small>arrives</small></div>
+      <div class="arrow">→</div>
+      <div class="node accent">Apache Sling<small>"third floor, room 302"</small></div>
+      <div class="arrow">→</div>
+      <div class="node">Content<small>renders itself</small></div>
+    </div>
+    <div class="cards g2 anim3" style="margin-top:44px;">
+      <div class="card"><div class="clabel">Most frameworks</div><div class="ctitle" style="font-family:var(--mono);font-size:30px;">URL → Code</div></div>
+      <div class="card accent"><div class="clabel">Apache Sling</div><div class="ctitle" style="font-family:var(--mono);font-size:30px;">URL → Content</div></div>
+    </div>
+    <p class="note anim3" style="margin-top:30px;">Sling maps every URL directly to content in AEM. The content decides how it renders — not a fixed rule book.</p>
+  </section>
+
+  <!-- 9 · JCR -->
+  <section class="slide paper" data-label="JCR">
+    <div class="head anim">
+      <div class="kicker">// Chapter 02 · Building Block 2</div>
+      <h2 class="title t-md">JCR — The Database</h2>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:46px;align-items:center;">
+      <div class="card accent" style="min-width:300px;align-items:center;text-align:center;">
+        <div class="clabel">JCR</div>
+        <div class="ctitle">One Repository</div>
+      </div>
+      <div class="chips" style="flex:1;">
+        <span class="chip">Pages</span><span class="chip">Images</span><span class="chip">Videos</span><span class="chip">Configs</span>
+        <span class="chip">Users</span><span class="chip">Components</span><span class="chip">Assets</span><span class="chip">Forms</span>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:46px;">Everything in AEM lives in the JCR. Authors create content <span class="red">→</span> it goes in. Visitors request it <span class="red">→</span> AEM pulls it out.</p>
+  </section>
+
+  <!-- 10 · OSGi -->
+  <section class="slide paper" data-label="OSGi">
+    <div class="head anim">
+      <div class="kicker">// Chapter 02 · Building Block 3</div>
+      <h2 class="title t-md">OSGi — The Power Grid</h2>
+    </div>
+    <div class="chips anim2" style="margin-top:48px;">
+      <span class="chip">Authentication</span><span class="chip">Sites</span><span class="chip">Assets</span><span class="chip">Forms</span>
+      <span class="chip">Workflows</span><span class="chip">Search</span><span class="chip down">Replication ⚠ down</span><span class="chip">Commerce</span>
+    </div>
+    <p class="note anim3" style="margin-top:48px;">One bundle can go down — the rest of AEM keeps running. <span class="red">That's why AEM is so stable.</span></p>
+  </section>
+
+  <!-- 11 · CHAPTER 03 -->
+  <section class="slide dark grid-bg" data-label="Chapter 03">
+    <div class="head anim">
+      <div class="kicker">// Chapter 03</div>
+      <h2 class="title t-lg">Author, Publish &amp; Dispatcher</h2>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:48px;">
+      <div class="card">
+        <div class="clabel">Author</div><div class="ctitle">Back of house</div>
+        <ul class="ticks"><li>Content team works here</li><li>Create &amp; edit pages</li><li>Upload images &amp; assets</li><li>Preview before publishing</li><li>Visitors never see this</li></ul>
+      </div>
+      <div class="card accent">
+        <div class="clabel">Publish</div><div class="ctitle">Front of house</div>
+        <ul class="ticks"><li>What visitors see</li><li>Optimized for speed</li><li>Scales to millions</li><li>Always on</li></ul>
+      </div>
+      <div class="card">
+        <div class="clabel">Dispatcher</div><div class="ctitle">Cache layer</div>
+        <ul class="ticks"><li>Caches pages</li><li>Reduces server load</li><li>Security layer</li><li>Handles traffic spikes</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · HOTEL ANALOGY -->
+  <section class="slide paper" data-label="Hotel analogy">
+    <div class="head anim">
+      <div class="kicker">// Chapter 03 · Analogy</div>
+      <h2 class="title t-md">Think of it like a hotel</h2>
+    </div>
+    <div class="cards g2 anim2" style="margin-top:48px;">
+      <div class="card">
+        <div class="clabel">Guests</div><div class="ctitle">= Website Visitors</div>
+        <p>They enjoy the experience. They never see what happens behind the scenes.</p>
+      </div>
+      <div class="card">
+        <div class="clabel">Staff</div><div class="ctitle">= Authors &amp; Developers</div>
+        <p>They set up and maintain everything, working in areas guests never see.</p>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:42px;"><span class="red">Publish</span> = front of house · <span class="red">Author</span> = back of house · <span class="red">Dispatcher</span> = the front desk.</p>
+  </section>
+
+  <!-- 13 · OUTRO -->
+  <section class="slide dark grid-bg center" data-label="Outro">
+    <div class="col gap-l">
+      <div class="eyebrow anim">// That's Video 1</div>
+      <h2 class="title t-lg anim" style="max-width:18em;">Everything the docs<br />don't tell you.</h2>
+      <div class="next-pill anim2"><b>Video 2 →</b> Components, Templates &amp; the AEM Authoring Experience</div>
+      <div class="outro-links anim3" style="margin-top:8px;">
+        <a href="https://youtube.com/@aeminsider"><span class="ic">▶</span> youtube.com/@aeminsider</a>
+        <a href="https://aeminsider.com"><span class="ic">◆</span> aeminsider.com</a>
+        <a href="https://aeminsider.substack.com"><span class="ic">✎</span> aeminsider.substack.com</a>
+      </div>
+      <p class="note anim3">Subscribe for weekly AEM content. Drop a comment — what should I cover next?</p>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>
