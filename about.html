@@ -148,9 +148,9 @@
             <button class="btn btn--red" type="submit">Send message</button>
             <span class="cf-note">Prefer email? <a href="mailto:aeminsider@gmail.com">aeminsider@gmail.com</a></span>
           </div>
-          <div class="cf-ok">✓ Thanks — your message is on its way. I read every one and will get back to you.</div>
-          <div class="cf-err">Couldn't send just now. Please email <a href="mailto:aeminsider@gmail.com">aeminsider@gmail.com</a> directly.</div>
         </form>
+        <div class="cf-ok">✓ Message sent — thanks for reaching out. I read every message and will get back to you soon.</div>
+        <div class="cf-err">Couldn't send just now. Please email <a href="mailto:aeminsider@gmail.com">aeminsider@gmail.com</a> directly.</div>
       </div>
     </div>
   </section>
@@ -213,7 +213,8 @@
     // contact form → Formspree (AJAX, stays on page)
     const cf=document.getElementById('contact-form');
     if(cf){
-      const cok=cf.querySelector('.cf-ok'), cerr=cf.querySelector('.cf-err');
+      const scope=cf.parentElement; // .contact-wrap — messages live here, outside the form
+      const cok=scope.querySelector('.cf-ok'), cerr=scope.querySelector('.cf-err');
       const emailRe=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
       cf.addEventListener('submit',async e=>{
         e.preventDefault();
@@ -230,7 +231,7 @@
         btn.disabled=true; btn.textContent='Sending…';
         try{
           const res=await fetch(cf.action,{method:'POST',body:new FormData(cf),headers:{'Accept':'application/json'}});
-          if(res.ok){cf.reset();cf.style.display='none';cok.classList.add('show');}
+          if(res.ok){cf.reset();cf.style.display='none';cerr.classList.remove('show');cok.classList.add('show');cok.scrollIntoView({behavior:'smooth',block:'center'});}
           else{cerr.classList.add('show');btn.disabled=false;btn.textContent=label;}
         }catch(_){cerr.classList.add('show');btn.disabled=false;btn.textContent=label;}
       });
