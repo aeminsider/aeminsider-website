@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AEM Maven commands cheat sheet — AEM Insider</title>
+<meta name="description" content="The daily AEM build & deploy Maven commands — copy each one, or download the cheat sheet." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="../assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="../index.html">
+        <img src="../assets/logo.svg" alt="AEM Insider" />
+        <span class="wm"><b>AEM Insider</b><span>aeminsider.com</span></span>
+      </a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../resources.html" class="active">Resources</a>
+        <a href="../contact.html">Contact</a>
+        <a class="nav-cta-m" href="https://aeminsider.substack.com" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+      <div class="spacer"></div>
+      <a class="btn btn--red" href="https://aeminsider.substack.com" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Subscribe
+      </a>
+      <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <a class="res-back" href="../resources.html">← All resources</a>
+      <div class="eyebrow" style="margin-top:16px;">// Cheat sheet · Free</div>
+      <h1 style="margin-top:12px;">AEM Maven commands cheat sheet</h1>
+      <p class="lede">The daily build &amp; deploy commands from EP03 — each with what it does and when to run it. Copy the one you need, or download the whole sheet. Author = port 4502 · Publish = port 4503.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:20px;">
+    <div class="wrap">
+      <div class="res-view">
+
+        <div class="cmd-group">
+          <div class="eyebrow">// Build &amp; deploy</div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Build only — no deploy</div>
+            <div class="cmd-desc">Verify the code compiles. No running AEM needed.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">terminal</span>
+                <button class="copy-btn" data-copy="#c1" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="c1">mvn clean install</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Deploy everything to Author</div>
+            <div class="cmd-desc">Start of day, or after a git pull. Deploys all modules to the Author instance (4502).</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">terminal</span>
+                <button class="copy-btn" data-copy="#c2" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="c2">mvn clean install -PautoInstallPackage</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Deploy everything to Publish</div>
+            <div class="cmd-desc">Deploys all modules to the Publish instance (4503).</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">terminal</span>
+                <button class="copy-btn" data-copy="#c3" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="c3">mvn clean install -PautoInstallPackagePublish</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Deploy to a different host / port</div>
+            <div class="cmd-desc">Override the target instance for any profile — e.g. an Author on port 4504. On Windows PowerShell you must quote the property (as shown) or it gets mangled; in Command Prompt or bash the quotes aren't needed. Add <span class="mono">-Daem.host=…</span> for a remote host.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">terminal</span>
+                <button class="copy-btn" data-copy="#c7" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="c7">mvn clean install -PautoInstallBundle '-Daem.port=4504'</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Deploy as one combined package</div>
+            <div class="cmd-desc">Bundles all modules into a single content package, then installs it.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">terminal</span>
+                <button class="copy-btn" data-copy="#c4" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="c4">mvn clean install -PautoInstallSinglePackage</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Java bundle only — fastest loop</div>
+            <div class="cmd-desc">You changed a Sling Model, service, or servlet. Rebuilds just the core module.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">terminal</span>
+                <button class="copy-btn" data-copy="#c5" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="c5">cd core &amp;&amp; mvn clean install -PautoInstallBundle</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Content package only</div>
+            <div class="cmd-desc">You changed HTL, a client library, or an OSGi config. Rebuilds just ui.apps.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">terminal</span>
+                <button class="copy-btn" data-copy="#c6" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="c6">cd ui.apps &amp;&amp; mvn clean install -PautoInstallPackage</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmd-group">
+          <div class="eyebrow">// Verify the deploy — check these three places</div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Package Manager</div>
+            <div class="cmd-desc">Your packages should be listed with status Installed (aeminsider.ui.apps, aeminsider.ui.content, and so on).</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">browser</span>
+                <button class="copy-btn" data-copy="#v1" aria-label="Copy URL">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="v1">localhost:4502/crx/packmgr</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Sites Console</div>
+            <div class="cmd-desc">You should see your project folder with a sample page inside — your content is live.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">browser</span>
+                <button class="copy-btn" data-copy="#v2" aria-label="Copy URL">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="v2">localhost:4502/sites.html</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Felix Console — Bundles</div>
+            <div class="cmd-desc">Search your app id — status should be Active. If it shows Resolved, there's a dependency issue in your Java code.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">browser</span>
+                <button class="copy-btn" data-copy="#v3" aria-label="Copy URL">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+              <pre id="v3">localhost:4502/system/console/bundles</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="res-actions">
+          <a class="btn btn--ghost" href="aem-maven-commands.txt" download="aem-maven-commands.txt">⬇ Download full cheat sheet (.txt)</a>
+        </div>
+        <p class="res-note">Assumes the standard archetype layout: core · ui.frontend · ui.apps · ui.content · ui.config · dispatcher · all. Not affiliated with Adobe Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-bot">
+        <span>© 2026 AEM Insider · aeminsider.com</span>
+        <span>Not affiliated with Adobe Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('nav');
+    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+    const burger=document.getElementById('burger');
+    if(burger){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+      document.querySelectorAll('.nav nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}));}
+
+    // copy-to-clipboard — each command block copies its own editor
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click',async()=>{
+        const el=document.querySelector(btn.dataset.copy);
+        if(!el)return;
+        const text=el.innerText;
+        try{await navigator.clipboard.writeText(text);}
+        catch(_){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}
+        const lbl=btn.querySelector('.cl');const prev=lbl.textContent;
+        btn.classList.add('copied');lbl.textContent='Copied!';
+        setTimeout(()=>{btn.classList.remove('copied');lbl.textContent=prev;},1500);
+      });
+    });
+  </script>
+</body>
+</html>

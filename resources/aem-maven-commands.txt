@@ -1,0 +1,42 @@
+# ======================================================================
+#  AEM Maven Commands — Cheat Sheet
+#  AEM Insider · aeminsider.com   (Not affiliated with Adobe Inc.)
+#  Author = port 4502 · Publish = port 4503
+# ======================================================================
+
+# --- Build & deploy ---------------------------------------------------
+
+# Build only — no deploy. Verify the code compiles (no running AEM needed).
+mvn clean install
+
+# Deploy everything to Author. Start of day / after a git pull.
+mvn clean install -PautoInstallPackage
+
+# Deploy everything to Publish (4503).
+mvn clean install -PautoInstallPackagePublish
+
+# Deploy to a different host / port — override the target instance for any profile.
+# Windows PowerShell: quote the -D flag (as below). Command Prompt / bash: quotes not needed.
+# Add -Daem.host=<host> for a remote box.
+mvn clean install -PautoInstallBundle '-Daem.port=4504'
+
+# Deploy all modules as ONE combined content package.
+mvn clean install -PautoInstallSinglePackage
+
+# Java bundle only — changed a Sling Model, service, or servlet. Fastest loop.
+cd core && mvn clean install -PautoInstallBundle
+
+# Content package only — changed HTL, a clientlib, or an OSGi config.
+cd ui.apps && mvn clean install -PautoInstallPackage
+
+
+# --- The pattern every AEM dev follows --------------------------------
+# Start of day / after git pull:  mvn clean install -PautoInstallPackage
+# While developing (one module):  cd core && mvn clean install -PautoInstallBundle
+
+
+# --- Verify the deploy — check three places ---------------------------
+# 1) Package Manager   localhost:4502/crx/packmgr             -> status Installed
+# 2) Sites Console     localhost:4502/sites.html              -> your project folder + sample page
+# 3) Felix Bundles     localhost:4502/system/console/bundles  -> your app id = Active
+#    (If a bundle shows Resolved instead of Active, there's a dependency issue in your Java.)

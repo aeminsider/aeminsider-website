@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maven settings.xml for AEM — AEM Insider</title>
+<meta name="description" content="Maven settings.xml that points Maven to Adobe's public repository. Copy it or download it for your AEM projects." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="../assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="../index.html">
+        <img src="../assets/logo.svg" alt="AEM Insider" />
+        <span class="wm"><b>AEM Insider</b><span>aeminsider.com</span></span>
+      </a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../resources.html" class="active">Resources</a>
+        <a href="../contact.html">Contact</a>
+        <a class="nav-cta-m" href="https://aeminsider.substack.com" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+      <div class="spacer"></div>
+      <a class="btn btn--red" href="https://aeminsider.substack.com" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Subscribe
+      </a>
+      <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <a class="res-back" href="../resources.html">← All resources</a>
+      <div class="eyebrow" style="margin-top:16px;">// Config File · Free</div>
+      <h1 style="margin-top:12px;">Maven settings.xml for AEM</h1>
+      <p class="lede">Points Maven to Adobe's public repository so your AEM builds can download the right dependencies. Required for every AEM Maven project. Copy it below and save it as your Maven settings file — the location depends on your OS:</p>
+      <div class="mono" style="margin-top:16px;font-size:14px;line-height:2;color:var(--ink-2);">
+        <div><span style="color:var(--accent);">macOS / Linux</span> &nbsp;→&nbsp; ~/.m2/settings.xml</div>
+        <div><span style="color:var(--accent);">Windows</span> &nbsp;→&nbsp; C:\Users\&lt;Name&gt;\.m2\settings.xml</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:20px;">
+    <div class="wrap">
+      <div class="res-view">
+        <div class="editor">
+          <div class="bar">
+            <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+            <span class="fn">settings.xml</span>
+            <button class="copy-btn" data-copy="#snip" aria-label="Copy to clipboard">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+              <span class="cl">Copy</span>
+            </button>
+          </div>
+          <pre id="snip">Loading…</pre>
+        </div>
+        <div class="res-actions">
+          <a class="btn btn--ghost" href="settings.xml" download="settings.xml">⬇ Download settings.xml</a>
+        </div>
+        <p class="res-note">Not committed to Git — this file lives on your machine, one copy per developer. Not affiliated with Adobe Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-bot">
+        <span>© 2026 AEM Insider · aeminsider.com</span>
+        <span>Not affiliated with Adobe Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- inline snippet source: rendered into #snip below (works offline, no fetch) -->
+  <script type="text/plain" id="src">
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <pluginGroups></pluginGroups>
+    <proxies></proxies>
+    <servers></servers>
+    <mirrors>
+	 <mirror>
+            <id>central-mirror</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+    </mirrors>
+    <profiles>
+        <!-- ====================================================== -->
+        <!-- A D O B E   P U B L I C   P R O F I L E                -->
+        <!-- ====================================================== -->
+        <profile>
+            <id>adobe-public</id>
+
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <releaseRepository-Id>adobe-public-releases</releaseRepository-Id>
+                <releaseRepository-Name>Adobe Public Releases</releaseRepository-Name>
+                <releaseRepository-URL>https://repo.adobe.com/nexus/content/groups/public</releaseRepository-URL>
+            </properties>
+
+            <repositories>
+                <repository>
+                    <id>adobe-public-releases</id>
+                    <name>Adobe Public Repository</name>
+                    <url>https://repo.adobe.com/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>adobe-public-releases</id>
+                    <name>Adobe Public Repository</name>
+                    <url>https://repo.adobe.com/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>adobe-public</activeProfile>
+    </activeProfiles>
+</settings>
+</script>
+
+  <script>
+    const nav=document.getElementById('nav');
+    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+    const burger=document.getElementById('burger');
+    if(burger){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+      document.querySelectorAll('.nav nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}));}
+
+    // render the snippet from the inline source — works offline, no fetch
+    (function(){var s=document.getElementById('src');if(s){document.getElementById('snip').textContent=s.textContent.replace(/^\n+/,'').replace(/\s+$/,'');}})();
+
+    // copy-to-clipboard
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click',async()=>{
+        const el=document.querySelector(btn.dataset.copy);
+        if(!el)return;
+        const text=el.innerText;
+        try{await navigator.clipboard.writeText(text);}
+        catch(_){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}
+        const lbl=btn.querySelector('.cl');const prev=lbl.textContent;
+        btn.classList.add('copied');lbl.textContent='Copied!';
+        setTimeout(()=>{btn.classList.remove('copied');lbl.textContent=prev;},1500);
+      });
+    });
+  </script>
+</body>
+</html>

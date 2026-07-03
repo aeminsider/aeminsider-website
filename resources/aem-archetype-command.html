@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AEM archetype generate command — AEM Insider</title>
+<meta name="description" content="The full mvn archetype:generate command that scaffolds a multimodule AEM project. Copy the bash, PowerShell, or cmd version." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="../assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="../index.html">
+        <img src="../assets/logo.svg" alt="AEM Insider" />
+        <span class="wm"><b>AEM Insider</b><span>aeminsider.com</span></span>
+      </a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../resources.html" class="active">Resources</a>
+        <a href="../contact.html">Contact</a>
+        <a class="nav-cta-m" href="https://aeminsider.substack.com" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+      <div class="spacer"></div>
+      <a class="btn btn--red" href="https://aeminsider.substack.com" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Subscribe
+      </a>
+      <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <a class="res-back" href="../resources.html">← All resources</a>
+      <div class="eyebrow" style="margin-top:16px;">// Command · Free</div>
+      <h1 style="margin-top:12px;">AEM archetype generate command</h1>
+      <p class="lede">One command scaffolds a full multimodule AEM project. Pick the version for your shell and copy it — then change the app title / id / groupId / artifactId to match your project. Adobe maintains the archetype; always use the latest <span class="mono">archetypeVersion</span>.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:20px;">
+    <div class="wrap">
+      <div class="res-view">
+
+        <div class="cmd-group">
+          <div class="eyebrow">// Generate the project</div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">macOS / Linux (bash)</div>
+            <div class="cmd-desc">Copy &amp; paste as-is — the <span class="mono">\</span> line breaks keep it readable.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">bash</span>
+                <button class="copy-btn" data-copy="#a1" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+<pre id="a1">mvn -B org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate \
+  -D archetypeGroupId=com.adobe.aem \
+  -D archetypeArtifactId=aem-project-archetype \
+  -D archetypeVersion=49 \
+  -D appTitle="AEM Insider Site" \
+  -D appId="aeminsider" \
+  -D groupId="com.aeminsider" \
+  -D artifactId="aeminsider-site" \
+  -D aemVersion="cloud" \
+  -D includeExamples=n \
+  -D includeFrontendModule=general</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Windows PowerShell</div>
+            <div class="cmd-desc">One line. Every <span class="mono">-D</span> flag is single-quoted so PowerShell doesn't mangle it. Run PowerShell as Administrator.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">PowerShell</span>
+                <button class="copy-btn" data-copy="#a2" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+<pre id="a2">mvn -B org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate '-DarchetypeGroupId=com.adobe.aem' '-DarchetypeArtifactId=aem-project-archetype' '-DarchetypeVersion=49' '-DappTitle=AEM Insider Site' '-DappId=aeminsider' '-DgroupId=com.aeminsider' '-DartifactId=aeminsider-site' '-DaemVersion=cloud' '-DincludeExamples=n' '-DincludeFrontendModule=general'</pre>
+            </div>
+          </div>
+
+          <div class="cmd-block">
+            <div class="cmd-when">Windows Command Prompt (cmd)</div>
+            <div class="cmd-desc">One line, plain <span class="mono">-D</span> flags. Run cmd as Administrator.</div>
+            <div class="editor">
+              <div class="bar">
+                <div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <span class="fn">cmd</span>
+                <button class="copy-btn" data-copy="#a3" aria-label="Copy command">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                  <span class="cl">Copy</span>
+                </button>
+              </div>
+<pre id="a3">mvn -B org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate -D archetypeGroupId=com.adobe.aem -D archetypeArtifactId=aem-project-archetype -D archetypeVersion=49 -D appTitle="AEM Insider Site" -D appId="aeminsider" -D groupId="com.aeminsider" -D artifactId="aeminsider-site" -D aemVersion="cloud" -D includeExamples=n -D includeFrontendModule=general</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmd-group">
+          <div class="eyebrow">// What each parameter means</div>
+          <div class="param-list">
+            <div class="param"><div class="pk">archetypeVersion=49</div><div class="pd">Latest blueprint version. Bump it as Adobe releases newer ones.</div></div>
+            <div class="param"><div class="pk">appId=aeminsider</div><div class="pd">Used in all JCR paths: /apps/aeminsider, /content/aeminsider.</div></div>
+            <div class="param"><div class="pk">groupId=com.aeminsider</div><div class="pd">Java package root for your code.</div></div>
+            <div class="param"><div class="pk">artifactId=aeminsider-site</div><div class="pd">The project folder name that gets created.</div></div>
+            <div class="param"><div class="pk">aemVersion=cloud</div><div class="pd">Cloud-ready structure. Use 6.5.0 for on-premise.</div></div>
+            <div class="param"><div class="pk">includeExamples=n</div><div class="pd">Clean project — no WKND sample code to delete later.</div></div>
+            <div class="param"><div class="pk">includeFrontendModule=general</div><div class="pd">Adds ui.frontend with a webpack build. Use react/angular for SPAs.</div></div>
+          </div>
+        </div>
+
+        <div class="res-actions">
+          <a class="btn btn--ghost" href="aem-archetype-command.txt" download="aem-archetype-command.txt">⬇ Download all versions (.txt)</a>
+        </div>
+        <p class="res-note">Archetype source: github.com/adobe/aem-project-archetype. Not affiliated with Adobe Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-bot">
+        <span>© 2026 AEM Insider · aeminsider.com</span>
+        <span>Not affiliated with Adobe Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('nav');
+    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+    const burger=document.getElementById('burger');
+    if(burger){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+      document.querySelectorAll('.nav nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}));}
+
+    // copy-to-clipboard — each block copies its own editor
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click',async()=>{
+        const el=document.querySelector(btn.dataset.copy);
+        if(!el)return;
+        const text=el.innerText;
+        try{await navigator.clipboard.writeText(text);}
+        catch(_){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();}
+        const lbl=btn.querySelector('.cl');const prev=lbl.textContent;
+        btn.classList.add('copied');lbl.textContent='Copied!';
+        setTimeout(()=>{btn.classList.remove('copied');lbl.textContent=prev;},1500);
+      });
+    });
+  </script>
+</body>
+</html>

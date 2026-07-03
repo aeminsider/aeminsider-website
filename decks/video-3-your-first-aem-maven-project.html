@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AEM Insider — Video 3: Your First AEM Maven Project</title>
+<link rel="icon" href="../assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="deck.css" />
+<style>
+  .ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px;}
+  .ticks li{font-size:28px;line-height:1.35;color:var(--ink-2);font-family:var(--sans);display:flex;gap:16px;align-items:flex-start;}
+  .dark .ticks li{color:rgba(255,255,255,0.78);}
+  .ticks li .n{font-family:var(--mono);font-size:24px;color:var(--accent);font-weight:600;flex:none;padding-top:2px;min-width:34px;}
+  .card ul.ticks{gap:11px;}
+  .card ul.ticks li{font-size:23px;line-height:1.3;}
+  .card ul.ticks li::before{content:"›";color:var(--accent);font-family:var(--mono);}
+  .card ul.ticks li .n{display:none;}
+  /* dense code windows for command / config slides */
+  .win.dense pre{font-size:22px;line-height:1.5;}
+  .win pre .k{color:var(--c-attr);}
+  .win pre .t{color:var(--c-tag);}
+  .win pre .s{color:var(--c-str);}
+  .win pre .kw{color:var(--c-kw);}
+  /* card that leads with a mono tag/command */
+  .card .cmono{font-family:var(--mono);font-size:23px;color:var(--ink);word-break:break-word;line-height:1.4;}
+  .card .cmono .red{color:var(--accent);}
+  .num-badge{font-family:var(--disp);font-weight:700;font-size:40px;color:var(--accent);line-height:1;}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · TITLE -->
+  <section class="slide dark grid-bg center" data-label="Title">
+    <div class="col gap-l">
+      <img class="shield anim" src="../assets/logo.svg" alt="AEM Insider" />
+      <div class="col gap-m">
+        <div class="eyebrow anim">// AEM Insider · Video 3</div>
+        <h1 class="title t-xl anim2">Your First AEM<br />Maven Project</h1>
+      </div>
+      <div class="col gap-s anim3" style="margin-top:8px;">
+        <div class="sub"><span class="red">Built the Right Way</span> · AEM Complete Tutorial Series 2026</div>
+        <div class="credline"><span class="dot"></span> Hands-On Demo · Archetype, Modules &amp; Deploy</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · PREREQUISITES -->
+  <section class="slide paper" data-label="Before We Start">
+    <div class="head anim">
+      <div class="kicker">// Chapter 02 · Prerequisites</div>
+      <h2 class="title t-md">Before We Start</h2>
+      <p class="note" style="margin-top:14px;">Four things installed and running before the first command.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:40px;align-items:flex-start;">
+      <div class="cards g2" style="flex:1.35;">
+        <div class="card"><div class="clabel">Java 21</div><div class="ctitle">The runtime</div><p>AEM Cloud SDK requires Java 21. Set up in Video 2.</p></div>
+        <div class="card"><div class="clabel">Maven 3.8+</div><div class="ctitle">Build &amp; deploy</div><p>The build and deploy tool. Used for every command.</p></div>
+        <div class="card"><div class="clabel">Node.js 18+</div><div class="ctitle">Frontend build</div><p>Required by ui.frontend for the webpack build.</p></div>
+        <div class="card"><div class="clabel">AEM Running</div><div class="ctitle">Author on 4502</div><p>Author on port 4502, from the Video 2 local setup.</p></div>
+      </div>
+      <div class="win dense" style="flex:1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">verify in terminal</span></div>
+<pre><span class="cmd">$</span> java -version
+<span class="cmd">$</span> mvn -version
+<span class="cmd">$</span> node -v
+<span class="cmd">$</span> npm -v</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · SETTINGS.XML -->
+  <section class="slide paper" data-label="settings.xml">
+    <div class="head anim">
+      <div class="kicker">// Chapter 02 · settings.xml</div>
+      <h2 class="title t-md">~/.m2/settings.xml</h2>
+      <p class="note" style="margin-top:14px;">Every AEM developer needs this file. Download link in the video description.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:38px;align-items:flex-start;">
+      <div class="cards g2" style="flex:1.35;">
+        <div class="card"><div class="clabel">The analogy</div><div class="ctitle">Like a contact list</div><p>Maven needs to download AEM libraries — but Adobe's server isn't in Maven's default list.</p></div>
+        <div class="card accent"><div class="clabel">Why it matters</div><div class="ctitle">No file → build fails</div><p>With this file, Maven knows Adobe's server address and finds the libraries instantly.</p></div>
+        <div class="card"><div class="clabel">Not in your project</div><div class="ctitle">Never committed to Git</div><p>It lives on your machine. Each developer keeps their own copy.</p></div>
+        <div class="card"><div class="clabel">Set once</div><div class="ctitle">Forget it</div><p>Configure once per machine. All future AEM projects use it automatically.</p></div>
+      </div>
+      <div class="win dense" style="flex:1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">where to put it</span></div>
+<pre><span class="muted"># Mac / Linux</span>
+~/.m2/settings.xml
+
+<span class="muted"># Windows</span>
+C:\Users\&lt;Name&gt;\.m2\
+    settings.xml</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · WHAT IS MAVEN -->
+  <section class="slide paper" data-label="What is Maven?">
+    <div class="head anim">
+      <div class="kicker">// Chapter 03 · What is Maven?</div>
+      <h2 class="title t-md">Maven — in plain English</h2>
+      <p class="note" style="margin-top:14px;">Like a food delivery app: you place one order, it handles everything else. You run one command.</p>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:44px;">
+      <div class="card"><div class="clabel">01 · Compiles</div><div class="ctitle">Java → bundle</div><p>Your Java code — Sling Models, services, servlets — into an OSGi bundle.</p></div>
+      <div class="card"><div class="clabel">02 · Packages</div><div class="ctitle">Content → packages</div><p>Your components, content, and config into installable AEM content packages.</p></div>
+      <div class="card"><div class="clabel">03 · Deploys</div><div class="ctitle">Uploads to AEM</div><p>Uploads everything to your running AEM instance — Author or Publish.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:44px;">One command, and <span class="red">Maven handles the rest</span>.</p>
+  </section>
+
+  <!-- 5 · ARCHETYPE -->
+  <section class="slide paper" data-label="The Archetype">
+    <div class="head anim">
+      <div class="kicker">// Chapter 04 · Generate the Project</div>
+      <h2 class="title t-md">The Archetype — Adobe's Blueprint</h2>
+      <p class="note" style="margin-top:12px;">One command generates the entire project. Adobe maintains it — always use the latest version.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:32px;align-items:flex-start;">
+      <div class="win dense" style="flex:1.25;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">generate the project</span></div>
+<pre><span class="cmd">$</span> mvn -B org.apache.maven.plugins:\
+    maven-archetype-plugin:3.2.1:generate \
+  -D archetypeGroupId=com.adobe.aem \
+  -D archetypeArtifactId=aem-project-archetype \
+  -D archetypeVersion=<span class="s">49</span> \
+  -D appTitle=<span class="s">"AEM Insider Site"</span> \
+  -D appId=<span class="s">"aeminsider"</span> \
+  -D groupId=<span class="s">"com.aeminsider"</span> \
+  -D artifactId=<span class="s">"aeminsider-site"</span> \
+  -D aemVersion=<span class="s">"cloud"</span> \
+  -D includeExamples=<span class="s">n</span> \
+  -D includeFrontendModule=<span class="s">general</span></pre>
+      </div>
+      <div class="cards" style="flex:1;gap:16px;">
+        <div class="card" style="padding:22px 26px;"><div class="clabel">archetypeVersion=49</div><p>Latest blueprint. Targets AEM as a Cloud Service.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">appId="aeminsider"</div><p>Used in all JCR paths — /apps/aeminsider, /content/aeminsider.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">aemVersion="cloud"</div><p>Cloud-ready structure. Use 6.5.0 for on-premise.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">includeExamples=n</div><p>Clean project — no WKND sample code to delete later.</p></div>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:26px;"><span class="red">Windows:</span> open Command Prompt in Administrator mode before running any Maven commands.</p>
+  </section>
+
+  <!-- 6 · FOLDER STRUCTURE -->
+  <section class="slide paper" data-label="Folder Structure">
+    <div class="head anim">
+      <div class="kicker">// Chapter 05 · Folder Structure</div>
+      <h2 class="title t-md">One Parent. Multiple Modules.</h2>
+      <p class="note" style="margin-top:12px;">Each folder is a module with one job. The root pom.xml is the parent — it coordinates the build order.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:30px;align-items:flex-start;">
+      <div class="win dense" style="flex:1.1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">aeminsider-site/</span></div>
+<pre>aeminsider-site/
+├── pom.xml            <span class="muted">← parent — build order</span>
+├── core/              <span class="muted">← Java code</span>
+├── ui.frontend/       <span class="muted">← CSS + JS source</span>
+├── ui.apps/           <span class="muted">← AEM components</span>
+├── ui.apps.structure/ <span class="muted">← JCR path filters</span>
+├── ui.content/        <span class="muted">← pages + templates</span>
+├── ui.config/         <span class="muted">← OSGi configs</span>
+├── it.tests/          <span class="muted">← integration tests</span>
+├── ui.tests/          <span class="muted">← UI tests</span>
+├── all/               <span class="muted">← combined package</span>
+└── dispatcher/        <span class="muted">← Dispatcher config</span></pre>
+      </div>
+      <ul class="ticks" style="flex:1;gap:14px;">
+        <li><span class="n">›</span><span><b>core/</b> — Sling Models, OSGi services, servlets. All your Java code.</span></li>
+        <li><span class="n">›</span><span><b>ui.frontend/</b> — CSS &amp; JS source. webpack compiles and sends output to ui.apps.</span></li>
+        <li><span class="n">›</span><span><b>ui.apps/</b> — component definitions, HTL templates, compiled client libraries.</span></li>
+        <li><span class="n">›</span><span><b>ui.content/</b> — sample pages, editable templates, /conf configurations.</span></li>
+        <li><span class="n">›</span><span><b>ui.config/</b> — OSGi configs per run mode: config, config.author, config.publish.</span></li>
+        <li><span class="n">›</span><span><b>dispatcher/</b> — Apache vhosts, rewrites, cache and filter rules.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7 · PARENT POM -->
+  <section class="slide paper" data-label="Parent pom.xml">
+    <div class="head anim">
+      <div class="kicker">// Chapter 06 · Parent POM</div>
+      <h2 class="title t-md">pom.xml — The Brain of the Build</h2>
+      <p class="note" style="margin-top:12px;">Four sections do the heavy lifting. Change a value once here — it applies everywhere.</p>
+    </div>
+    <div class="cards g2 anim2" style="margin-top:36px;">
+      <div class="card"><div class="cmono">&lt;modules&gt;</div><div class="ctitle">Module order</div><p>Lists all child modules in build order. ui.frontend builds before ui.apps — the compiled output must exist before ui.apps packages it.</p></div>
+      <div class="card"><div class="cmono">&lt;properties&gt;</div><div class="ctitle">AEM host &amp; ports</div><p>aem.host, aem.port (4502), aem.publish.host, aem.publish.port (4503). Change once here — applies everywhere.</p></div>
+      <div class="card"><div class="cmono">&lt;dependencyManagement&gt;</div><div class="ctitle">AEM SDK API</div><p>scope=provided — AEM has these classes at runtime. We compile against them but don't bundle AEM's own classes into our package.</p></div>
+      <div class="card"><div class="cmono">&lt;profiles&gt;</div><div class="ctitle">Deploy profiles</div><p>autoInstallPackage, autoInstallBundle, autoInstallSinglePackage. Each profile is a different deploy target.</p></div>
+    </div>
+  </section>
+
+  <!-- 8 · DEPLOY COMMANDS -->
+  <section class="slide paper" data-label="Deploy Commands">
+    <div class="head anim">
+      <div class="kicker">// Chapter 07 · Deploy Commands</div>
+      <h2 class="title t-md">Commands You'll Use Every Day</h2>
+      <p class="note" style="margin-top:12px;">Build only, deploy everything, or target a single module — pick the profile for what changed.</p>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:34px;">
+      <div class="card"><div class="clabel">Build only · no deploy</div><div class="cmono">mvn clean install</div><p>Verify code compiles. No AEM needed.</p></div>
+      <div class="card"><div class="clabel">Author 4502 · all modules</div><div class="cmono">mvn clean install <span class="red">-PautoInstallPackage</span></div><p>Start of day. After git pull.</p></div>
+      <div class="card"><div class="clabel">Publish 4503 · all modules</div><div class="cmono">mvn clean install <span class="red">-PautoInstallPackagePublish</span></div><p>Deploy everything to Publish.</p></div>
+      <div class="card"><div class="clabel">Author 4502 · single package</div><div class="cmono">mvn clean install <span class="red">-PautoInstallSinglePackage</span></div><p>Bundles all modules into one package.</p></div>
+      <div class="card"><div class="clabel">Author 4502 · Java only</div><div class="cmono">cd core &amp;&amp; mvn clean install <span class="red">-PautoInstallBundle</span></div><p>Changed a Sling Model or service. Fastest.</p></div>
+      <div class="card"><div class="clabel">Author 4502 · content only</div><div class="cmono">cd ui.apps &amp;&amp; mvn clean install <span class="red">-PautoInstallPackage</span></div><p>Changed HTL, clientlib, or OSGi config.</p></div>
+    </div>
+  </section>
+
+  <!-- 9 · THE PATTERN -->
+  <section class="slide dark grid-bg" data-label="The Pattern">
+    <div class="head anim">
+      <div class="kicker">// Chapter 07 · The Pattern</div>
+      <h2 class="title t-md">The Rule Every AEM Dev Follows</h2>
+      <p class="lede" style="margin-top:16px;max-width:40em;">Use the right profile for what changed — full build to start, targeted builds while developing.</p>
+    </div>
+    <div class="cards g2 anim2" style="margin-top:50px;">
+      <div class="card"><div class="clabel">Start of day</div><div class="cmono">mvn clean install <span class="red">-PautoInstallPackage</span></div><p>Full build. Deploys everything. Run after git pull or first thing in the morning.</p></div>
+      <div class="card accent"><div class="clabel">While developing</div><div class="cmono">cd core &amp;&amp; mvn clean install <span class="red">-PautoInstallBundle</span></div><p>Individual module only. Faster and targeted — just the thing you changed.</p></div>
+    </div>
+  </section>
+
+  <!-- 10 · VERIFY DEPLOYMENT -->
+  <section class="slide paper" data-label="Verify Deployment">
+    <div class="head anim">
+      <div class="kicker">// Chapter 07 · Verify Deployment</div>
+      <h2 class="title t-md">After Deploy — Check Three Places</h2>
+      <p class="note" style="margin-top:12px;">If all three look right, your project is live on the instance.</p>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:40px;">
+      <div class="card"><div class="num-badge">01</div><div class="cmono">localhost:4502/crx/packmgr</div><div class="ctitle">Package Manager</div><p>Your packages listed with status Installed — aeminsider.ui.apps, aeminsider.ui.content, and so on.</p></div>
+      <div class="card"><div class="num-badge">02</div><div class="cmono">localhost:4502/sites.html</div><div class="ctitle">Sites Console</div><p>An aeminsider folder with a sample page inside. Your project content is live.</p></div>
+      <div class="card"><div class="num-badge">03</div><div class="cmono">localhost:4502/system/console/bundles</div><div class="ctitle">Felix Console</div><p>Search aeminsider — status Active. If it shows Resolved, there's a dependency issue in your Java.</p></div>
+    </div>
+  </section>
+
+  <!-- 11 · RECAP -->
+  <section class="slide paper" data-label="Recap">
+    <div class="head anim">
+      <div class="kicker">// Chapter 08 · Recap</div>
+      <h2 class="title t-md">What We Covered Today</h2>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:40px;">
+      <div class="card"><div class="clabel">01</div><div class="ctitle">Prerequisites + settings.xml</div><p>Java 21, Maven 3.8+, Node.js 18+. settings.xml points Maven to Adobe's server.</p></div>
+      <div class="card"><div class="clabel">02</div><div class="ctitle">Maven</div><p>Like a food delivery app. One command compiles, packages, and deploys.</p></div>
+      <div class="card"><div class="clabel">03</div><div class="ctitle">Archetype — the blueprint</div><p>aem-project-archetype v49. One command generates the whole structure.</p></div>
+      <div class="card"><div class="clabel">04</div><div class="ctitle">Six working modules</div><p>core · ui.frontend · ui.apps · ui.content · ui.config · dispatcher.</p></div>
+      <div class="card"><div class="clabel">05</div><div class="ctitle">Parent pom.xml</div><p>Coordinates module order, host settings, SDK dependency, and deploy profiles.</p></div>
+      <div class="card"><div class="clabel">06</div><div class="ctitle">Deploy commands</div><p>Full build at start of day. Individual modules while developing.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:36px;">This project is your foundation — <span class="red">every component, template, and service goes here</span>.</p>
+  </section>
+
+  <!-- 12 · OUTRO -->
+  <section class="slide dark grid-bg center" data-label="Outro">
+    <div class="col gap-l">
+      <div class="eyebrow anim">// That's Video 3</div>
+      <h2 class="title t-lg anim" style="max-width:16em;">Next: your first<br /><span class="red">component</span>.</h2>
+      <div class="next-pill anim2"><b>Video 4 →</b> Build Your First AEM Component · HTL template, Sling Model, registered in ui.apps &amp; dropped onto a page</div>
+      <div class="outro-links anim3" style="margin-top:8px;">
+        <a href="https://youtube.com/@aeminsider"><span class="ic">▶</span> youtube.com/@aeminsider</a>
+        <a href="https://aeminsider.com"><span class="ic">◆</span> aeminsider.com</a>
+        <a href="https://aeminsider.substack.com"><span class="ic">✎</span> aeminsider.substack.com</a>
+      </div>
+      <p class="note anim3">Subscribe so you don't miss it. Drop a comment — what should I cover next?</p>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>

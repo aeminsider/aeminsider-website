@@ -1,0 +1,59 @@
+========================================================================
+ AEM Project Archetype — generate command
+ AEM Insider · aeminsider.com
+ Not affiliated with Adobe Inc.
+========================================================================
+
+Generates a full multimodule AEM project in one command. Adobe maintains
+the archetype and bumps the version as AEM evolves — always use the latest.
+
+Change appTitle / appId / groupId / artifactId to match your project.
+
+
+------------------------------------------------------------------------
+ Mac / Linux (bash) — copy & paste as-is
+------------------------------------------------------------------------
+
+mvn -B org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate \
+  -D archetypeGroupId=com.adobe.aem \
+  -D archetypeArtifactId=aem-project-archetype \
+  -D archetypeVersion=49 \
+  -D appTitle="AEM Insider Site" \
+  -D appId="aeminsider" \
+  -D groupId="com.aeminsider" \
+  -D artifactId="aeminsider-site" \
+  -D aemVersion="cloud" \
+  -D includeExamples=n \
+  -D includeFrontendModule=general
+
+
+------------------------------------------------------------------------
+ Windows PowerShell — one line. Quote every -D flag (single quotes),
+ or PowerShell mangles them. Run as Administrator.
+------------------------------------------------------------------------
+
+mvn -B org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate '-DarchetypeGroupId=com.adobe.aem' '-DarchetypeArtifactId=aem-project-archetype' '-DarchetypeVersion=49' '-DappTitle=AEM Insider Site' '-DappId=aeminsider' '-DgroupId=com.aeminsider' '-DartifactId=aeminsider-site' '-DaemVersion=cloud' '-DincludeExamples=n' '-DincludeFrontendModule=general'
+
+
+------------------------------------------------------------------------
+ Windows Command Prompt (cmd) — one line. Run as Administrator.
+------------------------------------------------------------------------
+
+mvn -B org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate -D archetypeGroupId=com.adobe.aem -D archetypeArtifactId=aem-project-archetype -D archetypeVersion=49 -D appTitle="AEM Insider Site" -D appId="aeminsider" -D groupId="com.aeminsider" -D artifactId="aeminsider-site" -D aemVersion="cloud" -D includeExamples=n -D includeFrontendModule=general
+
+
+------------------------------------------------------------------------
+ What the key parameters mean
+------------------------------------------------------------------------
+
+archetypeVersion=49          Latest blueprint version. Bump it as Adobe releases newer ones.
+appId="aeminsider"           Used in all JCR paths: /apps/aeminsider, /content/aeminsider.
+groupId="com.aeminsider"     Java package root for your code.
+artifactId="aeminsider-site" The project folder name that gets created.
+aemVersion="cloud"           Cloud-ready structure. Use 6.5.0 for on-premise.
+includeExamples=n            Clean project — no WKND sample code to delete later.
+includeFrontendModule=general  Adds ui.frontend with a webpack build. Use react/angular for SPAs.
+
+------------------------------------------------------------------------
+ Archetype source: github.com/adobe/aem-project-archetype
+------------------------------------------------------------------------
