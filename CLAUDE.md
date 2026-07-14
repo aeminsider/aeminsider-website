@@ -145,6 +145,7 @@ aeminsider-website/
 | EP01 | What is Adobe Experience Manager? Complete Overview 2026 | `uhxeVCX93jU` | `https://www.youtube.com/watch?v=uhxeVCX93jU` | `/p/what-is-adobe-experience-manager` |
 | EP02 | How Are AEM Pages Built? Components, Templates & Local Setup Explained (2026) | `7a3dwv0oQNg` | `https://www.youtube.com/watch?v=7a3dwv0oQNg` | `/p/how-aem-pages-are-built-components` |
 | EP03 | Your First AEM Maven Project — Built the Right Way | `7o9ecK87QzY` | `https://youtu.be/7o9ecK87QzY` | `/p/your-first-aem-maven-project-built` |
+| EP04 | Build Your First AEM Component — No Java Needed | `XPfanQZlUGU` | `https://youtu.be/XPfanQZlUGU` | `/p/build-your-first-aem-component-no` |
 
 YouTube thumbnail URL pattern: `https://i.ytimg.com/vi/<VIDEO_ID>/maxresdefault.jpg`
 Fallback on error: `https://i.ytimg.com/vi/<VIDEO_ID>/hqdefault.jpg`
@@ -189,9 +190,11 @@ The Copy button lives in the code-window bar (icon + "Copy"); no changes to anim
 
 | EP | Title | Track | What it covers |
 |---|---|---|---|
-| EP04 | Build Your First AEM Component from Scratch | dev | HTL template, Sling Model, ui.apps registration, page editor |
-| EP05 | AEM Sites, Assets & Forms — Complete Guide | dev | Sites console, Assets DAM, Content Fragments, Experience Fragments |
-| EP06 | AEM as a Cloud Service — What's Different? | dev | AEMaaCS vs on-premise, Cloud Manager, Edge Delivery Services |
+| EP05 | AEM Dialogs — Deep Dive | dev | Granite UI field types (dropdowns, checkboxes, pathfields, rich text), tabs, validation — locked in EP04's outro |
+| EP06 | Editable Templates & Policies | dev | Structure vs initial content, policies, locked/unlocked — promised "later in the series" in EP04 |
+| EP07 | Clientlibs Explained | dev | Categories, embeds, dependencies, ui.frontend — promised "later in the series" in EP04 |
+
+Backlog (no EP number yet): Sling Models (deferred from EP04) · AEM Sites, Assets & Forms · AEM as a Cloud Service — What's Different? (full script already written, July 2026).
 
 Content Authors & Marketers track: planned but not started. No EP numbers assigned yet.
 

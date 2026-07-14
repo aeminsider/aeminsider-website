@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AEM Insider — Video 4: Build Your First AEM Component</title>
+<link rel="icon" href="../assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="deck.css" />
+<style>
+  .ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px;}
+  .ticks li{font-size:28px;line-height:1.35;color:var(--ink-2);font-family:var(--sans);display:flex;gap:16px;align-items:flex-start;}
+  .dark .ticks li{color:rgba(255,255,255,0.78);}
+  .ticks li .n{font-family:var(--mono);font-size:24px;color:var(--accent);font-weight:600;flex:none;padding-top:2px;min-width:34px;}
+  .card ul.ticks{gap:11px;}
+  .card ul.ticks li{font-size:23px;line-height:1.3;}
+  .card ul.ticks li::before{content:"›";color:var(--accent);font-family:var(--mono);}
+  .card ul.ticks li .n{display:none;}
+  /* dense code windows for command / config slides */
+  .win.dense pre{font-size:22px;line-height:1.5;}
+  .win pre .k{color:var(--c-attr);}
+  .win pre .t{color:var(--c-tag);}
+  .win pre .s{color:var(--c-str);}
+  .win pre .kw{color:var(--c-kw);}
+  /* card that leads with a mono tag/command */
+  .card .cmono{font-family:var(--mono);font-size:23px;color:var(--ink);word-break:break-word;line-height:1.4;}
+  .card .cmono .red{color:var(--accent);}
+  .num-badge{font-family:var(--disp);font-weight:700;font-size:40px;color:var(--accent);line-height:1;}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · TITLE -->
+  <section class="slide dark grid-bg center" data-label="Title">
+    <div class="col gap-l">
+      <img class="shield anim" src="../assets/logo.svg" alt="AEM Insider" />
+      <div class="col gap-m">
+        <div class="eyebrow anim">// AEM Insider · Video 4</div>
+        <h1 class="title t-xl anim2">Build Your First<br />AEM Component</h1>
+      </div>
+      <div class="col gap-s anim3" style="margin-top:8px;">
+        <div class="sub"><span class="red">No Java Needed</span> · AEM Complete Tutorial Series 2026</div>
+        <div class="credline"><span class="dot"></span> Hands-On Demo · From CRXDE to an Authored Page</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · CRXDE LITE -->
+  <section class="slide paper" data-label="CRXDE Lite">
+    <div class="head anim">
+      <div class="kicker">// Chapter 01 · CRXDE Lite</div>
+      <h2 class="title t-md">The Repository, Raw</h2>
+      <p class="note" style="margin-top:14px;">Everything in AEM lives in the JCR — stored as nodes and properties. Once this clicks, AEM stops being magic.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:38px;align-items:flex-start;">
+      <div class="cards" style="flex:1.2;gap:16px;">
+        <div class="card" style="padding:22px 26px;"><div class="clabel">Everything is a node</div><p>A folder that can also hold data. Pages, components, configs, images — all nodes.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">Every node has properties</div><p>A name and a value. That's the entire data model of AEM.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">Read and write</div><p>Create nodes, edit properties, write files — live on the instance.</p></div>
+      </div>
+      <div class="win dense" style="flex:1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">localhost:4502/crx/de</span></div>
+<pre><span class="muted"># the content tree</span>
+/apps/aeminsider
+├── components
+├── clientlibs
+└── i18n
+
+<span class="muted"># properties panel</span>
+<span class="k">jcr:primaryType</span>  nt:folder
+<span class="k">jcr:title</span>        AEM Insider</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · THE BIG THREE -->
+  <section class="slide paper" data-label="The Big Three">
+    <div class="head anim">
+      <div class="kicker">// Chapter 02 · The Big Three</div>
+      <h2 class="title t-md">Three Folders That Matter</h2>
+      <p class="note" style="margin-top:14px;">The repository and the codebase are mirrors — code is just content that gets deployed.</p>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:40px;">
+      <div class="card"><div class="cmono"><span class="red">/apps</span>/aeminsider</div><div class="ctitle">Your code</div><p>Components, rendering templates, client libraries. Deployed from <b>ui.apps</b>.</p></div>
+      <div class="card"><div class="cmono"><span class="red">/content</span>/aeminsider</div><div class="ctitle">The website</div><p>Pages, assets, everything authors create. From <b>ui.content</b>.</p></div>
+      <div class="card"><div class="cmono"><span class="red">/conf</span>/aeminsider</div><div class="ctitle">Configuration</div><p>Editable templates, policies, settings. Also from <b>ui.content</b>.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:40px;"><span class="red">/libs</span> is Adobe's own code. Rule #1 of AEM: never modify /libs. Look, learn, don't touch.</p>
+  </section>
+
+  <!-- 4 · CREATE THE COMPONENT -->
+  <section class="slide paper" data-label="Create the Component">
+    <div class="head anim">
+      <div class="kicker">// Chapter 03 · Create the Component</div>
+      <h2 class="title t-md">One Node. Two Properties. One File.</h2>
+      <p class="note" style="margin-top:12px;">Two ways to build: in CRXDE (instant — today's way) or in code (needs a deployment). <span class="red">A deployment overwrites CRXDE work</span> — export it to code first.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:30px;align-items:flex-start;">
+      <div class="win dense" style="flex:1.1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">/apps/aeminsider/components</span></div>
+<pre>card                 <span class="s">[cq:Component]</span>
+├── <span class="k">jcr:title</span>        Card
+├── <span class="k">componentGroup</span>   AEM Insider
+│                    Site - Content
+└── card.html</pre>
+      </div>
+      <div class="cards" style="flex:1;gap:16px;">
+        <div class="card" style="padding:22px 26px;"><div class="clabel">cq:Component</div><p>Makes this folder a component — not just a folder.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">jcr:title</div><p>The name authors see in the editor.</p></div>
+        <div class="card accent" style="padding:22px 26px;"><div class="clabel">componentGroup</div><p>The entry ticket. It comes back later in this video.</p></div>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:26px;"><span class="red">Save All.</span> In CRXDE, nothing exists until you hit Save All — every single change.</p>
+  </section>
+
+  <!-- 5 · THE DIALOG -->
+  <section class="slide paper" data-label="The Dialog">
+    <div class="head anim">
+      <div class="kicker">// Chapter 04 · The Dialog</div>
+      <h2 class="title t-md">The Author's Form</h2>
+      <p class="note" style="margin-top:12px;">Authors don't use CRXDE — they need a form. And nobody writes dialogs from scratch: copy a working one, adapt it.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:32px;align-items:flex-start;">
+      <div class="cards" style="flex:1;gap:16px;">
+        <div class="card" style="padding:22px 26px;"><div class="clabel">01 · Copy</div><p>The cq:dialog node from the helloworld component.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">02 · Paste</div><p>Into our card component. Done — card has a dialog.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">03 · Rename</div><p>Fields → ./title and ./description (as a textarea).</p></div>
+      </div>
+      <div class="win dense" style="flex:1.15;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">cq:dialog</span></div>
+<pre>cq:dialog            <span class="muted">jcr:title Card</span>
+└── content / items / … / items
+    ├── title
+    │   <span class="k">fieldLabel</span>  Title
+    │   <span class="k">name</span>        <span class="s">./title</span>
+    └── description  <span class="muted">[textarea]</span>
+        <span class="k">fieldLabel</span>  Description
+        <span class="k">name</span>        <span class="s">./description</span></pre>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:26px;"><span class="red">name = ./title</span> → saves the value as property "title", directly on the component's node.</p>
+  </section>
+
+  <!-- 6 · HTL -->
+  <section class="slide paper" data-label="HTL">
+    <div class="head anim">
+      <div class="kicker">// Chapter 05 · HTL</div>
+      <h2 class="title t-md">The Dialog Writes. HTL Reads.</h2>
+      <p class="note" style="margin-top:12px;">Same name on both sides — that's the whole contract. No code in between.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:32px;align-items:flex-start;">
+      <div class="win dense" style="flex:1.1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">card.html</span></div>
+<pre><span class="t">&lt;div</span> <span class="k">class</span>=<span class="s">"cmp-card"</span><span class="t">&gt;</span>
+  <span class="t">&lt;h2&gt;</span><span class="kw">${properties.title}</span><span class="t">&lt;/h2&gt;</span>
+  <span class="t">&lt;p&gt;</span><span class="kw">${properties.description}</span><span class="t">&lt;/p&gt;</span>
+<span class="t">&lt;/div&gt;</span></pre>
+      </div>
+      <div class="cards" style="flex:1;gap:16px;">
+        <div class="card" style="padding:22px 26px;"><div class="clabel">Same name, both sides</div><p>./title in the dialog ↔ properties.title in HTL.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">Safe by default</div><p>HTL escapes output automatically — XSS protection built in, not bolted on.</p></div>
+        <div class="card" style="padding:22px 26px;"><div class="clabel">No Java yet</div><p>Real logic lives in Sling Models — later in the series. This component doesn't need one.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · THE GUEST LIST -->
+  <section class="slide dark grid-bg" data-label="The Guest List">
+    <div class="head anim">
+      <div class="kicker">// Chapter 06 · The Guest List</div>
+      <h2 class="title t-md">Deployed ≠ Available</h2>
+      <p class="lede" style="margin-top:16px;max-width:40em;">"I built my component. Why can't I see it in the editor?" — the #1 question every new AEM developer asks.</p>
+    </div>
+    <div class="cards g2 anim2" style="margin-top:50px;">
+      <div class="card"><div class="clabel">The bouncer</div><div class="ctitle">The editable template</div><p>Pages are built on editable templates (they live in /conf). Every template decides which components are allowed in its containers.</p></div>
+      <div class="card accent"><div class="clabel">The guest list</div><div class="ctitle">The policy</div><p>The layout container's policy lists allowed component groups. Our ticket: <b>AEM Insider Site - Content</b> — the group we set in step one.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:40px;">Editable templates &amp; policies get their own video later in the series — today we just walk through the door.</p>
+  </section>
+
+  <!-- 8 · AUTHOR IT -->
+  <section class="slide paper" data-label="Author It">
+    <div class="head anim">
+      <div class="kicker">// Chapter 07 · Author It</div>
+      <h2 class="title t-md">The Payoff</h2>
+      <p class="note" style="margin-top:12px;">New page. Real authoring. The fields we built in CRXDE five minutes ago.</p>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:40px;">
+      <div class="card"><div class="num-badge">01</div><div class="ctitle">Create a test page</div><p>Sites console → Create → Page. Template: Content Page. Title: "Component Test".</p></div>
+      <div class="card"><div class="num-badge">02</div><div class="ctitle">Drag the Card in</div><p>Component browser → filter "Card" → drop it into the container.</p></div>
+      <div class="card"><div class="num-badge">03</div><div class="ctitle">Author it</div><p>Open the dialog. Title + description. Save — and it renders.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:40px;"><span class="red">Develop → Deploy → Allow → Author.</span> Your daily loop as an AEM developer, from today on.</p>
+  </section>
+
+  <!-- 9 · BEHIND THE SCENES -->
+  <section class="slide paper" data-label="Behind the Scenes">
+    <div class="head anim">
+      <div class="kicker">// Chapter 08 · Behind the Scenes</div>
+      <h2 class="title t-md">The Round Trip</h2>
+      <p class="note" style="margin-top:12px;">The part most tutorials skip — what actually happened when the author hit save.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:30px;align-items:flex-start;">
+      <ul class="ticks" style="flex:1;gap:14px;">
+        <li><span class="n">01</span><span><b>Dialog saves</b> — name="./title" writes each field's value.</span></li>
+        <li><span class="n">02</span><span><b>JCR writes</b> — properties land on the card node under the page.</span></li>
+        <li><span class="n">03</span><span><b>Sling resolves</b> — sling:resourceType points back to our component.</span></li>
+        <li><span class="n">04</span><span><b>HTL renders</b> — ${properties.title} reads that exact node. HTML goes out.</span></li>
+      </ul>
+      <div class="win dense" style="flex:1.25;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">the page's card node</span></div>
+<pre><span class="muted"># /content/aeminsider/…/component-test
+#   /jcr:content/root/container/card</span>
+<span class="k">title</span>               My First Component
+<span class="k">description</span>         Straight talk on AEM.
+<span class="k">sling:resourceType</span>  aeminsider/
+                    components/card</pre>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:26px;">Content lives in <span class="red">/content</span>. The renderer lives in <span class="red">/apps</span>. That separation is the heart of AEM.</p>
+  </section>
+
+  <!-- 10 · STYLE IT -->
+  <section class="slide paper" data-label="Style It">
+    <div class="head anim">
+      <div class="kicker">// Chapter 09 · Style It</div>
+      <h2 class="title t-md">From 1995 to Card</h2>
+      <p class="note" style="margin-top:12px;">A style block inside the file — scoped to the component class so nothing leaks into the page.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:30px;align-items:flex-start;">
+      <div class="win dense" style="flex:1.1;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">card.html — for today only</span></div>
+<pre><span class="t">&lt;style&gt;</span>
+  <span class="k">.cmp-card</span> {
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+  <span class="k">.cmp-card h2</span> { color: <span class="s">#D32F2F</span>; }
+<span class="t">&lt;/style&gt;</span></pre>
+      </div>
+      <div class="cards" style="flex:1;gap:16px;">
+        <div class="card" style="padding:22px 26px;"><div class="clabel">Scope it</div><p>Everything under .cmp-card — no leaking styles into the rest of the page.</p></div>
+        <div class="card accent" style="padding:22px 26px;"><div class="clabel">The honest note</div><p>A &lt;style&gt; tag in the component is fine for learning — it is not how real projects ship CSS.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · CLIENTLIBS -->
+  <section class="slide paper" data-label="Clientlibs">
+    <div class="head anim">
+      <div class="kicker">// Chapter 09 · Continued</div>
+      <h2 class="title t-md">Clientlibs, in 60 Seconds</h2>
+      <p class="note" style="margin-top:12px;">Why the inline style is temporary — three reasons.</p>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:36px;">
+      <div class="card"><div class="clabel">Repeated</div><p>10 cards on a page = 10 copies of the exact same CSS.</p></div>
+      <div class="card"><div class="clabel">Unoptimized</div><p>No bundling. No minification. Every byte ships raw.</p></div>
+      <div class="card"><div class="clabel">Uncached</div><p>The browser can't cache your styles as one versioned file.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:40px;">AEM's answer: <span class="red">client libraries</span> — bundled, minified, versioned, loaded once per page. ui.frontend feeds exactly this system. Full video later in the series.</p>
+  </section>
+
+  <!-- 12 · EXPORT TO CODE -->
+  <section class="slide paper" data-label="Export to Code">
+    <div class="head anim">
+      <div class="kicker">// Chapter 10 · Export It to Code</div>
+      <h2 class="title t-md">Make It Deployment-Proof</h2>
+      <p class="note" style="margin-top:12px;">The next deployment would wipe our CRXDE work. Package Manager gets it into the codebase first.</p>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:30px;align-items:flex-start;">
+      <div class="cards" style="flex:1;gap:14px;">
+        <div class="card" style="padding:20px 26px;"><div class="clabel">01 · Create</div><p>crx/packmgr → Create Package: "card-component".</p></div>
+        <div class="card" style="padding:20px 26px;"><div class="clabel">02 · Filter</div><p>Edit → Filters → /apps/aeminsider/components/card. The shopping list.</p></div>
+        <div class="card" style="padding:20px 26px;"><div class="clabel">03 · Build + Download</div><p>AEM zips that repository path. The zip lands on your machine.</p></div>
+        <div class="card" style="padding:20px 26px;"><div class="clabel">04 · Copy into ui.apps</div><p>Unzip → copy card → paste into …/jcr_root/apps/aeminsider/components. Commit.</p></div>
+      </div>
+      <div class="win dense" style="flex:1.15;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">card-component.zip — unzipped</span></div>
+<pre>jcr_root/
+└── apps/aeminsider/components/card
+    ├── .content.xml   <span class="muted">← the node</span>
+    ├── <span class="s">_cq_dialog</span>/    <span class="muted">← cq:dialog</span>
+    │   └── .content.xml
+    └── card.html
+
+<span class="muted"># cq: on the instance
+# becomes _cq_ on disk</span></pre>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:26px;">Exported + committed = <span class="red">every future deploy ships the card instead of deleting it</span>.</p>
+  </section>
+
+  <!-- 13 · RECAP -->
+  <section class="slide paper" data-label="Recap">
+    <div class="head anim">
+      <div class="kicker">// Chapter 11 · Recap</div>
+      <h2 class="title t-md">What You Actually Learned</h2>
+    </div>
+    <div class="cards g3 anim2" style="margin-top:40px;">
+      <div class="card"><div class="clabel">01</div><div class="ctitle">Nodes + properties</div><p>CRXDE Lite is the raw repository. Everything in AEM is stored this way.</p></div>
+      <div class="card"><div class="clabel">02</div><div class="ctitle">The big three</div><p>/apps = code · /content = data · /conf = config. Mirrors of the codebase.</p></div>
+      <div class="card"><div class="clabel">03</div><div class="ctitle">The component</div><p>A cq:Component node + jcr:title + componentGroup + card.html.</p></div>
+      <div class="card"><div class="clabel">04</div><div class="ctitle">The contract</div><p>name="./title" writes. ${properties.title} reads. Same name, both sides.</p></div>
+      <div class="card"><div class="clabel">05</div><div class="ctitle">The guest list</div><p>Deployed ≠ available. The template's policy allows component groups.</p></div>
+      <div class="card"><div class="clabel">06</div><div class="ctitle">The round trip</div><p>Dialog save → node properties → sling:resourceType → HTL → HTML.</p></div>
+    </div>
+    <p class="note anim3" style="margin-top:36px;">Built in CRXDE to learn fast — then exported to ui.apps. <span class="red">Version-controlled. Deployment-proof.</span></p>
+  </section>
+
+  <!-- 14 · OUTRO -->
+  <section class="slide dark grid-bg center" data-label="Outro">
+    <div class="col gap-l">
+      <div class="eyebrow anim">// That's Video 4</div>
+      <h2 class="title t-lg anim" style="max-width:16em;">Next: master the<br /><span class="red">dialog</span>.</h2>
+      <div class="next-pill anim2"><b>Video 5 →</b> AEM Dialogs — Deep Dive · dropdowns, checkboxes, path pickers, rich text, tabs &amp; validation</div>
+      <div class="outro-links anim3" style="margin-top:8px;">
+        <a href="https://youtube.com/@aeminsider"><span class="ic">▶</span> youtube.com/@aeminsider</a>
+        <a href="https://aeminsider.com"><span class="ic">◆</span> aeminsider.com</a>
+        <a href="https://aeminsider.substack.com"><span class="ic">✎</span> aeminsider.substack.com</a>
+      </div>
+      <p class="note anim3">Subscribe so you don't miss it. Stuck? Component not showing up? Drop a comment — I read all of them.</p>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>
