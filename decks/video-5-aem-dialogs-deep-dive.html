@@ -247,11 +247,80 @@ showCta
     <p class="note anim3" style="margin-top:36px;"><i>More exist — numberfield, datepicker, switch. Same pattern; pick them up from the reference docs.</i></p>
   </section>
 
-  <!-- 8 · MULTIFIELD STORAGE -->
-  <section class="slide paper" data-label="Multifield Storage">
+  <!-- 8 · FIELDS WITH EXTRA NODES -->
+  <section class="slide paper" data-label="Fields With Extra Nodes">
     <div class="head anim">
       <div class="kicker">// Chapter 05 · Continued</div>
-      <h2 class="title t-md">Where <span class="red">multifield</span> data goes</h2>
+      <h2 class="title t-md">Why some fields need <span class="red">more nodes</span></h2>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:32px;align-items:stretch;">
+      <div class="panel" style="flex:1;min-width:0;display:flex;flex-direction:column;">
+        <div class="plabel">Rich Text</div>
+<pre style="font-size:17px;line-height:1.5;">+ description
+  <span class="rt">- sling:resourceType =</span>
+    <span class="rt">"cq/gui/…/dialog/richtext"</span>
+  <span class="red">+ rtePlugins</span>
+    + format  <span class="rt">- features = "bold,italic"</span>
+    + lists   <span class="rt">- features = "*"</span>
+    + links   <span class="rt">- features = "modifylink,unlink"</span></pre>
+        <div class="pcom" style="margin-top:auto;padding-top:20px;font-style:italic;">Its features are structured config — so they live in child nodes.</div>
+      </div>
+      <div class="panel" style="flex:1;min-width:0;display:flex;flex-direction:column;">
+        <div class="plabel">Select</div>
+<pre style="font-size:17px;line-height:1.5;">+ style
+  <span class="rt">- sling:resourceType =</span>
+    <span class="rt">"granite/ui/…/form/select"</span>
+  <span class="red">+ items</span>
+    + default    <span class="rt">- text · value · selected</span>
+    + highlight  <span class="rt">- text · value</span>
+    + dark       <span class="rt">- text · value</span></pre>
+        <div class="pcom" style="margin-top:auto;padding-top:20px;font-style:italic;">Each dropdown option is its own child node: text + value.</div>
+      </div>
+      <div class="panel" style="flex:1;min-width:0;display:flex;flex-direction:column;">
+        <div class="plabel">Checkbox</div>
+<pre style="font-size:17px;line-height:1.5;">+ showCta
+  <span class="rt">- sling:resourceType =</span>
+    <span class="rt">"granite/ui/…/form/checkbox"</span>
+  <span class="red">- text</span> <span class="rt">= "Show call-to-action button"</span>
+  <span class="red">- value</span> <span class="rt">= true {Boolean}</span>
+  <span class="red">- uncheckedValue</span> <span class="rt">= false {Boolean}</span></pre>
+        <div class="pcom" style="margin-top:auto;padding-top:20px;font-style:italic;">No child nodes — but text instead of fieldLabel, and typed Boolean values.</div>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:28px;font-family:var(--sans);font-size:23px;"><b style="color:var(--ink);">The resource type decides which properties and child nodes a field understands.</b> Simple fields are flat. Structured configuration becomes child nodes. Every field's options are in the reference docs.</p>
+  </section>
+
+  <!-- 9 · THE HTL -->
+  <section class="slide paper" data-label="The HTL">
+    <div class="head anim">
+      <div class="kicker">// Chapter 06</div>
+      <h2 class="title t-md">The HTL — <span class="red">reading it back</span></h2>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:32px;align-items:stretch;">
+      <div class="panel" style="flex:1.7;min-width:0;">
+        <div class="plabel">teaser.html</div>
+<pre style="font-size:19px;line-height:1.6;">&lt;div class="aemi-teaser aemi-teaser--<span class="red">${properties.style || 'default'}</span>"&gt;
+  &lt;h2&gt;${properties.title}&lt;/h2&gt;
+  &lt;div&gt;${properties.description <span class="red">@ context='html'</span>}&lt;/div&gt;
+  &lt;a <span class="red">data-sly-test="${properties.showCta &amp;&amp; properties.linkUrl}"</span>
+     href="${properties.linkUrl @ extension='html'}"&gt;
+    ${properties.ctaLabel <span class="red">|| 'Read more'</span>}&lt;/a&gt;
+&lt;/div&gt;</pre>
+      </div>
+      <div class="cards" style="flex:1;gap:16px;">
+        <div class="card" style="padding:20px 26px;"><div class="clabel">@ context='html'</div><p>HTL escapes everything by default. This says: trusted rich text — sanitize, then render. RTE output only.</p></div>
+        <div class="card" style="padding:20px 26px;"><div class="clabel">data-sly-test</div><p>Checkbox ticked AND a link present — otherwise no button at all.</p></div>
+        <div class="card" style="padding:20px 26px;"><div class="clabel">|| fallback</div><p>Empty style → default. Empty button label → Read more.</p></div>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:26px;"><i>Every line maps to one dialog field. Same names, both sides — that's the whole contract.</i></p>
+  </section>
+
+  <!-- 10 · HOW TO CONFIGURE A MULTIFIELD -->
+  <section class="slide paper" data-label="Configure a Multifield">
+    <div class="head anim">
+      <div class="kicker">// Chapter 07</div>
+      <h2 class="title t-md">How to configure a <span class="red">multifield</span></h2>
     </div>
     <div class="row gap-l anim2" style="margin-top:32px;align-items:stretch;">
       <div class="panel" style="flex:1.9;min-width:0;">
@@ -295,10 +364,39 @@ showCta
     <p class="anim3" style="margin-top:28px;font-family:var(--mono);font-size:22px;color:var(--ink);"><b><span class="red">name="./highlights"</span> → the highlights node&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">name="./points"</span> → a points node inside each item</b></p>
   </section>
 
-  <!-- 9 · VALIDATION -->
+  <!-- 11 · THE MULTIFIELD HTL -->
+  <section class="slide paper" data-label="The Multifield HTL">
+    <div class="head anim">
+      <div class="kicker">// Chapter 07 · Continued</div>
+      <h2 class="title t-md">The <span class="red">multifield</span> HTL</h2>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:32px;align-items:stretch;">
+      <div class="panel" style="flex:1.7;min-width:0;">
+        <div class="plabel">teaser.html — added after the CTA link</div>
+<pre style="font-size:18px;line-height:1.55;">&lt;sly data-sly-list.child="<span class="red">${resource.children}</span>"&gt;
+  &lt;ul data-sly-test="${child.name == 'highlights'}"
+      data-sly-list.item="${child.children}"&gt;
+    &lt;li&gt;
+      &lt;a data-sly-test="${<span class="red">item.valueMap</span>.link}"
+         href="${item.valueMap.link @ extension='html'}"&gt;${item.valueMap.text}&lt;/a&gt;
+      &lt;sly data-sly-test="${!item.valueMap.link}"&gt;${item.valueMap.text}&lt;/sly&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/sly&gt;</pre>
+      </div>
+      <div class="cards" style="flex:1;gap:16px;">
+        <div class="card" style="padding:20px 26px;"><div class="clabel">resource.children</div><p>properties can't read child nodes. So we walk the component's children and pick the one named highlights.</p></div>
+        <div class="card" style="padding:20px 26px;"><div class="clabel">item.valueMap</div><p>Each item is a node. valueMap reads its properties: text, link. Link present → link. Otherwise plain text.</p></div>
+        <div class="card" style="padding:20px 26px;"><div class="clabel">Sling Model</div><p>Fine for one list. Nested lists in plain HTL get messy — the clean way is a Sling Model. Later in the series.</p></div>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:26px;"><i>Paste it under the CTA link, refresh — the highlights render in the order the author chose.</i></p>
+  </section>
+
+  <!-- 12 · VALIDATION -->
   <section class="slide paper" data-label="Validation">
     <div class="head anim">
-      <div class="kicker">// Chapter 06</div>
+      <div class="kicker">// Chapter 08</div>
       <h2 class="title t-md">Validation</h2>
     </div>
     <div class="row gap-l anim2" style="margin-top:34px;align-items:flex-start;">
