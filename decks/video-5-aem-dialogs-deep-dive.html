@@ -316,7 +316,62 @@ showCta
     <p class="note anim3" style="margin-top:26px;"><i>Every line maps to one dialog field. Same names, both sides — that's the whole contract.</i></p>
   </section>
 
-  <!-- 10 · HOW TO CONFIGURE A MULTIFIELD -->
+  <!-- 10 · THE STYLES -->
+  <section class="slide paper" data-label="The Styles">
+    <div class="head anim">
+      <div class="kicker">// Chapter 06 · Continued</div>
+      <h2 class="title t-md">The styles — <span class="red">for today only</span></h2>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:28px;align-items:stretch;">
+      <div class="panel" style="flex:1;min-width:0;">
+        <div class="plabel">teaser.html — &lt;style&gt; · base</div>
+<pre style="font-size:16px;line-height:1.45;">.aemi-teaser {
+    <span class="rt">max-width: 640px;
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 8px;</span>
+}
+.aemi-teaser__title { <span class="rt">margin: 0 0 12px;</span> }
+.aemi-teaser__description { <span class="rt">color: #444; line-height: 1.5;</span> }
+.aemi-teaser__cta {
+    <span class="rt">display: inline-block;
+    margin-top: 16px;
+    padding: 10px 22px;
+    background: #D32F2F;
+    color: #fff;
+    border-radius: 6px;</span>
+}
+.aemi-teaser__highlights { <span class="rt">margin: 16px 0 0; padding-left: 20px;</span> }
+.aemi-teaser__highlight a { <span class="rt">color: #D32F2F;</span> }</pre>
+      </div>
+      <div class="panel" style="flex:1;min-width:0;">
+        <div class="plabel">teaser.html — &lt;style&gt; · variants</div>
+<pre style="font-size:16px;line-height:1.45;"><span class="rt">/* the Style dropdown's value
+   becomes one of these classes */</span>
+<span class="red">.aemi-teaser--highlight</span> {
+    <span class="rt">border: 2px solid #D32F2F;
+    background: #fdf3f3;</span>
+}
+<span class="red">.aemi-teaser--dark</span> {
+    <span class="rt">background: #16171A;
+    border-color: #16171A;</span>
+}
+.aemi-teaser--dark .aemi-teaser__title {
+    <span class="rt">color: #fff;</span>
+}
+.aemi-teaser--dark .aemi-teaser__description {
+    <span class="rt">color: rgba(255,255,255,.75);</span>
+}</pre>
+      </div>
+    </div>
+    <div class="cards g3 anim3" style="margin-top:22px;">
+      <div class="card" style="padding:18px 24px;"><div class="clabel">Scoped</div><p>Everything sits under .aemi-teaser — nothing leaks into the rest of the page.</p></div>
+      <div class="card" style="padding:18px 24px;"><div class="clabel">--highlight / --dark</div><p>The select's value becomes a CSS class. One dropdown, three looks — live in the demo.</p></div>
+      <div class="card" style="padding:18px 24px;"><div class="clabel">Inline for today</div><p>Fine for learning — real projects ship CSS through clientlibs. Later in the series.</p></div>
+    </div>
+  </section>
+
+  <!-- 11 · HOW TO CONFIGURE A MULTIFIELD -->
   <section class="slide paper" data-label="Configure a Multifield">
     <div class="head anim">
       <div class="kicker">// Chapter 07</div>
