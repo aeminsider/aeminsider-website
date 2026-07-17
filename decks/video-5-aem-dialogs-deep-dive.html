@@ -474,13 +474,20 @@ showCta
     <div class="row gap-l anim2" style="margin-top:32px;align-items:stretch;">
       <div class="panel" style="flex:1.7;min-width:0;">
         <div class="plabel">teaser.html — added after the CTA link</div>
-<pre style="font-size:18px;line-height:1.55;">&lt;sly data-sly-list.child="<span class="red">${resource.children}</span>"&gt;
+<pre style="font-size:16px;line-height:1.5;">&lt;sly data-sly-list.child="<span class="red">${resource.children}</span>"&gt;
   &lt;ul data-sly-test="${child.name == 'highlights'}"
       data-sly-list.item="${child.children}"&gt;
     &lt;li&gt;
       &lt;a data-sly-test="${<span class="red">item.valueMap</span>.link}"
          href="${item.valueMap.link @ extension='html'}"&gt;${item.valueMap.text}&lt;/a&gt;
       &lt;sly data-sly-test="${!item.valueMap.link}"&gt;${item.valueMap.text}&lt;/sly&gt;
+      <span class="rt">&lt;!-- nested multifield: same pattern, one level deeper --&gt;</span>
+      &lt;sly data-sly-list.grp="<span class="red">${item.children}</span>"&gt;
+        &lt;ul class="aemi-teaser__points" data-sly-test="${grp.name == 'points'}"
+            data-sly-list.point="${grp.children}"&gt;
+          &lt;li&gt;${point.valueMap.text}&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/sly&gt;
     &lt;/li&gt;
   &lt;/ul&gt;
 &lt;/sly&gt;</pre>
@@ -488,7 +495,7 @@ showCta
       <div class="cards" style="flex:1;gap:16px;">
         <div class="card" style="padding:20px 26px;"><div class="clabel">resource.children</div><p>properties can't read child nodes. So we walk the component's children and pick the one named highlights.</p></div>
         <div class="card" style="padding:20px 26px;"><div class="clabel">item.valueMap</div><p>Each item is a node. valueMap reads its properties: text, link. Link present → link. Otherwise plain text.</p></div>
-        <div class="card" style="padding:20px 26px;"><div class="clabel">Sling Model</div><p>Fine for one list. Nested lists in plain HTL get messy — the clean way is a Sling Model. Later in the series.</p></div>
+        <div class="card" style="padding:20px 26px;"><div class="clabel">Sling Model</div><p>The nested list is three loops deep. It works — but you can see where this is going. A Sling Model reads the whole tree in a few clean lines. Later in the series.</p></div>
       </div>
     </div>
     <p class="note anim3" style="margin-top:26px;"><i>Paste it under the CTA link, refresh — the highlights render in the order the author chose.</i></p>
