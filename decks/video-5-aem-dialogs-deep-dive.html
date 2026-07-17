@@ -348,19 +348,21 @@ showCta
         <div class="plabel">teaser.html — &lt;style&gt; · variants</div>
 <pre style="font-size:16px;line-height:1.45;"><span class="rt">/* the Style dropdown's value
    becomes one of these classes */</span>
-<span class="red">.aemi-teaser--highlight</span> {
-    <span class="rt">border: 2px solid #D32F2F;
-    background: #fdf3f3;</span>
-}
+<span class="red">.aemi-teaser--highlight</span> { <span class="rt">border: 2px solid #D32F2F; background: #fdf3f3;</span> }
 <span class="red">.aemi-teaser--dark</span> {
     <span class="rt">background: #16171A;
-    border-color: #16171A;</span>
+    border-color: #16171A;
+    color: #fff;</span>
 }
-.aemi-teaser--dark .aemi-teaser__title {
-    <span class="rt">color: #fff;</span>
-}
-.aemi-teaser--dark .aemi-teaser__description {
-    <span class="rt">color: rgba(255,255,255,.75);</span>
+.aemi-teaser--dark .aemi-teaser__title { <span class="rt">color: #fff;</span> }
+
+<span class="rt">/* the RTE outputs its own &lt;p&gt; and &lt;li&gt; tags — the page's
+   global styles color those directly. Reach them explicitly: */</span>
+.aemi-teaser--dark .aemi-teaser__description,
+<span class="red">.aemi-teaser--dark .aemi-teaser__description p,
+.aemi-teaser--dark .aemi-teaser__description li,</span>
+.aemi-teaser--dark .aemi-teaser__highlight {
+    <span class="rt">color: rgba(255,255,255,.8);</span>
 }</pre>
       </div>
     </div>
