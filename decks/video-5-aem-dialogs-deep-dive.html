@@ -373,10 +373,50 @@ showCta
     </div>
   </section>
 
-  <!-- 11 · HOW TO CONFIGURE A MULTIFIELD -->
-  <section class="slide paper" data-label="Configure a Multifield">
+  <!-- 11 · THE SIMPLE MULTIFIELD -->
+  <section class="slide paper" data-label="The Simple Multifield">
     <div class="head anim">
       <div class="kicker">// Chapter 07</div>
+      <h2 class="title t-md">The <span class="red">simple</span> multifield</h2>
+    </div>
+    <div class="row gap-l anim2" style="margin-top:32px;align-items:stretch;">
+      <div class="panel" style="flex:1;min-width:0;display:flex;flex-direction:column;">
+        <div class="plabel">Dialog</div>
+<pre style="font-size:18px;line-height:1.5;">+ highlights
+  <span class="rt">- sling:resourceType =</span>
+    <span class="rt">"granite/ui/…/form/multifield"</span>
+  + field
+    <span class="rt">- sling:resourceType =</span>
+      <span class="rt">"granite/ui/…/form/textfield"</span>
+    <span class="rt">- name = </span><span class="red">"./highlights"</span></pre>
+        <div class="pcom" style="margin-top:auto;padding-top:20px;font-style:italic;">No composite. The field itself is the textfield — one per row.</div>
+      </div>
+      <div class="panel" style="flex:1;min-width:0;display:flex;flex-direction:column;">
+        <div class="plabel">JCR</div>
+<pre style="font-size:18px;line-height:1.5;">+ teaser
+  - <span class="red">highlights</span> = [
+      <span class="rt">"Built from scratch",
+      "No copy-paste",
+      "Validation included"</span>
+    ]</pre>
+        <div class="pcom" style="margin-top:auto;padding-top:20px;font-style:italic;">No child nodes — the whole list is ONE multi-value property.</div>
+      </div>
+      <div class="panel" style="flex:1;min-width:0;display:flex;flex-direction:column;">
+        <div class="plabel">HTL</div>
+<pre style="font-size:18px;line-height:1.5;">&lt;ul data-sly-list.item=
+        "<span class="red">${properties.highlights}</span>"&gt;
+    &lt;li&gt;${item}&lt;/li&gt;
+&lt;/ul&gt;</pre>
+        <div class="pcom" style="margin-top:auto;padding-top:20px;font-style:italic;">A property — so plain properties reads it. No resource.children.</div>
+      </div>
+    </div>
+    <p class="note anim3" style="margin-top:28px;font-family:var(--sans);font-size:23px;"><b style="color:var(--ink);">One field per row → one multi-value property → plain properties reads it.</b> The moment a row needs text AND a link — or a nested list — a property can't hold it. That's the composite multifield. Next slide.</p>
+  </section>
+
+  <!-- 12 · HOW TO CONFIGURE A MULTIFIELD -->
+  <section class="slide paper" data-label="Configure a Multifield">
+    <div class="head anim">
+      <div class="kicker">// Chapter 07 · Continued</div>
       <h2 class="title t-md">How to configure a <span class="red">multifield</span></h2>
     </div>
     <div class="row gap-l anim2" style="margin-top:32px;align-items:stretch;">
