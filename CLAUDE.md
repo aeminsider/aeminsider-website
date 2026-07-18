@@ -123,7 +123,9 @@ aeminsider-website/
 │   ├── deck-stage.js       ← Deck viewer JS
 │   ├── video-1-what-is-aem.html
 │   ├── video-2-how-aem-pages-are-built.html
-│   └── video-3-your-first-aem-maven-project.html
+│   ├── video-3-your-first-aem-maven-project.html
+│   ├── video-4-build-your-first-aem-component.html
+│   └── video-5-aem-dialogs-deep-dive.html
 ├── resources/              ← each snippet = a raw file + an HTML viewer page (copy + download)
 │   ├── settings.xml                 ← Maven settings for AEM (raw file)
 │   ├── settings-xml.html            ← viewer: copy-to-clipboard + download
@@ -146,6 +148,7 @@ aeminsider-website/
 | EP02 | How Are AEM Pages Built? Components, Templates & Local Setup Explained (2026) | `7a3dwv0oQNg` | `https://www.youtube.com/watch?v=7a3dwv0oQNg` | `/p/how-aem-pages-are-built-components` |
 | EP03 | Your First AEM Maven Project — Built the Right Way | `7o9ecK87QzY` | `https://youtu.be/7o9ecK87QzY` | `/p/your-first-aem-maven-project-built` |
 | EP04 | Build Your First AEM Component — No Java Needed | `XPfanQZlUGU` | `https://youtu.be/XPfanQZlUGU` | `/p/build-your-first-aem-component-no` |
+| EP05 | AEM Dialogs — Deep Dive | `EMFzrGdn-5U` | `https://youtu.be/EMFzrGdn-5U` | `/p/aem-dialogs-deep-dive` |
 
 YouTube thumbnail URL pattern: `https://i.ytimg.com/vi/<VIDEO_ID>/maxresdefault.jpg`
 Fallback on error: `https://i.ytimg.com/vi/<VIDEO_ID>/hqdefault.jpg`
@@ -190,11 +193,10 @@ The Copy button lives in the code-window bar (icon + "Copy"); no changes to anim
 
 | EP | Title | Track | What it covers |
 |---|---|---|---|
-| EP05 | AEM Dialogs — Deep Dive | dev | Granite UI field types (dropdowns, checkboxes, pathfields, rich text), tabs, validation — locked in EP04's outro |
-| EP06 | Editable Templates & Policies | dev | Structure vs initial content, policies, locked/unlocked — promised "later in the series" in EP04 |
-| EP07 | Clientlibs Explained | dev | Categories, embeds, dependencies, ui.frontend — promised "later in the series" in EP04 |
+| EP06 | Editable Templates — How Every Page Gets Its Structure | dev | Templates, policies, structure vs initial content, the template editor — locked in EP05's outro ("why was the Teaser allowed on the page?") |
+| EP07 | Clientlibs Explained | dev | Categories, embeds, dependencies, ui.frontend — promised "later in the series" in EP04 + EP05 |
 
-Backlog (no EP number yet): Sling Models (deferred from EP04) · AEM Sites, Assets & Forms · AEM as a Cloud Service — What's Different? (full script already written, July 2026).
+Backlog (no EP number yet): Sling Models (deferred from EP04; EP05 points to it for clean multifield rendering) · AEM Sites, Assets & Forms · AEM as a Cloud Service — What's Different? (full script already written, July 2026).
 
 Content Authors & Marketers track: planned but not started. No EP numbers assigned yet.
 
@@ -499,5 +501,5 @@ When asked to build a PPTX:
 
 ---
 
-*Last updated: July 2026*
+*Last updated: July 2026 — after EP05 shipped*
 *Maintained by Vasim Akram — aeminsider@gmail.com*
