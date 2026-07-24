@@ -193,10 +193,10 @@ The Copy button lives in the code-window bar (icon + "Copy"); no changes to anim
 
 | EP | Title | Track | What it covers |
 |---|---|---|---|
-| EP06 | Editable Templates — How Every Page Gets Its Structure | dev | Templates, policies, structure vs initial content, the template editor — locked in EP05's outro ("why was the Teaser allowed on the page?") |
-| EP07 | Clientlibs Explained | dev | Categories, embeds, dependencies, ui.frontend — promised "later in the series" in EP04 + EP05 |
+| EP06 | Editable Templates — How Every Page Gets Its Structure | dev | Templates, template types + customization, the page component, policies, structure vs initial content, layout mode — locked in EP05's outro; opens with the "why was the Teaser allowed on the page?" question |
+| EP07 | Sling Resource Resolution | dev | How a URL becomes a resource becomes a script — types, super types, selectors, search paths. Locked in EP06's outro. |
 
-Backlog (no EP number yet): Sling Models (deferred from EP04; EP05 points to it for clean multifield rendering) · AEM Sites, Assets & Forms · AEM as a Cloud Service — What's Different? (full script already written, July 2026).
+Backlog (no EP number yet): Clientlibs Explained (promised in EP04 + EP05, restated in EP06's outro) · Sling Models (deferred from EP04; EP05 points to it for clean multifield rendering) · AEM Sites, Assets & Forms · AEM as a Cloud Service — What's Different? (full script already written, July 2026).
 
 Content Authors & Marketers track: planned but not started. No EP numbers assigned yet.
 

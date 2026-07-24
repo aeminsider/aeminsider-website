@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>EP06 · Editable Templates — Slide Deck · AEM Insider</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+<style>
+  /* EP06-specific bits — everything else comes from deck.css */
+  .tree{color:var(--c-text);}
+  .tree .p{color:var(--c-kw);}
+  .tree .c{color:var(--c-com);}
+  .ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .ticks li{font-size:25px;line-height:1.45;color:var(--ink-2);padding-left:38px;position:relative;}
+  .ticks li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-family:var(--mono);font-weight:700;}
+  .ticks.plain li::before{content:"–";color:var(--ink-3);}
+  .dark .ticks li{color:rgba(255,255,255,0.78);}
+  .checklist{display:flex;flex-direction:column;gap:18px;}
+  .checkrow{display:flex;align-items:center;gap:18px;font-size:26px;}
+  .checkrow .box{width:34px;height:34px;border-radius:7px;border:2.5px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:22px;color:#fff;}
+  .checkrow.on .box{background:var(--accent);border-color:var(--accent);}
+  .checkrow.off{color:var(--ink-3);}
+  .wire{display:flex;flex-direction:column;gap:14px;}
+  .wire .wrow{border:2.5px solid var(--line);border-radius:12px;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:24px;background:var(--card);}
+  .wire .wrow.open{border-style:dashed;border-color:var(--accent);color:var(--accent);background:var(--accent-soft);min-height:120px;}
+  .wire .lkic{width:32px;height:32px;flex-shrink:0;}
+  .dark .wire .wrow{background:var(--dark-2);border-color:var(--dark-line);color:#fff;}
+  .dark .wire .wrow.open{background:rgba(211,47,47,0.12);border-color:var(--accent);color:var(--accent);}
+  .dark .checkrow .box{border-color:var(--dark-line);}
+  .dark .checkrow.on .box{border-color:var(--accent);}
+  .pathchip{font-family:var(--mono);font-size:22px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:4px 14px;}
+  .dark .pathchip{color:var(--paper);background:#0c0d11;border-color:var(--dark-line);}
+  .mlines{display:flex;justify-content:center;gap:420px;margin:18px 0;}
+  .mlines i{width:6px;height:56px;background:var(--accent);border-radius:3px;}
+  .merge{width:62%;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  .mrow{border:2.5px solid var(--line);border-radius:12px;background:var(--card);padding:20px 30px;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-weight:700;font-size:24px;color:var(--ink);}
+  .mrow.open{border:2.5px dashed var(--accent);background:var(--accent-soft);color:var(--accent);}
+  .mrow .msrc{font-weight:400;font-size:21px;color:var(--ink-3);}
+  .dark .mrow{background:var(--dark-2);border-color:var(--dark-line);color:#fff;}
+  .dark .mrow.open{background:rgba(211,47,47,0.12);border-color:var(--accent);color:var(--accent);}
+  .dark .mrow .msrc{color:rgba(255,255,255,0.5);}
+  .codechip{font-family:var(--mono);font-size:24px;white-space:pre;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 22px;}
+  .dark .codechip{color:var(--paper);background:#0c0d11;border-color:var(--dark-line);}
+  .hsarrow{flex:1;padding-top:96px;text-align:center;}
+  .hsarrow i{display:block;height:6px;background:var(--accent);border-radius:3px;margin-bottom:20px;}
+  .hsarrow .hst{font-family:var(--mono);font-weight:700;font-size:24px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);}
+  .hsarrow .hss{font-family:var(--mono);font-size:22px;color:var(--ink-3);margin-top:8px;}
+  .dark .hsarrow .hss{color:rgba(255,255,255,0.5);}
+  .svse{display:flex;flex-direction:column;gap:22px;}
+  .svse .hrow,.svse .rrow{display:flex;gap:40px;}
+  .svse .hcell{flex:1;font-family:var(--mono);font-weight:700;font-size:26px;letter-spacing:.08em;text-transform:uppercase;color:#fff;border-radius:12px;padding:20px 34px;}
+  .svse .hcell.static{background:var(--ink-2);}
+  .svse .hcell.editable{background:var(--accent);}
+  .svse .cell{flex:1;background:var(--card);border-radius:12px;padding:24px 34px;font-size:26px;color:var(--ink-2);}
+  .svse .cell.ed{border:2px solid var(--accent);font-weight:600;color:var(--ink);}
+  .banner{background:var(--accent);border-radius:22px;padding:70px 80px;text-align:center;box-shadow:0 30px 90px rgba(211,47,47,0.25);}
+  .banner p{margin:0;font-size:40px;line-height:1.5;font-weight:700;color:#fff;}
+  .banner p + p{margin-top:18px;}
+  .banner u{text-underline-offset:7px;}
+  .colgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;padding:24px;border:1px solid var(--line);border-radius:14px;background:repeating-linear-gradient(90deg,rgba(211,47,47,0.05) 0 calc(100%/12 - 10px),transparent calc(100%/12 - 10px) calc(100%/12));}
+  .colgrid .gblock{grid-column:span 6;background:var(--card);border:2px solid var(--accent);border-radius:10px;padding:26px 18px;font-family:var(--mono);font-size:24px;text-align:center;color:var(--ink);}
+  .colgrid .gblock.alt{border-style:dashed;}
+  .colgrid .gblock.full{grid-column:span 12;background:var(--accent);border-color:var(--accent);color:#fff;}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 · TITLE -->
+  <section class="slide dark center grid-bg" data-label="Title">
+    <img class="shield anim" src="../assets/logo.svg" alt="AEM Insider">
+    <div class="eyebrow anim" style="margin-top:44px;">EP06 // AEM Complete Tutorial Series 2026</div>
+    <h1 class="title t-xl anim2" style="margin:26px 0 0;">Editable Templates —<br><span class="red">How Every Page Gets Its Structure</span></h1>
+    <div class="sub anim3" style="margin-top:34px;">Structure · Initial Content · Policies · The Template Editor</div>
+    <div class="tags anim3" style="margin-top:40px;">
+      <span class="t">no Java</span><span class="t">template editor</span><span class="t">/conf</span><span class="t">the guest list</span>
+    </div>
+    <div class="credline mt-a"><span class="dot"></span>aeminsider.com · @aeminsider · Not affiliated with Adobe Inc.</div>
+  </section>
+
+  <!-- 02 · WHAT A TEMPLATE DECIDES -->
+  <section class="slide paper" data-label="What a template decides">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 01 · What a template decides</div>
+      <h2 class="title t-lg anim2">Every page starts from a template.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="cards g3">
+        <div class="card">
+          <div class="clabel">Structure</div>
+          <p>The fixed frame — header and footer, locked on every page. Plus one container left open for the page's own content.</p>
+        </div>
+        <div class="card">
+          <div class="clabel">Initial content</div>
+          <p>The starting content of a new page — what is already there before an author does anything.</p>
+        </div>
+        <div class="card">
+          <div class="clabel">Policies</div>
+          <p>The rules. Which components are allowed inside which container. The guest list.</p>
+        </div>
+      </div>
+    </div>
+    <div class="note anim3"><span class="red">No template → no page.</span> And the page remembers its template. Forever.</div>
+  </section>
+
+  <!-- 03 · THE CHAIN -->
+  <section class="slide dark" data-label="The chain">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 02 · The chain</div>
+      <h2 class="title t-lg anim2">From component to page.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="flow" style="flex-wrap:nowrap;">
+        <div class="node">Page component<small>renders the whole page<br>/apps</small></div>
+        <div class="arrow">→</div>
+        <div class="node">Template type<small>the blank form<br>/conf</small></div>
+        <div class="arrow">→</div>
+        <div class="node">Template<small>structure · initial · policies<br>/conf</small></div>
+        <div class="arrow">→</div>
+        <div class="node accent">Pages<small>created by authors<br>/content</small></div>
+      </div>
+    </div>
+    <div class="note anim3">The link between a template type and a template exists <span class="red">only at creation time</span> — it's a copy.</div>
+  </section>
+
+  <!-- 04 · WHERE EVERYTHING LIVES -->
+  <section class="slide paper" data-label="Where everything lives">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 03 · Where everything lives</div>
+      <h2 class="title t-lg anim2">Three folders. Three jobs.</h2>
+    </div>
+    <div class="body-grow anim3">
+      <div class="win">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">jcr-repository</span></div>
+        <pre class="tree"><span class="p">/apps</span>/aeminsider/components/page      <span class="c">← the page component  (code)</span>
+<span class="p">/conf</span>/aeminsider/settings/wcm
+  ├── template-types/page             <span class="c">← the template type   (blank form)</span>
+  ├── templates/page-content          <span class="c">← the template        (structure · initial · policies)</span>
+  └── policies                        <span class="c">← the policies        (the actual rules)</span>
+<span class="p">/content</span>/aeminsider/us/en/...         <span class="c">← the pages           (what authors create)</span>
+
+<span class="c">// the whole episode is one page's trail through these three folders</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · THE PAGE COMPONENT -->
+  <section class="slide dark" data-label="The page component">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 04 · The page component, up close</div>
+      <h2 class="title t-lg anim2">Two files. No page. Full HTML.</h2>
+    </div>
+    <div class="body-grow anim3">
+      <div class="win">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">/apps/aeminsider/components/page</span></div>
+        <pre class="tree"><span class="p">/apps/aeminsider/components/page</span>
+├── .content.xml                  <span class="c">← sling:resourceSuperType = core page component</span>
+├── customheaderlibs.html         <span class="c">← injected into &lt;head&gt; — your CSS/JS hooks</span>
+└── customfooterlibs.html         <span class="c">← injected before &lt;/body&gt;</span>
+
+<span class="p">/apps/core/wcm/components/page/v3/page</span>    <span class="c">← the REAL renderer (Adobe's core component)</span>
+├── page.html                     <span class="c">← the entry point — the file ours is "missing"</span>
+│     <span class="c">└─ includes ↓</span>
+├── head.html                     <span class="c">← renders the &lt;head&gt; of the document</span>
+└── body.html                     <span class="c">← renders the &lt;body&gt;</span></pre>
+      </div>
+    </div>
+    <div class="note anim3">One property — <span class="red">sling:resourceSuperType</span> — inherits an entire page renderer. How Sling walks that chain is <span class="red">next episode</span>.</div>
+  </section>
+
+  <!-- 06 · TEMPLATE TYPES -->
+  <section class="slide paper" data-label="Template types">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 05 · Template types, properly</div>
+      <h2 class="title t-lg anim2">A template embryo.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="row gap-l" style="align-items:center;">
+      <div class="win anim3" style="flex:0 0 800px;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">/conf/aeminsider/settings/wcm/template-types</span></div>
+        <pre class="tree"><span class="p">page</span>                     <span class="c">← the shipped type</span>
+├── jcr:content          <span class="c">← jcr:title = "Page"</span>
+├── initial/jcr:content  <span class="c">← our page component</span>
+├── structure            <span class="c">← empty starting layout</span>
+└── policies             <span class="c">← default rules</span></pre>
+      </div>
+      <div class="cards" style="flex:1;">
+        <div class="card"><div class="clabel">The embryo</div><p>Same three parts a template has — initial, structure, policies — plus the title the Create Template wizard shows.</p></div>
+        <div class="card"><div class="clabel">The pointer</div><p>Its resourceType carries the <b>page component</b>. Every template stamped from the type inherits it — every page renders through it.</p></div>
+        <div class="card accent"><div class="clabel">A stamp</div><p>Templates copy from it at creation, then never look back. Delete the type — no template notices.</p></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · MAKE YOUR OWN TEMPLATE TYPE -->
+  <section class="slide paper" data-label="Make your own type">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 06 · Make your own template type</div>
+      <h2 class="title t-lg anim2">No button for this. Just copy one.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="cards g3">
+        <div class="card">
+          <div class="big-num">01</div>
+          <div class="ctitle">Copy</div>
+          <p>Copy the shipped <b>page</b> type in CRXDE, paste it right next to the original.</p>
+        </div>
+        <div class="card">
+          <div class="big-num">02</div>
+          <div class="ctitle">Rename + retitle</div>
+          <p>Node → <b>aeminsider-page</b> · jcr:title → <b>AEM Insider Page</b>. It appears in the Create Template wizard immediately.</p>
+        </div>
+        <div class="card">
+          <div class="big-num">03</div>
+          <div class="ctitle">Check the pointer</div>
+          <p>The resourceType inside — change it only if your type should render through a different page component.</p>
+        </div>
+      </div>
+    </div>
+    <div class="note anim3">One type per <span class="red">kind</span> of template — content pages, experience fragments. Real projects ship types in code (ui.content).</div>
+  </section>
+
+  <!-- 07 · STRUCTURE MODE -->
+  <section class="slide dark" data-label="Structure mode">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 07 · Structure mode</div>
+      <h2 class="title t-lg anim2">The fixed part of every page.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="row gap-l" style="align-items:center;">
+      <div class="wire anim3" style="flex:0 0 660px;">
+        <div class="wrow">HEADER — from the template
+          <svg class="lkic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--ink-3);" aria-label="locked"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2" fill="currentColor" stroke="none"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="wrow open">CONTAINER — authors work here
+          <svg class="lkic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent);" aria-label="unlocked"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2" fill="currentColor" stroke="none"/><path d="M8 10.5V7a4 4 0 0 1 7.8-1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="wrow">FOOTER — from the template
+          <svg class="lkic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--ink-3);" aria-label="locked"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2" fill="currentColor" stroke="none"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <div class="cards" style="flex:1;">
+        <div class="card">
+          <div class="clabel">Locked</div>
+          <p>Structure components show a padlock on every page. Authors cannot edit, move, or delete them.</p>
+        </div>
+        <div class="card accent">
+          <div class="clabel">Live</div>
+          <p>One source: the template. Edit the structure and every existing page changes. Instantly.</p>
+        </div>
+        <div class="card">
+          <div class="clabel">The unlocked container</div>
+          <p>The hole in the frame — the one place page authors are allowed to work.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · ONE PAGE, TWO SOURCES -->
+  <section class="slide paper" data-label="One page, two sources">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 08 · How a page renders</div>
+      <h2 class="title t-lg anim2">One page. Two sources.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="cards g2 anim3">
+        <div class="card">
+          <div class="row" style="align-items:center;gap:20px;"><span class="clabel">The template</span><span class="pathchip">/conf</span></div>
+          <p>The frame — structure components, locked, one copy for all pages.</p>
+        </div>
+        <div class="card">
+          <div class="row" style="align-items:center;gap:20px;"><span class="clabel">The page</span><span class="pathchip">/content</span></div>
+          <p>The middle — whatever the author put into the unlocked container.</p>
+        </div>
+      </div>
+      <div class="mlines anim3"><i></i><i></i></div>
+      <div class="merge anim3">
+        <div class="mrow">HEADER <span class="msrc">renders from /conf</span></div>
+        <div class="mrow open">AUTHOR CONTENT <span class="msrc">renders from /content</span></div>
+        <div class="mrow">FOOTER <span class="msrc">renders from /conf</span></div>
+      </div>
+    </div>
+    <div class="note anim3">One page in the browser — <span class="red">two sources</span> in the repository, merged on every request.</div>
+  </section>
+
+  <!-- 07 · POLICIES -->
+  <section class="slide dark" data-label="Policies">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 09 · Policies</div>
+      <h2 class="title t-lg anim2">The guest list, finally.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="row gap-l" style="align-items:center;">
+      <div class="card anim3" style="flex:0 0 700px;">
+        <div class="clabel">Allowed components</div>
+        <div class="checklist" style="margin-top:14px;">
+          <div class="checkrow on"><span class="box">✓</span>AEM Insider Site - Content <span class="muted">(Card · Teaser · core components)</span></div>
+          <div class="checkrow off"><span class="box"></span>General</div>
+          <div class="checkrow off"><span class="box"></span>Adobe CQ</div>
+        </div>
+      </div>
+      <div class="col gap-m" style="flex:1;">
+        <p class="lede" style="max-width:none;">One ticked group covers every component in it — that checkbox is why the Card <em>and</em> the Teaser were allowed on the page.</p>
+        <div class="win">
+          <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">the pointer</span></div>
+          <pre>container
+  <span style="color:var(--c-kw)">cq:policy</span> = "wcm/foundation/.../policy"
+  <span style="color:var(--c-com)">// resolved under /conf/.../policies</span></pre>
+        </div>
+        <div class="note">Policies live <span class="red">next to</span> the templates — shared, reusable, and edits hit every template that points at them.</div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · INITIAL CONTENT -->
+  <section class="slide paper" data-label="Initial content">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 10 · Initial content</div>
+      <h2 class="title t-lg anim2">The head start.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="row" style="align-items:flex-start;justify-content:space-between;gap:50px;">
+        <div class="card anim3" style="flex:0 0 620px;">
+          <div class="clabel">Template · initial mode</div>
+          <div class="codechip">title   "Article title goes here"</div>
+          <div class="codechip">card    "Summary"</div>
+          <p class="muted" style="font-size:24px;">The master copy, in /conf.</p>
+        </div>
+        <div class="hsarrow anim3">
+          <i></i>
+          <div class="hst">Copied once</div>
+          <div class="hss">at page creation</div>
+        </div>
+        <div class="card anim3" style="flex:0 0 620px;">
+          <div class="clabel">New page</div>
+          <div class="codechip">title   ← editable</div>
+          <div class="codechip">card    ← editable, deletable</div>
+          <p style="font-size:24px;margin:0;">The author's copy, in /content. No locks.</p>
+        </div>
+      </div>
+    </div>
+    <div class="note anim3"><span class="red">Change it tomorrow — existing pages don't move.</span> Only new pages get the new kit.</div>
+  </section>
+
+  <!-- 09 · THE RULE -->
+  <section class="slide dark center" data-label="The rule">
+    <div class="eyebrow anim">// The rule of this episode</div>
+    <div class="banner anim2" style="margin-top:54px;">
+      <p>STRUCTURE is live — edit it, and <u>EVERY</u> existing page changes.</p>
+      <p>INITIAL CONTENT is a copy — it only shapes <u>NEW</u> pages.</p>
+    </div>
+    <div class="note anim3" style="margin-top:44px;text-align:center;">Every template question comes down to knowing which of these two you're standing in.</div>
+  </section>
+
+  <!-- 12 · LAYOUT MODE -->
+  <section class="slide paper" data-label="Layout mode">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 11 · Layout mode</div>
+      <h2 class="title t-lg anim2">The third mode: width.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="row gap-l" style="align-items:center;">
+      <div class="anim3" style="flex:0 0 660px;">
+        <div class="colgrid">
+          <div class="gblock">CARD · 6 cols</div>
+          <div class="gblock alt">TEASER · 6 cols</div>
+          <div class="gblock full">PHONE: full width, stacked</div>
+        </div>
+      </div>
+      <div class="cards" style="flex:1;">
+        <div class="card"><div class="clabel">12 columns</div><p>Every container sits on a hidden grid. Drag a component's handles to set how many columns it takes. Side by side — no CSS.</p></div>
+        <div class="card"><div class="clabel">Per breakpoint</div><p>The emulator bar switches desktop / tablet / phone — each keeps its own layout. One content, per-device widths.</p></div>
+        <div class="card"><div class="clabel">Stored as cq:responsive</div><p>On the page for page edits, in the template for structure defaults. Grid settings come from the container's policy.</p></div>
+      </div>
+      </div>
+    </div>
+    <div class="note anim3">Layout mode exists in <span class="red">both editors</span> — the template sets the defaults, the page overrides them.</div>
+  </section>
+
+  <!-- 14 · STATIC VS EDITABLE -->
+  <section class="slide paper" data-label="Static vs editable">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 12 · The interview minute</div>
+      <h2 class="title t-lg anim2">Static vs editable.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="svse anim3">
+        <div class="hrow">
+          <div class="hcell static">Static templates</div>
+          <div class="hcell editable">Editable templates</div>
+        </div>
+        <div class="rrow">
+          <div class="cell">Lives under /apps, defined in code only</div>
+          <div class="cell ed">Lives under /conf, edited in the template editor</div>
+        </div>
+        <div class="rrow">
+          <div class="cell">No link to its pages after creation</div>
+          <div class="cell ed">Structure stays live — one edit, every page</div>
+        </div>
+        <div class="rrow">
+          <div class="cell">No policies, no style system</div>
+          <div class="cell ed">Policies, style system, core components</div>
+        </div>
+        <div class="rrow">
+          <div class="cell">Legacy — AEM before 6.2</div>
+          <div class="cell ed">Today's standard. Full stop.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · OUTRO -->
+  <section class="slide dark center grid-bg" data-label="Next episode">
+    <div class="eyebrow anim">// Next on AEM Insider</div>
+    <h2 class="title t-lg anim2" style="margin:26px 0 0;">Next: <span class="red">Sling Resource Resolution</span></h2>
+    <p class="lede anim2" style="margin-top:30px;max-width:30em;">How a URL becomes a resource becomes a script — resource types, super types, selectors, and the search paths. The engine under everything we've built. In detail.</p>
+    <div class="next-pill anim3" style="margin-top:40px;"><b>EP07</b> · after this, AEM stops being magic — for good</div>
+    <div class="outro-links mt-a">
+      <a href="https://youtube.com/@aeminsider" target="_blank" rel="noopener"><span class="ic">▶</span>youtube.com/@aeminsider</a>
+      <a href="https://aeminsider.substack.com" target="_blank" rel="noopener"><span class="ic">✎</span>aeminsider.substack.com</a>
+      <a href="https://aeminsider.com" target="_blank" rel="noopener"><span class="ic">⌂</span>aeminsider.com</a>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>
