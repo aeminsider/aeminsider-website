@@ -125,7 +125,8 @@ aeminsider-website/
 │   ├── video-2-how-aem-pages-are-built.html
 │   ├── video-3-your-first-aem-maven-project.html
 │   ├── video-4-build-your-first-aem-component.html
-│   └── video-5-aem-dialogs-deep-dive.html
+│   ├── video-5-aem-dialogs-deep-dive.html
+│   └── video-6-editable-templates.html
 ├── resources/              ← each snippet = a raw file + an HTML viewer page (copy + download)
 │   ├── settings.xml                 ← Maven settings for AEM (raw file)
 │   ├── settings-xml.html            ← viewer: copy-to-clipboard + download
@@ -149,6 +150,7 @@ aeminsider-website/
 | EP03 | Your First AEM Maven Project — Built the Right Way | `7o9ecK87QzY` | `https://youtu.be/7o9ecK87QzY` | `/p/your-first-aem-maven-project-built` |
 | EP04 | Build Your First AEM Component — No Java Needed | `XPfanQZlUGU` | `https://youtu.be/XPfanQZlUGU` | `/p/build-your-first-aem-component-no` |
 | EP05 | AEM Dialogs — Deep Dive | `EMFzrGdn-5U` | `https://youtu.be/EMFzrGdn-5U` | `/p/aem-dialogs-deep-dive` |
+| EP06 | Editable Templates — How Every Page Gets Its Structure | `xTqpS5bENCw` | `https://youtu.be/xTqpS5bENCw` | `/p/editable-templates-how-every-aem` |
 
 YouTube thumbnail URL pattern: `https://i.ytimg.com/vi/<VIDEO_ID>/maxresdefault.jpg`
 Fallback on error: `https://i.ytimg.com/vi/<VIDEO_ID>/hqdefault.jpg`
@@ -193,8 +195,7 @@ The Copy button lives in the code-window bar (icon + "Copy"); no changes to anim
 
 | EP | Title | Track | What it covers |
 |---|---|---|---|
-| EP06 | Editable Templates — How Every Page Gets Its Structure | dev | Templates, template types + customization, the page component, policies, structure vs initial content, layout mode — locked in EP05's outro; opens with the "why was the Teaser allowed on the page?" question |
-| EP07 | Sling Resource Resolution | dev | How a URL becomes a resource becomes a script — types, super types, selectors, search paths. Locked in EP06's outro. |
+| EP07 | Sling Resource Resolution | dev | How a URL becomes a resource becomes a script — types, super types, selectors, search paths. Locked in EP06's outro. Inherits the slide cut from EP06 ("the page component, up close" — no `page.html`, inheritance to core page v3, `customheaderlibs`/`customfooterlibs`). |
 
 Backlog (no EP number yet): Clientlibs Explained (promised in EP04 + EP05, restated in EP06's outro) · Sling Models (deferred from EP04; EP05 points to it for clean multifield rendering) · AEM Sites, Assets & Forms · AEM as a Cloud Service — What's Different? (full script already written, July 2026).
 
@@ -501,5 +502,5 @@ When asked to build a PPTX:
 
 ---
 
-*Last updated: July 2026 — after EP05 shipped*
+*Last updated: 29 July 2026 — after EP06 shipped (blog, index with the 3-live cap, resources, decks, tables)*
 *Maintained by Vasim Akram — aeminsider@gmail.com*

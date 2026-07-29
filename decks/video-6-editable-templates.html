@@ -149,30 +149,6 @@
   </section>
 
   <!-- 05 · THE PAGE COMPONENT -->
-  <section class="slide dark" data-label="The page component">
-    <div class="head">
-      <div class="eyebrow anim">// Chapter 04 · The page component, up close</div>
-      <h2 class="title t-lg anim2">Two files. No page. Full HTML.</h2>
-    </div>
-    <div class="body-grow anim3">
-      <div class="win">
-        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">/apps/aeminsider/components/page</span></div>
-        <pre class="tree"><span class="p">/apps/aeminsider/components/page</span>
-├── .content.xml                  <span class="c">← sling:resourceSuperType = core page component</span>
-├── customheaderlibs.html         <span class="c">← injected into &lt;head&gt; — your CSS/JS hooks</span>
-└── customfooterlibs.html         <span class="c">← injected before &lt;/body&gt;</span>
-
-<span class="p">/apps/core/wcm/components/page/v3/page</span>    <span class="c">← the REAL renderer (Adobe's core component)</span>
-├── page.html                     <span class="c">← the entry point — the file ours is "missing"</span>
-│     <span class="c">└─ includes ↓</span>
-├── head.html                     <span class="c">← renders the &lt;head&gt; of the document</span>
-└── body.html                     <span class="c">← renders the &lt;body&gt;</span></pre>
-      </div>
-    </div>
-    <div class="note anim3">One property — <span class="red">sling:resourceSuperType</span> — inherits an entire page renderer. How Sling walks that chain is <span class="red">next episode</span>.</div>
-  </section>
-
-  <!-- 06 · TEMPLATE TYPES -->
   <section class="slide paper" data-label="Template types">
     <div class="head">
       <div class="eyebrow anim">// Chapter 05 · Template types, properly</div>
@@ -310,7 +286,7 @@
         <div class="win">
           <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">the pointer</span></div>
           <pre>container
-  <span style="color:var(--c-kw)">cq:policy</span> = "wcm/foundation/.../policy"
+  <span style="color:var(--c-kw)">cq:policy</span> = "aeminsider/components/container/policy_..."
   <span style="color:var(--c-com)">// resolved under /conf/.../policies</span></pre>
         </div>
         <div class="note">Policies live <span class="red">next to</span> the templates — shared, reusable, and edits hit every template that points at them.</div>
