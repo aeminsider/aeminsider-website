@@ -126,7 +126,8 @@ aeminsider-website/
 │   ├── video-3-your-first-aem-maven-project.html
 │   ├── video-4-build-your-first-aem-component.html
 │   ├── video-5-aem-dialogs-deep-dive.html
-│   └── video-6-editable-templates.html
+│   ├── video-6-editable-templates.html
+│   └── video-7-sling-resource-resolution.html
 ├── resources/              ← each snippet = a raw file + an HTML viewer page (copy + download)
 │   ├── settings.xml                 ← Maven settings for AEM (raw file)
 │   ├── settings-xml.html            ← viewer: copy-to-clipboard + download
@@ -151,6 +152,7 @@ aeminsider-website/
 | EP04 | Build Your First AEM Component — No Java Needed | `XPfanQZlUGU` | `https://youtu.be/XPfanQZlUGU` | `/p/build-your-first-aem-component-no` |
 | EP05 | AEM Dialogs — Deep Dive | `EMFzrGdn-5U` | `https://youtu.be/EMFzrGdn-5U` | `/p/aem-dialogs-deep-dive` |
 | EP06 | Editable Templates — How Every Page Gets Its Structure | `xTqpS5bENCw` | `https://youtu.be/xTqpS5bENCw` | `/p/editable-templates-how-every-aem` |
+| EP07 | Sling Resource Resolution — How a URL Becomes a Script | `AZp7hydnqDA` | `https://youtu.be/AZp7hydnqDA` | `/p/sling-resource-resolution-how-a-url` |
 
 YouTube thumbnail URL pattern: `https://i.ytimg.com/vi/<VIDEO_ID>/maxresdefault.jpg`
 Fallback on error: `https://i.ytimg.com/vi/<VIDEO_ID>/hqdefault.jpg`
@@ -195,9 +197,9 @@ The Copy button lives in the code-window bar (icon + "Copy"); no changes to anim
 
 | EP | Title | Track | What it covers |
 |---|---|---|---|
-| EP07 | Sling Resource Resolution | dev | How a URL becomes a resource becomes a script — types, super types, selectors, search paths. Locked in EP06's outro. Inherits the slide cut from EP06 ("the page component, up close" — no `page.html`, inheritance to core page v3, `customheaderlibs`/`customfooterlibs`). |
+| EP08 | Clientlibs — How CSS and JavaScript Reach the Page | dev | Categories, dependencies, embedding, and the URL hash. Locked in EP07's outro and set up by `customheaderlibs.html` on EP07's page-component slide. Finally pays off the clientlibs promise made in EP04, EP05 and EP06 — do not defer it again. |
 
-Backlog (no EP number yet): Clientlibs Explained (promised in EP04 + EP05, restated in EP06's outro) · Sling Models (deferred from EP04; EP05 points to it for clean multifield rendering) · AEM Sites, Assets & Forms · AEM as a Cloud Service — What's Different? (full script already written, July 2026).
+Backlog (no EP number yet): Sling Models (deferred from EP04; EP05 points to it for clean multifield rendering) · AEM Sites, Assets & Forms · AEM as a Cloud Service — What's Different? (full script already written, July 2026).
 
 Content Authors & Marketers track: planned but not started. No EP numbers assigned yet.
 
@@ -502,5 +504,5 @@ When asked to build a PPTX:
 
 ---
 
-*Last updated: 29 July 2026 — after EP06 shipped (blog, index with the 3-live cap, resources, decks, tables)*
+*Last updated: 5 August 2026 — after EP07 shipped (blog, index with the 3-live cap — EP04 dropped off, resources, decks, tables). EP08 = Clientlibs is the new coming-soon everywhere.*
 *Maintained by Vasim Akram — aeminsider@gmail.com*
