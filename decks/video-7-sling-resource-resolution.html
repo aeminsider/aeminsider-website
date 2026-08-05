@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>EP07 · Sling Resource Resolution — Slide Deck · AEM Insider</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+<style>
+  /* EP07-specific bits — everything else comes from deck.css */
+  .tree{color:var(--c-text);}
+  .tree .p{color:var(--c-kw);}
+  .tree .v{color:var(--c-str);}
+  .tree .c{color:var(--c-com);}
+
+  /* labelled super-type step between the two component boxes */
+  .steplink{display:flex;align-items:center;gap:16px;margin:14px 0;}
+  .steplink .ar{font-family:var(--mono);font-size:40px;line-height:1;color:var(--accent);}
+  .steplink .lb{font-family:var(--mono);font-size:23px;color:var(--accent);}
+
+  /* the three-level super-type chain under the page-component window */
+  .chain{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:22px;font-family:var(--mono);font-size:22px;color:var(--ink-3);}
+  .chain i{color:var(--accent);font-style:normal;}
+
+  /* the script-name ladder — the centrepiece slide */
+  .ladder{display:flex;flex-direction:column;gap:12px;}
+  .lrow{display:flex;align-items:center;gap:26px;padding:16px 26px;border-radius:12px;background:var(--dark-2);border:2px solid var(--dark-line);}
+  .lrow .n{font-family:var(--mono);font-weight:700;font-size:30px;color:var(--accent);width:34px;flex-shrink:0;}
+  .lrow .pat{font-family:var(--mono);font-size:27px;color:#fff;flex:1;}
+  .lrow .pat em{font-style:normal;font-size:20px;color:rgba(255,255,255,0.45);margin-left:18px;}
+  .lrow .to{font-family:var(--mono);font-size:24px;color:var(--ink-3);flex-shrink:0;}
+  .lrow .ex{font-family:var(--mono);font-size:27px;color:var(--accent);width:340px;text-align:right;flex-shrink:0;}
+  .lrow.best{border-color:var(--accent);background:rgba(211,47,47,0.12);}
+  .lrow.node .pat{color:#fff;}
+  .lrow.node{border-style:dashed;}
+  .lcap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:22px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+  .lcap .w{color:rgba(255,255,255,0.45);}
+  .reqline{font-family:var(--mono);font-size:26px;color:rgba(255,255,255,0.6);margin-bottom:18px;}
+  .reqline b{color:#fff;font-weight:500;}
+
+  /* URL anatomy */
+  .urlbar{font-family:var(--mono);font-size:34px;text-align:center;white-space:nowrap;}
+  .urlbar span{padding:4px 2px;border-bottom:5px solid transparent;}
+  .u1{color:#fff;border-bottom-color:var(--accent)!important;}
+  .u2{color:#ffb4b4;border-bottom-color:#ffb4b4!important;}
+  .u3{color:#9ecbff;border-bottom-color:#9ecbff!important;}
+  .u4{color:#b7e5a1;border-bottom-color:#b7e5a1!important;}
+  .u5{color:rgba(255,255,255,0.35);border-bottom-color:rgba(255,255,255,0.25)!important;}
+  /* one row per URL part: swatch · name · the literal value · what it does */
+  .uparts{display:flex;flex-direction:column;gap:14px;margin-top:34px;}
+  .uprow{display:flex;align-items:flex-start;gap:24px;background:var(--dark-2);border:2px solid rgba(255,255,255,0.10);border-radius:12px;padding:18px 26px;}
+  .uprow i.sw{width:15px;height:15px;border-radius:4px;flex-shrink:0;margin-top:9px;}
+  .uprow .nm{font-family:var(--mono);font-weight:700;font-size:25px;width:210px;flex-shrink:0;white-space:nowrap;}
+  .uprow .val{font-family:var(--mono);font-size:22px;color:#fff;width:620px;flex-shrink:0;white-space:nowrap;}
+  .uprow .what{font-size:24px;line-height:1.35;color:rgba(255,255,255,0.66);flex:1;}
+  .uprow .what b{color:#fff;font-weight:700;}
+  .uprow .what small{display:block;font-family:var(--mono);font-size:20px;color:rgba(255,255,255,0.40);margin-top:4px;}
+
+  /* the two questions */
+  .qsplit{display:flex;gap:36px;align-items:stretch;}
+  .qbox{flex:1;background:var(--card);border:2.5px solid var(--line);border-radius:16px;padding:34px 38px;}
+  .qbox .qn{font-family:var(--mono);font-weight:700;font-size:26px;color:var(--accent);letter-spacing:.08em;}
+  .qbox h3{margin:12px 0 18px;font-size:34px;font-weight:700;color:var(--ink);}
+  .qbox p{margin:0;font-size:25px;line-height:1.5;color:var(--ink-2);}
+  .qbox .qm{font-family:var(--mono);font-size:23px;color:var(--ink-3);margin-top:20px;display:block;}
+
+  /* search paths */
+  .paths{display:flex;flex-direction:column;gap:18px;width:74%;margin:0 auto;}
+  .prow{display:flex;align-items:center;gap:30px;border-radius:14px;padding:34px 42px;}
+  .prow .pp{font-family:var(--mono);font-weight:700;font-size:46px;flex-shrink:0;width:180px;}
+  .prow .pd{font-size:26px;line-height:1.4;}
+  .prow.first{background:var(--accent);color:#fff;}
+  .prow.first .pd{color:rgba(255,255,255,0.9);}
+  .prow.second{background:var(--dark-2);border:2px solid var(--dark-line);color:#fff;}
+  .prow.second .pp{color:rgba(255,255,255,0.55);}
+  .prow.second .pd{color:rgba(255,255,255,0.55);}
+  .pconf{text-align:center;font-family:var(--mono);font-size:25px;color:rgba(255,255,255,0.6);margin-top:28px;}
+  .pconf b{color:var(--accent);}
+
+  /* the order — red banner list */
+  .order{display:flex;flex-direction:column;gap:14px;width:80%;margin:0 auto;}
+  .orow{display:flex;align-items:baseline;gap:26px;font-size:29px;color:#fff;}
+  .orow .on{font-family:var(--mono);font-weight:700;font-size:26px;color:var(--accent);width:34px;flex-shrink:0;}
+  .orule{margin-top:42px;background:var(--accent);border-radius:18px;padding:32px 60px;text-align:center;font-family:var(--mono);font-weight:700;font-size:31px;color:#fff;letter-spacing:.02em;box-shadow:0 26px 70px rgba(211,47,47,0.22);}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 · TITLE -->
+  <section class="slide dark center grid-bg" data-label="Title">
+    <img class="shield anim" src="../assets/logo.svg" alt="AEM Insider">
+    <div class="eyebrow anim" style="margin-top:44px;">EP07 // AEM Complete Tutorial Series 2026</div>
+    <h1 class="title t-xl anim2" style="margin:26px 0 0;">Sling Resource Resolution —<br><span class="red">How a URL Becomes a Script</span></h1>
+    <div class="sub anim3" style="margin-top:34px;">Resource types · Super types · Selectors · Search paths</div>
+    <div class="tags anim3" style="margin-top:40px;">
+      <span class="t">/apps beats /libs</span><span class="t">most specific wins</span><span class="t">the script-name ladder</span>
+    </div>
+    <div class="credline mt-a"><span class="dot"></span>aeminsider.com · @aeminsider · Not affiliated with Adobe Inc.</div>
+  </section>
+
+  <!-- 02 · SIX EPISODES OF "IT JUST WORKED" -->
+  <section class="slide dark" data-label="It just worked">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 01 · Six episodes of "it just worked"</div>
+      <h2 class="title t-lg anim2">We typed a URL. AEM sent back HTML.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="cards g3">
+        <div class="card">
+          <div class="clabel">EP04</div>
+          <p>We made a folder called <b>card</b>, put <b>card.html</b> inside it, and a Card appeared on the page. Nobody told AEM where that file was.</p>
+        </div>
+        <div class="card">
+          <div class="clabel">EP05</div>
+          <p>We made a node called <b>cq:dialog</b> in the same folder. We clicked Configure and it opened. We never connected the two.</p>
+        </div>
+        <div class="card">
+          <div class="clabel">EP06</div>
+          <p>Our page component had <b>no page.html at all</b>. Two small files — and every page still rendered a full HTML document.</p>
+        </div>
+      </div>
+    </div>
+    <div class="note anim3">Three things. <span class="red">One engine behind all of them</span> — resource resolution, from Apache Sling.</div>
+  </section>
+
+  <!-- 03 · TWO QUESTIONS -->
+  <section class="slide paper" data-label="Two questions">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 02 · It's two questions, not one</div>
+      <h2 class="title t-lg anim2">Resolution happens in two steps.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="qsplit anim2">
+        <div class="qbox">
+          <div class="qn">STEP 1</div>
+          <h3>URL → Resource</h3>
+          <p>Sling takes the <b>path</b> and finds a node in the repository. That node is the resource.</p>
+          <span class="qm">one rule</span>
+        </div>
+        <div class="qbox" style="border-color:var(--accent);">
+          <div class="qn">STEP 2</div>
+          <h3>Resource → Script</h3>
+          <p>Now a different question: <b>which file renders this node?</b> Resource types, super types, selectors, search paths.</p>
+          <span class="qm">several rules — this is where people get stuck</span>
+        </div>
+      </div>
+    </div>
+    <div class="note anim3">Mix these two up and nothing makes sense. <span class="red">Keep them apart and it all does.</span></div>
+  </section>
+
+  <!-- 04 · THE URL -->
+  <section class="slide dark" data-label="The parts of a URL">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 03 · Step one — the path finds the resource</div>
+      <h2 class="title t-lg anim2">A sample AEM URL, part by part.</h2>
+    </div>
+    <div class="body-grow" style="justify-content:center;">
+      <div class="urlbar anim2" style="font-size:32px;">
+        <span class="u1">/content/aeminsider/us/en/first-component</span><span class="u2">.summary</span><span class="u3">.html</span><span class="u4">/abc</span><span class="u5">?debug=true</span>
+      </div>
+      <div class="uparts anim3">
+        <div class="uprow">
+          <i class="sw" style="background:#D32F2F"></i>
+          <span class="nm" style="color:#D32F2F">path</span>
+          <span class="val">/content/aeminsider/us/en/first-component</span>
+          <span class="what">used to <b>find the resource</b></span>
+        </div>
+        <div class="uprow">
+          <i class="sw" style="background:#ffb4b4"></i>
+          <span class="nm" style="color:#ffb4b4">selector</span>
+          <span class="val">.summary</span>
+          <span class="what">identifies <b>what script we need to run</b><small>can have more than one — .summary.print</small></span>
+        </div>
+        <div class="uprow">
+          <i class="sw" style="background:#9ecbff"></i>
+          <span class="nm" style="color:#9ecbff">extension</span>
+          <span class="val">.html</span>
+          <span class="what">specifies the <b>output format</b>, or rendering type</span>
+        </div>
+        <div class="uprow">
+          <i class="sw" style="background:#b7e5a1"></i>
+          <span class="nm" style="color:#b7e5a1">suffix</span>
+          <span class="val">/abc</span>
+          <span class="what">extra information passed to the script, after the resource is resolved</span>
+        </div>
+        <div class="uprow">
+          <i class="sw" style="background:rgba(255,255,255,0.55)"></i>
+          <span class="nm" style="color:rgba(255,255,255,0.55)">query string</span>
+          <span class="val">?debug=true</span>
+          <span class="what">optional parameters, available through the <b>request object</b></span>
+        </div>
+      </div>
+    </div>
+    <div class="note anim3">Path <span class="red">finds the resource</span>. Selectors and extension <span class="red">decide what runs</span>. Suffix and query string are <span class="red">used by the script</span>.</div>
+  </section>
+
+  <!-- 05 · THE LADDER -->
+  <section class="slide dark" data-label="The script-name ladder">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 04 · Step two — which file Sling looks for</div>
+      <h2 class="title t-lg anim2">Five names, tried in order.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="reqline anim2">request: <b>card.summary.html</b> &nbsp;·&nbsp; resource type: <b>aeminsider/components/card</b></div>
+      <div class="lcap anim2"><span>best match</span><span class="w">first one that exists wins</span></div>
+      <div class="ladder anim2" style="margin-top:10px;">
+        <div class="lrow best"><span class="n">1</span><span class="pat">Selector+Extension.html</span><span class="to">→</span><span class="ex">summary.html.html</span></div>
+        <div class="lrow"><span class="n">2</span><span class="pat">Selector.html</span><span class="to">→</span><span class="ex">summary.html</span></div>
+        <div class="lrow"><span class="n">3</span><span class="pat">html.html</span><span class="to">→</span><span class="ex">html.html</span></div>
+        <div class="lrow node"><span class="n">4</span><span class="pat">nodename.html <em>the component folder, not the page node</em></span><span class="to">→</span><span class="ex">card.html</span></div>
+        <div class="lrow"><span class="n">5</span><span class="pat">GET.html</span><span class="to">→</span><span class="ex">GET.html</span></div>
+      </div>
+      <div class="lcap anim3" style="margin-top:10px;"><span class="w">worst match</span><span>most specific wins</span></div>
+    </div>
+    <div class="note anim3"><span class="red">card.html is fourth.</span> The file you've written since EP04 only wins because nothing above it exists.</div>
+  </section>
+
+  <!-- 06 · SUPER TYPE -->
+  <section class="slide paper" data-label="sling:resourceSuperType">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 05 · Super types</div>
+      <h2 class="title t-lg anim2">No file here? Ask the parent.</h2>
+    </div>
+    <div class="body-grow" style="justify-content:center;">
+      <div class="flow anim2" style="flex-direction:column;gap:0;">
+        <div class="node accent">aeminsider/components/teaser-wide</div>
+        <div class="steplink"><span class="ar">&#8595;</span><span class="lb">sling:resourceSuperType</span></div>
+        <div class="node">aeminsider/components/teaser</div>
+      </div>
+      <div class="anim3" style="text-align:center;margin-top:34px;font-family:var(--mono);font-size:23px;color:var(--ink-3);">
+        no script of its own &nbsp;·&nbsp; no dialog of its own &nbsp;·&nbsp; <span style="color:var(--accent);">still renders</span>
+      </div>
+      <div class="anim3" style="text-align:center;margin-top:16px;font-family:var(--mono);font-size:22px;color:var(--ink-3);">
+        our page component goes three levels deep — coming up
+      </div>
+    </div>
+    <div class="note anim3"><b>resourceType</b> = what I am. <b>resourceSuperType</b> = what I extend. Sling walks up until it finds the file — <span class="red">script, dialog or include.</span></div>
+  </section>
+
+  <!-- 07 · SEARCH PATHS -->
+  <section class="slide dark" data-label="The search paths">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 06 · The search paths</div>
+      <h2 class="title t-lg anim2">The resource type is relative. To this.</h2>
+    </div>
+    <div class="body-grow" style="justify-content:center;">
+      <div class="anim2" style="text-align:center;font-family:var(--mono);font-size:26px;color:rgba(255,255,255,0.55);margin-bottom:26px;">
+        sling:resourceType = <b style="color:#fff;">aeminsider/components/card</b>
+      </div>
+      <div class="paths anim2">
+        <div class="prow first"><span class="pp">/apps</span><span class="pd"><b>/apps/aeminsider/components/card</b><br>Your project. Checked first.</span></div>
+        <div class="prow second"><span class="pp">/libs</span><span class="pd"><b>/libs/aeminsider/components/card</b><br>Adobe's tree. Looked at second — never put your code here.</span></div>
+      </div>
+      <div class="pconf anim3">resource.resolver.searchpath = <b>[/apps, /libs]</b></div>
+    </div>
+    <div class="note anim3">Putting your own file at the same path under <b>/apps</b> so it beats Adobe's is called an <span class="red">overlay</span>. Resolved <b>per file</b>, not per component.</div>
+  </section>
+
+  <!-- 08 · THE PAGE COMPONENT -->
+  <section class="slide paper" data-label="The page component">
+    <div class="head">
+      <div class="eyebrow anim">// Chapter 07 · Our page component, up close</div>
+      <h2 class="title t-lg anim2">Two files. And no <span class="red">page.html</span>.</h2>
+    </div>
+    <div class="body-grow">
+      <div class="win anim2" style="width:78%;margin:0 auto;">
+        <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="fn">/apps/aeminsider/components/page</span></div>
+        <pre class="tree">.content.xml              <span class="p">sling:resourceSuperType =</span>
+                          <span class="v">core/wcm/components/page/v3/page</span>
+
+customheaderlibs.html     <span class="c">injected into &lt;head&gt;</span>
+customfooterlibs.html     <span class="c">injected before &lt;/body&gt;</span>
+
+<span class="c">// that's the whole component. There is no page.html.</span></pre>
+      </div>
+      <div class="anim3" style="text-align:center;margin-top:26px;font-size:27px;color:var(--ink-2);max-width:1420px;margin-left:auto;margin-right:auto;text-wrap:balance;">
+        So where does the page come from? <span class="red">The super type.</span> <b>page.html</b> lives in the parent — and it includes <b>head.html</b> and <b>body.html</b> from beside it.
+      </div>
+      <div class="chain anim3">
+        <span>aeminsider/components/page</span><i>→</i><span>core/wcm/components/page/v3</span><i>→</i><span>wcm/foundation/&hellip;/basicpage/v1</span>
+      </div>
+    </div>
+    <div class="note anim3">Those two files are <span class="red">hooks</span>. The parent includes them at two exact spots — which is where clientlibs will plug in.</div>
+  </section>
+
+  <!-- 09 · THE ORDER -->
+  <section class="slide dark center" data-label="The order">
+    <div class="eyebrow anim">// Chapter 08 · The whole engine</div>
+    <h2 class="title t-lg anim2" style="margin:22px 0 46px;">Every request, every time.</h2>
+    <div class="order anim2">
+      <div class="orow"><span class="on">1</span><span>Take the <b>path</b> and find a node.</span></div>
+      <div class="orow"><span class="on">2</span><span>Read the <b>resource type</b> off it.</span></div>
+      <div class="orow"><span class="on">3</span><span>Look under <b>/apps</b> first, then <b>/libs</b>.</span></div>
+      <div class="orow"><span class="on">4</span><span>Match the <b>most specific file name</b> — selector, extension, node name, method.</span></div>
+      <div class="orow"><span class="on">5</span><span>Nothing there? Follow the <b>super type</b> and repeat in the parent.</span></div>
+      <div class="orow"><span class="on">6</span><span>Keep walking up until you run out of parents.</span></div>
+    </div>
+    <div class="orule anim3">Most specific wins · /apps beats /libs · children beat parents</div>
+  </section>
+
+  <!-- 10 · NEXT -->
+  <section class="slide dark center grid-bg" data-label="Next episode">
+    <div class="eyebrow anim">// Next on AEM Insider</div>
+    <h2 class="title t-lg anim2" style="margin:26px 0 0;">Next: <span class="red">Clientlibs</span></h2>
+    <p class="lede anim2" style="margin-top:30px;max-width:30em;">How CSS and JavaScript actually reach an AEM page. Categories, dependencies, embedding — and why the URL has that long hash in it.</p>
+    <div class="next-pill anim3" style="margin-top:40px;"><b>EP08</b> · customheaderlibs.html is where it plugs in</div>
+    <div class="outro-links mt-a">
+      <a href="https://youtube.com/@aeminsider" target="_blank" rel="noopener"><span class="ic">▶</span>youtube.com/@aeminsider</a>
+      <a href="https://aeminsider.substack.com" target="_blank" rel="noopener"><span class="ic">✎</span>aeminsider.substack.com</a>
+      <a href="https://aeminsider.com" target="_blank" rel="noopener"><span class="ic">⌂</span>aeminsider.com</a>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>
